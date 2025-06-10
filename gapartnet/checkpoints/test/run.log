@@ -1,0 +1,312 @@
+Namespace(exp_name='test', model_path='/home/liuyuyan/GaPartNet/gapartnet/checkpoints/100flowstats0.02flowxyzoffsetslider/models/final_model.pth', test=True)
+Loading pretrained model from /home/liuyuyan/GaPartNet/gapartnet/checkpoints/100flowstats0.02flowxyzoffsetslider/models/final_model.pth
+Pretrained model loaded successfully, resuming training...
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8099
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4298
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.48%
+Validation val/AP@50_round_fixed_handle: 61.33%
+Validation val/AP@50_slider_button: 86.08%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.52%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 86.85%
+Validation val/AP@50_hinge_knob: 81.70%
+Validation val/AP@50_revolute_handle: 87.63%
+Validation test_intra/AP@50_line_fixed_handle: 84.43%
+Validation test_intra/AP@50_round_fixed_handle: 40.17%
+Validation test_intra/AP@50_slider_button: 86.07%
+Validation test_intra/AP@50_hinge_door: 96.30%
+Validation test_intra/AP@50_slider_drawer: 64.80%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.53%
+Validation test_intra/AP@50_hinge_knob: 75.30%
+Validation test_intra/AP@50_revolute_handle: 90.44%
+Validation test_inter/AP@50_line_fixed_handle: 41.12%
+Validation test_inter/AP@50_round_fixed_handle: 23.99%
+Validation test_inter/AP@50_slider_button: 52.93%
+Validation test_inter/AP@50_hinge_door: 85.53%
+Validation test_inter/AP@50_slider_drawer: 73.53%
+Validation test_inter/AP@50_slider_lid: 71.35%
+Validation test_inter/AP@50_hinge_lid: 87.82%
+Validation test_inter/AP@50_hinge_knob: 39.60%
+Validation test_inter/AP@50_revolute_handle: 1.03%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 87.01
+mean_mAP: 75.49
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.78
+mean_mAP: 68.09
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 52.99
+mean_mAP: 41.00
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8103
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4301
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.42%
+Validation val/AP@50_round_fixed_handle: 61.72%
+Validation val/AP@50_slider_button: 86.09%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.43%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 87.04%
+Validation val/AP@50_hinge_knob: 81.72%
+Validation val/AP@50_revolute_handle: 87.63%
+Validation test_intra/AP@50_line_fixed_handle: 84.56%
+Validation test_intra/AP@50_round_fixed_handle: 39.65%
+Validation test_intra/AP@50_slider_button: 86.08%
+Validation test_intra/AP@50_hinge_door: 96.31%
+Validation test_intra/AP@50_slider_drawer: 64.90%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.85%
+Validation test_intra/AP@50_hinge_knob: 75.31%
+Validation test_intra/AP@50_revolute_handle: 90.40%
+Validation test_inter/AP@50_line_fixed_handle: 40.94%
+Validation test_inter/AP@50_round_fixed_handle: 24.43%
+Validation test_inter/AP@50_slider_button: 53.02%
+Validation test_inter/AP@50_hinge_door: 85.36%
+Validation test_inter/AP@50_slider_drawer: 73.59%
+Validation test_inter/AP@50_slider_lid: 70.99%
+Validation test_inter/AP@50_hinge_lid: 87.65%
+Validation test_inter/AP@50_hinge_knob: 39.81%
+Validation test_inter/AP@50_revolute_handle: 1.13%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 87.06
+mean_mAP: 75.52
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.78
+mean_mAP: 68.11
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 52.99
+mean_mAP: 40.99
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8104
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4300
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0694
+Validation val/AP@50_line_fixed_handle: 83.48%
+Validation val/AP@50_round_fixed_handle: 59.31%
+Validation val/AP@50_slider_button: 86.10%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.52%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 87.04%
+Validation val/AP@50_hinge_knob: 81.46%
+Validation val/AP@50_revolute_handle: 87.66%
+Validation test_intra/AP@50_line_fixed_handle: 84.55%
+Validation test_intra/AP@50_round_fixed_handle: 40.03%
+Validation test_intra/AP@50_slider_button: 86.08%
+Validation test_intra/AP@50_hinge_door: 96.31%
+Validation test_intra/AP@50_slider_drawer: 64.97%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.93%
+Validation test_intra/AP@50_hinge_knob: 75.57%
+Validation test_intra/AP@50_revolute_handle: 90.69%
+Validation test_inter/AP@50_line_fixed_handle: 41.04%
+Validation test_inter/AP@50_round_fixed_handle: 24.15%
+Validation test_inter/AP@50_slider_button: 52.99%
+Validation test_inter/AP@50_hinge_door: 85.28%
+Validation test_inter/AP@50_slider_drawer: 73.56%
+Validation test_inter/AP@50_slider_lid: 71.26%
+Validation test_inter/AP@50_hinge_lid: 87.76%
+Validation test_inter/AP@50_hinge_knob: 39.79%
+Validation test_inter/AP@50_revolute_handle: 1.28%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 86.79
+mean_mAP: 75.44
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.90
+mean_mAP: 68.05
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 53.01
+mean_mAP: 41.02
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8100
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4299
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.27%
+Validation val/AP@50_round_fixed_handle: 61.40%
+Validation val/AP@50_slider_button: 86.08%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.43%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 86.85%
+Validation val/AP@50_hinge_knob: 81.67%
+Validation val/AP@50_revolute_handle: 87.65%
+Validation test_intra/AP@50_line_fixed_handle: 84.36%
+Validation test_intra/AP@50_round_fixed_handle: 39.31%
+Validation test_intra/AP@50_slider_button: 86.07%
+Validation test_intra/AP@50_hinge_door: 96.39%
+Validation test_intra/AP@50_slider_drawer: 64.89%
+Validation test_intra/AP@50_slider_lid: 99.97%
+Validation test_intra/AP@50_hinge_lid: 89.66%
+Validation test_intra/AP@50_hinge_knob: 75.87%
+Validation test_intra/AP@50_revolute_handle: 90.63%
+Validation test_inter/AP@50_line_fixed_handle: 41.04%
+Validation test_inter/AP@50_round_fixed_handle: 24.07%
+Validation test_inter/AP@50_slider_button: 53.03%
+Validation test_inter/AP@50_hinge_door: 85.34%
+Validation test_inter/AP@50_slider_drawer: 73.69%
+Validation test_inter/AP@50_slider_lid: 70.87%
+Validation test_inter/AP@50_hinge_lid: 87.76%
+Validation test_inter/AP@50_hinge_knob: 39.85%
+Validation test_inter/AP@50_revolute_handle: 1.06%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 86.98
+mean_mAP: 75.52
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.79
+mean_mAP: 68.03
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 52.97
+mean_mAP: 40.99
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8094
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4302
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.41%
+Validation val/AP@50_round_fixed_handle: 60.29%
+Validation val/AP@50_slider_button: 86.09%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.52%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 86.85%
+Validation val/AP@50_hinge_knob: 81.68%
+Validation val/AP@50_revolute_handle: 87.65%
+Validation test_intra/AP@50_line_fixed_handle: 84.44%
+Validation test_intra/AP@50_round_fixed_handle: 40.38%
+Validation test_intra/AP@50_slider_button: 86.07%
+Validation test_intra/AP@50_hinge_door: 96.29%
+Validation test_intra/AP@50_slider_drawer: 64.87%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.67%
+Validation test_intra/AP@50_hinge_knob: 75.59%
+Validation test_intra/AP@50_revolute_handle: 90.54%
+Validation test_inter/AP@50_line_fixed_handle: 41.08%
+Validation test_inter/AP@50_round_fixed_handle: 24.18%
+Validation test_inter/AP@50_slider_button: 52.97%
+Validation test_inter/AP@50_hinge_door: 85.24%
+Validation test_inter/AP@50_slider_drawer: 73.60%
+Validation test_inter/AP@50_slider_lid: 70.89%
+Validation test_inter/AP@50_hinge_lid: 87.70%
+Validation test_inter/AP@50_hinge_knob: 39.67%
+Validation test_inter/AP@50_revolute_handle: 0.81%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 86.89
+mean_mAP: 75.46
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.87
+mean_mAP: 68.08
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 52.90
+mean_mAP: 40.98
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8107
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4299
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.28%
+Validation val/AP@50_round_fixed_handle: 61.49%
+Validation val/AP@50_slider_button: 86.08%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.52%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 87.04%
+Validation val/AP@50_hinge_knob: 81.76%
+Validation val/AP@50_revolute_handle: 87.62%
+Validation test_intra/AP@50_line_fixed_handle: 84.41%
+Validation test_intra/AP@50_round_fixed_handle: 39.80%
+Validation test_intra/AP@50_slider_button: 86.09%
+Validation test_intra/AP@50_hinge_door: 96.27%
+Validation test_intra/AP@50_slider_drawer: 65.01%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.74%
+Validation test_intra/AP@50_hinge_knob: 75.78%
+Validation test_intra/AP@50_revolute_handle: 90.38%
+Validation test_inter/AP@50_line_fixed_handle: 41.14%
+Validation test_inter/AP@50_round_fixed_handle: 24.14%
+Validation test_inter/AP@50_slider_button: 53.01%
+Validation test_inter/AP@50_hinge_door: 85.37%
+Validation test_inter/AP@50_slider_drawer: 73.51%
+Validation test_inter/AP@50_slider_lid: 70.72%
+Validation test_inter/AP@50_hinge_lid: 87.90%
+Validation test_inter/AP@50_hinge_knob: 39.71%
+Validation test_inter/AP@50_revolute_handle: 1.37%
+------results of test_inter------
+mean_all_accu: 99.85
+mean_pixel_accu: 99.68
+mean_miou: 96.98
+mean_AP@50: 87.03
+mean_mAP: 75.49
+------results of test_inter------
+mean_all_accu: 99.18
+mean_pixel_accu: 97.38
+mean_miou: 85.73
+mean_AP@50: 80.83
+mean_mAP: 68.11
+------results of test_inter------
+mean_all_accu: 95.17
+mean_pixel_accu: 88.43
+mean_miou: 55.93
+mean_AP@50: 52.99
+mean_mAP: 41.04
+Val Files = 2700, Skipped None Items = 4, Avg Val Loss = -0.8099
+Val Files = 5235, Skipped None Items = 44, Avg Val Loss = -0.4299
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0696
+Validation val/AP@50_line_fixed_handle: 83.28%
+Validation val/AP@50_round_fixed_handle: 59.69%
+Validation val/AP@50_slider_button: 86.08%
+Validation val/AP@50_hinge_door: 98.98%
+Validation val/AP@50_slider_drawer: 97.43%
+Validation val/AP@50_slider_lid: 99.53%
+Validation val/AP@50_hinge_lid: 87.03%
+Validation val/AP@50_hinge_knob: 81.71%
+Validation val/AP@50_revolute_handle: 87.64%
+Validation test_intra/AP@50_line_fixed_handle: 84.37%
+Validation test_intra/AP@50_round_fixed_handle: 39.91%
+Validation test_intra/AP@50_slider_button: 86.09%
+Validation test_intra/AP@50_hinge_door: 96.34%
+Validation test_intra/AP@50_slider_drawer: 64.78%
+Validation test_intra/AP@50_slider_lid: 99.98%
+Validation test_intra/AP@50_hinge_lid: 89.94%
+Validation test_intra/AP@50_hinge_knob: 75.87%
+Validation test_intra/AP@50_revolute_handle: 90.37%

@@ -1,0 +1,39 @@
+<robot name="simple_articulated">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="1.2 1.7 1.6"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.2 1.7 1.6"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <link name="moving_link">
+    <visual>
+      <geometry>
+        <box size="0.85 1.17 1.17"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.85 1.17 1.17"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="revolute_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="moving_link"/>
+    <origin xyz="0 0 1"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.0"/>
+  </joint>
+</robot>

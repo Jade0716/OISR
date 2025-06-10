@@ -1,0 +1,15 @@
+# ninja log v5
+3	26272	1740482308194303647	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/interpolate_gpu.o	ce157da332adf4bb
+2	26290	1740482308213303238	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/group_points_gpu.o	82631b184b840e7f
+1	26877	1740482308800290579	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/ball_query_gpu.o	42bc0ee3abc19c6d
+5	27298	1740482309221281500	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/sampling_gpu.o	3022a8ddce777e12
+4	28936	1740482310824246935	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/pointnet2_api.o	6a183a601ebd882
+25	9669	1740483847094653735	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/sampling.o	296270628c18b7a
+22	9694	1740483847117653312	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/group_points.o	b6742b075889b874
+23	9767	1740483847198651824	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/interpolate.o	1336bd9bc587aceb
+21	10069	1740483847499646293	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/ball_query.o	968b6be897cfb8c4
+21	25411	1740483862841364035	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/ball_query_gpu.o	42bc0ee3abc19c6d
+24	25483	1740483862914362690	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/interpolate_gpu.o	ce157da332adf4bb
+26	25961	1740483863390353922	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/sampling_gpu.o	3022a8ddce777e12
+23	26016	1740483863447352871	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/group_points_gpu.o	82631b184b840e7f
+24	26236	1740483863641349298	/home/liuyuyan/GaPartNet/dataset/process_tools/utils/pointnet_lib/build/temp.linux-x86_64-cpython-38/src/pointnet2_api.o	6a183a601ebd882

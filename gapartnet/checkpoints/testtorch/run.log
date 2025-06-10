@@ -1,0 +1,40 @@
+Namespace(exp_name='testtorch', model_path=None, test=False)
+No pretrained model provided, training from scratch...
+==epoch: 0, learning rate: 0.001000==
+Namespace(exp_name='testtorch', model_path=None, test=False)
+No pretrained model provided, training from scratch...
+==epoch: 0, learning rate: 0.001000==
+Epoch 0: Used Files = 18872, Skipped None Items = 60, Avg Loss = 1.1189
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3633
+Validation val/AP@50_line_fixed_handle: 0.00%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 7.03%
+Validation val/AP@50_hinge_door: 60.11%
+Validation val/AP@50_slider_drawer: 20.50%
+Validation val/AP@50_slider_lid: 0.00%
+Validation val/AP@50_hinge_lid: 67.18%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 89.96
+mean_pixel_accu: 76.29
+mean_AP@50: 17.20
+Save the model from epoch 0
+==epoch: 1, learning rate: 0.001000==
+Epoch 1: Used Files = 18872, Skipped None Items = 60, Avg Loss = 0.0699
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1700
+Validation val/AP@50_line_fixed_handle: 0.00%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 18.45%
+Validation val/AP@50_hinge_door: 63.28%
+Validation val/AP@50_slider_drawer: 24.73%
+Validation val/AP@50_slider_lid: 39.03%
+Validation val/AP@50_hinge_lid: 74.54%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 91.11
+mean_pixel_accu: 78.92
+mean_AP@50: 24.45
+Save the model from epoch 1
+==epoch: 2, learning rate: 0.001000==

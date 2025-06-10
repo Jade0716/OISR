@@ -1,0 +1,656 @@
+[2025-03-17 15:25:50.834] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:04.118] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:07.709] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:07.709] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:07.709] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:28:07.847] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:26.842] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:30.342] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:30.343] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:30.343] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:28:30.440] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:50.308] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:28:53.891] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:53.891] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:28:53.891] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:28:54.006] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:11.661] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:15.336] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:15.336] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:15.337] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:29:15.489] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:32.936] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:36.744] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:36.744] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:36.744] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:29:36.903] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:54.713] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:29:58.421] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:58.421] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:29:58.421] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:29:58.582] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:30:19.447] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:30:22.750] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:30:22.750] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:30:22.750] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:30:22.868] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:30:40.901] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:30:44.254] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:30:44.254] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:30:44.254] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:30:45.005] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:02.314] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:05.655] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:05.655] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:05.655] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:31:05.754] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:24.208] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:28.068] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:28.068] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:28.068] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:31:28.186] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:47.097] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:31:50.085] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:50.085] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:31:50.085] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:31:50.199] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:07.107] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:10.942] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:10.942] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:10.942] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:32:11.027] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:31.204] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:34.942] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:34.942] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:34.942] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:32:35.049] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:55.729] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:32:59.175] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:59.175] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:32:59.175] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:32:59.260] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:33:16.992] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:33:20.021] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:33:20.021] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:33:20.021] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:33:20.117] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:33:37.121] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:33:40.402] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:33:40.402] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:33:40.402] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:33:40.522] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:33:57.822] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:34:01.887] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:01.887] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:01.887] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:34:02.400] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:34:20.560] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:34:24.589] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:24.589] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:24.589] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:34:25.082] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:34:44.177] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:34:47.609] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:47.609] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:34:47.609] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:34:47.725] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:04.771] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:08.055] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:08.055] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:08.055] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:35:08.138] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:25.830] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:28.961] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:28.961] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:28.961] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:35:29.280] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:46.481] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:35:50.029] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:50.029] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:35:50.029] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:35:50.161] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:07.948] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:11.519] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:11.519] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:11.519] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:36:11.678] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:32.912] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:36.015] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:36.015] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:36.015] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:36:36.127] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:55.346] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:36:58.791] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:58.791] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:36:58.791] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:36:58.896] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:37:17.261] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:37:20.617] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:37:20.617] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:37:20.617] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:37:20.758] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:37:39.798] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:37:43.164] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:37:43.164] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:37:43.164] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:37:43.325] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:01.532] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:05.334] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:05.335] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:05.335] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:38:05.421] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:26.594] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:30.177] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:30.177] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:30.177] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:38:30.288] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:47.623] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:38:51.372] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:51.372] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:38:51.372] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:38:51.494] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:10.773] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:14.304] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:14.304] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:14.304] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:39:14.415] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:33.484] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:37.130] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:37.130] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:37.130] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:39:37.246] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:47.388] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:49.921] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:49.921] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:39:49.921] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:39:50.043] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:39:58.592] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:01.351] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:01.352] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:01.352] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:01.465] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:09.540] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:11.508] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:11.508] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:11.508] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:11.610] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:19.232] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:20.866] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:20.866] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:20.866] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:20.990] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:30.532] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:32.564] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:32.564] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:32.564] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:32.680] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:41.399] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:44.242] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:44.242] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:44.242] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:44.356] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:51.946] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:40:54.356] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:54.356] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:40:54.356] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:40:54.460] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:01.448] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:03.630] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:03.630] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:03.630] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:03.723] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:11.271] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:12.964] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:12.964] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:12.964] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:15.251] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:23.370] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:25.256] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:25.256] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:25.256] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:25.385] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:32.609] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:35.473] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:35.473] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:35.473] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:35.571] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:43.112] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:45.695] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:45.695] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:45.695] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:45.784] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:53.590] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:41:55.140] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:55.140] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:41:55.140] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:41:55.392] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:02.906] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:04.511] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:04.511] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:04.511] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:42:04.601] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:12.136] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:13.894] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:13.894] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:13.894] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:42:13.986] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:27.491] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:30.602] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:30.602] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:30.602] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:42:30.747] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:38.851] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:41.370] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:41.371] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:41.371] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:42:44.261] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:51.890] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:42:53.916] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:53.916] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:42:53.916] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:42:54.043] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:01.099] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:03.669] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:03.669] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:03.669] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:03.760] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:11.845] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:13.669] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:13.669] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:13.669] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:13.829] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:23.253] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:25.615] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:25.615] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:25.615] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:26.700] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:34.655] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:36.236] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:36.236] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:36.236] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:36.375] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:44.262] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:45.712] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:45.712] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:45.712] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:46.202] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:54.344] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:43:56.421] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:56.421] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:43:56.421] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:43:56.519] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:03.797] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:06.150] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:06.150] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:06.150] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:06.268] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:14.417] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:16.265] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:16.265] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:16.265] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:16.369] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:23.724] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:26.648] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:26.648] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:26.648] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:27.139] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:35.052] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:36.557] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:36.557] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:36.557] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:36.644] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:44.304] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:46.070] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:46.070] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:46.070] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:46.196] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:53.480] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:44:55.271] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:55.271] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:44:55.271] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:44:55.370] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:03.354] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:05.263] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:05.263] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:05.263] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:45:05.412] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:13.007] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:16.187] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:16.187] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:16.187] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:45:16.324] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:28.600] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:31.314] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:31.314] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:31.314] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:45:31.401] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:43.243] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:46.299] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:46.299] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:45:46.299] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:45:46.430] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:45:58.021] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:01.468] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:01.468] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:01.468] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:46:01.557] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:14.312] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:16.903] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:16.903] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:16.903] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:46:17.051] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:28.691] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:32.521] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:32.521] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:32.521] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:46:32.652] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:46.824] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:46:49.370] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:49.370] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:46:49.370] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:46:49.484] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:00.713] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:04.270] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:04.270] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:04.270] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:47:04.382] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:17.743] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:20.799] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:20.799] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:20.799] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:47:20.917] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:32.530] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:35.379] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:35.379] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:35.379] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:47:35.513] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:48.533] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:47:50.894] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:50.894] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:47:50.894] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:47:51.022] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:02.560] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:04.607] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:04.607] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:04.607] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:48:05.314] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:18.639] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:21.988] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:21.988] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:21.988] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:48:26.128] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:39.471] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:42.201] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:42.201] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:48:42.201] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:48:44.808] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:48:58.322] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:05.201] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:05.201] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:05.201] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:49:05.390] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:20.882] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:25.764] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:25.764] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:25.764] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:49:25.925] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:39.893] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:44.327] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:44.328] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:49:44.328] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:49:44.461] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:49:59.086] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:05.317] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:05.317] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:05.317] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:50:06.087] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:21.591] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:24.511] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:24.511] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:24.511] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:50:24.616] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:38.163] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:41.723] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:41.723] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:50:41.723] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:50:41.820] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:50:58.104] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:04.509] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:04.509] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:04.509] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:51:06.354] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:18.765] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:23.931] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:23.931] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:23.931] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:51:24.049] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:38.997] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:43.508] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:43.508] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:51:43.508] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:51:43.613] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:51:58.780] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:02.191] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:02.192] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:02.192] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:52:02.296] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:15.889] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:19.938] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:19.938] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:19.938] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:52:20.091] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:34.389] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:39.769] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:39.769] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:39.769] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:52:39.900] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:54.313] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:52:58.900] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:58.900] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:52:58.900] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:52:59.039] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:12.387] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:16.139] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:16.139] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:16.139] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:53:16.248] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:31.000] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:33.676] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:33.676] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:33.676] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:53:33.776] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:45.487] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:53:47.569] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:47.569] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:53:47.569] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:53:47.667] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:01.190] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:04.858] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:04.858] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:04.858] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:54:04.961] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:17.543] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:19.748] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:19.748] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:19.748] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:54:19.840] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:33.172] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:36.304] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:36.304] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:36.304] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:54:38.143] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:43.601] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:48.870] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:48.871] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:54:48.871] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:54:48.964] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:54:56.936] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:01.634] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:01.634] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:01.634] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:55:01.734] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:09.093] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:12.400] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:12.400] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:12.400] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:55:12.507] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:19.068] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:22.935] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:22.935] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:22.935] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:55:23.026] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:31.724] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:37.821] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:37.821] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:37.821] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:55:37.905] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:45.641] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:50.505] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:50.505] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:55:50.505] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:55:50.590] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:55:59.407] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:04.107] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:04.107] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:04.107] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:56:04.193] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:12.519] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:16.011] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:16.011] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:16.011] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:56:16.096] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:24.071] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:29.178] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:29.178] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:29.178] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:56:29.265] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:37.996] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:42.322] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:42.322] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:42.322] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:56:42.415] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:49.204] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:56:55.113] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:55.113] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:56:55.113] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:56:55.198] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:03.032] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:07.039] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:07.039] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:07.039] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:57:07.139] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:14.952] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:18.440] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:18.440] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:18.440] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:57:19.061] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:24.986] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:27.907] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:27.907] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:27.907] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:57:28.008] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:35.242] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:40.081] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:40.082] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:40.082] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:57:40.167] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:48.159] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:57:53.383] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:53.383] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:57:53.383] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:57:53.515] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:01.025] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:07.363] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:07.363] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:07.363] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:58:07.471] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:17.946] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:21.338] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:21.338] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:21.338] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:58:21.456] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:28.499] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:32.427] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:32.427] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:32.427] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:58:32.517] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:39.030] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:44.215] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:44.216] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:44.216] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:58:44.310] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:51.564] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:58:56.967] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:56.967] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:58:56.967] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:58:57.069] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:05.528] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:09.756] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:09.756] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:09.756] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:59:11.476] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:20.111] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:27.678] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:27.678] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:27.678] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:59:27.781] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:36.807] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:44.295] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:44.295] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 15:59:44.295] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 15:59:44.390] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 15:59:54.105] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:01.705] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:01.705] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:01.705] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:00:01.846] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:11.864] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:18.365] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:18.365] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:18.365] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:00:18.450] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:30.874] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:36.840] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:36.840] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:36.840] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:00:36.936] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:44.543] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:00:51.593] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:51.593] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:00:51.593] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:00:51.724] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:00.958] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:06.839] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:06.840] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:06.840] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:01:06.953] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:15.359] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:22.524] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:22.525] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:22.525] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:01:22.641] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:31.771] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:36.753] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:36.753] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:36.753] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:01:36.878] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:51.416] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:01:59.149] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:59.149] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:01:59.149] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:01:59.252] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:10.750] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:15.682] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:15.682] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:15.682] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:02:15.776] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:24.239] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:27.125] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:27.125] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:27.125] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:02:27.222] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:35.374] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
+[2025-03-17 16:02:41.457] [SAPIEN] [warning] A second engine will share the same internal structures with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:41.457] [svulkan2] [warning] A second renderer will share the same internal context with the first one. Arguments passed to constructor will be ignored.
+[2025-03-17 16:02:41.457] [SAPIEN] [warning] Setting renderer more than once should be avoided.
+[2025-03-17 16:02:41.568] [SAPIEN] [warning] getCameraMatrix is deprecated, use getIntrinsicMatrix instead
