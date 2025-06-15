@@ -81,10 +81,13 @@ class GAPartNet(nn.Module):
             val_ap_iou_threshold: float = 0.5,
             # testing
             visualize_cfg: Dict = {},
+            # adaptive clustering
+            use_adaptive_clustering: bool = False,
     ):
         super(GAPartNet, self).__init__()
         self.validation_step_outputs = []
         self.visualize_cfg = visualize_cfg
+        self.use_adaptive_clustering = use_adaptive_clustering
         self.in_channels = in_channels
         self.num_part_classes = num_part_classes
         self.backbone_type = backbone_type
@@ -372,14 +375,45 @@ class GAPartNet(nn.Module):
             sem_logits: torch.Tensor,
             sem_labels: torch.Tensor,
     ) -> torch.Tensor:
+        #创建一个类别权重，给handle类别加权
+        class_weights=torch.ones(self.num_part_classes,device=sem_logits.device)
+        class_weights[1]=2.0
+        class_weights[2]=3.0
+        class_weights[9]=3.0
         if self.use_sem_focal_loss:
-            loss = focal_loss(
-                sem_logits, sem_labels,
-                alpha=None,
-                gamma=2.0,
-                ignore_index=self.ignore_sem_label,
-                reduction="mean",
-            )
+#            loss = focal_loss(
+#                sem_logits, sem_labels,
+#                alpha=None,
+#                gamma=2.0,
+#                ignore_index=self.ignore_sem_label,
+#                reduction="mean",
+#            )
+            # 计算小类别的自适应focal loss
+            small_classes = [1, 2, 8, 9]  # handle + knob classes
+            is_small_class = torch.isin(sem_labels, torch.tensor(small_classes, device=sem_labels.device))
+            
+            if is_small_class.any():
+                # 小类别使用更高的gamma值(3.0)以更关注难分类样本
+                small_mask = is_small_class
+                other_mask = ~small_mask
+                
+                loss = torch.zeros_like(sem_logits[:, 0])
+                if small_mask.any():
+                    loss[small_mask] = focal_loss(
+                        sem_logits[small_mask], sem_labels[small_mask],
+                        alpha=None, gamma=3.0, ignore_index=self.ignore_sem_label, reduction="none"
+                    )
+                if other_mask.any():
+                    loss[other_mask] = focal_loss(
+                        sem_logits[other_mask], sem_labels[other_mask],
+                        alpha=None, gamma=2.0, ignore_index=self.ignore_sem_label, reduction="none"
+                    )
+                loss = loss.mean()
+            else:
+                loss = focal_loss(
+                    sem_logits, sem_labels,
+                    alpha=None, gamma=2.0, ignore_index=self.ignore_sem_label, reduction="mean"
+                )
         else:
             loss = F.cross_entropy(
                 sem_logits, sem_labels,
@@ -549,11 +583,13 @@ class GAPartNet(nn.Module):
         sorted_cc_labels, sorted_indices = cluster_proposals(
             flow_xyz + offset_preds, batch_indices_compact, batch_offsets, sem_preds,
             self.ball_query_radius, self.max_num_points_per_query,
+            use_adaptive=self.use_adaptive_clustering,
         )
 
         sorted_cc_labels_shift, sorted_indices_shift = cluster_proposals(
             pt_xyz + offset_preds, batch_indices_compact, batch_offsets, sem_preds,
             self.ball_query_radius, self.max_num_points_per_query_shift,
+            use_adaptive=self.use_adaptive_clustering,
         )
 
         # combine clusters
@@ -563,15 +599,52 @@ class GAPartNet(nn.Module):
         ], dim=0)
         sorted_indices = torch.cat([sorted_indices, sorted_indices_shift], dim=0)
 
+        '''        
+        # 针对小类别进行额外的精细聚类
+        small_classes = [1, 2, 8, 9]  # handle + knob classes  
+        small_mask = torch.isin(sem_preds, torch.tensor(small_classes, device=sem_preds.device))
+        
+        if small_mask.any():
+            # 小类别使用更小的聚类半径进行精细聚类
+            fine_radius = self.ball_query_radius * 0.7  # 缩小到70%
+            sorted_cc_labels_fine, sorted_indices_fine = cluster_proposals(
+                (flow_xyz + offset_preds)[small_mask], 
+                batch_indices_compact[small_mask], 
+                batch_offsets, 
+                sem_preds[small_mask],
+                fine_radius, 
+                self.max_num_points_per_query,
+            )
+            # 合并精细聚类结果
+            if sorted_cc_labels_fine.shape[0] > 0:
+                sorted_cc_labels_fine += sorted_cc_labels.shape[0] + sorted_cc_labels_shift.shape[0]
+                sorted_indices_fine = torch.nonzero(small_mask, as_tuple=True)[0][sorted_indices_fine]
+                sorted_cc_labels = torch.cat([sorted_cc_labels, sorted_cc_labels_shift, sorted_cc_labels_fine], dim=0)
+                sorted_indices = torch.cat([sorted_indices, sorted_indices_shift, sorted_indices_fine], dim=0)
+            else:
+                sorted_cc_labels = torch.cat([sorted_cc_labels, sorted_cc_labels_shift], dim=0)
+                sorted_indices = torch.cat([sorted_indices, sorted_indices_shift], dim=0)
+        else:
+            # 没有小类别时的原始合并逻辑
+            sorted_cc_labels = torch.cat([sorted_cc_labels, sorted_cc_labels_shift], dim=0)
+            sorted_indices = torch.cat([sorted_indices, sorted_indices_shift], dim=0)
+        '''
         # compact the proposal ids
         _, proposal_indices, num_points_per_proposal = torch.unique_consecutive(
             sorted_cc_labels, return_inverse=True, return_counts=True
         )
 
-        # remove small proposals
-        valid_proposal_mask = (
-                num_points_per_proposal >= self.min_num_points_per_proposal
-        )
+        # 获取每个proposal的类别 (使用第一个点的语义类别代表该proposal)
+        num_proposals = num_points_per_proposal.shape[0]
+        proposal_offsets_temp = torch.zeros(num_proposals + 1, dtype=torch.int32, device=device)
+        proposal_offsets_temp[1:] = num_points_per_proposal.cumsum(0)
+        proposal_classes = sem_preds[sorted_indices[proposal_offsets_temp[:-1].long()]]
+        
+        # remove small proposals (handle和knob类别使用更低的阈值)
+        small_class_mask = (proposal_classes == 1) | (proposal_classes == 2) | (proposal_classes == 8) | (proposal_classes == 9)
+        min_points_threshold = torch.where(small_class_mask, 2, self.min_num_points_per_proposal)
+        valid_proposal_mask = num_points_per_proposal >= min_points_threshold
+
         # proposal to point
         valid_point_mask = valid_proposal_mask[proposal_indices]
 

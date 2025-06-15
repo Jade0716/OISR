@@ -717,7 +717,7 @@ def main():
     train_batch_size: int = 32#32
     val_batch_size: int = 32
     test_batch_size: int = 32
-    num_workers: int = 16
+    num_workers: int = 80
     pos_jitter: float = 0.
     color_jitter: float = 0.1
     flip_prob: float = 0.

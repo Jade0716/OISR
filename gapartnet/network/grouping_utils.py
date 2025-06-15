@@ -103,9 +103,99 @@ def segmented_voxelize(
 
     return voxel_features, voxel_coords, pc_voxel_id
 
+# 定义小部件类别的自适应聚类参数
+SMALL_PART_CLUSTERING_PARAMS = {
+    1: 0.03,    # line_fixed_handle - 1.5cm
+    2: 0.03,     # round_fixed_handle - 2cm
+    8: 0.03,    # hinge_knob - 1.5cm  
+    9: 0.02,     # revolute_handle - 2cm
+}
+
+SMALL_PART_MAX_NEIGHBORS = {
+    1: 30,       # line_fixed_handle
+    2: 35,       # round_fixed_handle
+    8: 25,       # hinge_knob
+    9: 30,       # revolute_handle
+}
+
+def cluster_proposals_adaptive(
+    pt_xyz: torch.Tensor,
+    batch_indices: torch.Tensor,
+    batch_offsets: torch.Tensor,
+    sem_preds: torch.Tensor,
+    ball_query_radius: float,
+    max_num_points_per_query: int,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """轻量级自适应聚类函数 - 高性能版本"""
+    device = pt_xyz.device
+    index_dtype = batch_indices.dtype
+    
+    # 快速检查是否包含小部件（避免CPU-GPU同步）
+    small_part_mask = torch.zeros_like(sem_preds, dtype=torch.bool)
+    for small_cls in SMALL_PART_CLUSTERING_PARAMS.keys():
+        small_part_mask |= (sem_preds == small_cls)
+    
+    # 如果没有小部件，直接使用原始聚类
+    if not small_part_mask.any():
+        return cluster_proposals_original(
+            pt_xyz, batch_indices, batch_offsets, sem_preds,
+            ball_query_radius, max_num_points_per_query
+        )
+    
+    # 计算自适应半径（向量化操作）
+    adaptive_radius = torch.full_like(sem_preds, ball_query_radius, dtype=torch.float32)
+    for small_cls, small_radius in SMALL_PART_CLUSTERING_PARAMS.items():
+        cls_mask = sem_preds == small_cls
+        adaptive_radius[cls_mask] = small_radius
+    
+    # 计算自适应邻居数（向量化操作）
+    adaptive_max_neighbors = torch.full_like(sem_preds, max_num_points_per_query, dtype=torch.int32)
+    for small_cls, small_max_neighbors in SMALL_PART_MAX_NEIGHBORS.items():
+        cls_mask = sem_preds == small_cls
+        adaptive_max_neighbors[cls_mask] = small_max_neighbors
+    
+    # 使用加权平均半径（保持单次ball_query调用）
+    small_part_ratio = small_part_mask.sum().float() / sem_preds.shape[0]
+    if small_part_ratio > 0.3:  # 如果小部件占比超过30%，使用更小的半径
+        effective_radius = ball_query_radius * 0.7  # 减小30%
+        effective_max_neighbors = max_num_points_per_query // 2
+    else:
+        effective_radius = ball_query_radius * 0.9  # 轻微减小10%
+        effective_max_neighbors = max_num_points_per_query
+    
+    # 单次ball_query调用（保持高性能）
+    clustered_indices, num_points_per_query = ball_query(
+        pt_xyz,
+        pt_xyz,
+        batch_indices,
+        batch_offsets,
+        effective_radius,
+        effective_max_neighbors,
+        point_labels=sem_preds,
+        query_labels=sem_preds,
+    )
+    
+    # 连通组件标记
+    ccl_indices_begin = torch.arange(
+        pt_xyz.shape[0], dtype=index_dtype, device=device
+    ) * effective_max_neighbors
+    ccl_indices_end = ccl_indices_begin + num_points_per_query
+    ccl_indices = torch.stack([ccl_indices_begin, ccl_indices_end], dim=1)
+    cc_labels = connected_components_labeling(
+        ccl_indices.view(-1), clustered_indices.view(-1), compacted=False
+    )
+    
+    sorted_cc_labels, sorted_indices = torch.sort(cc_labels)
+    
+    # 简化的调试信息（减少CPU-GPU同步）
+    if small_part_mask.any() and torch.rand(1).item() < 0.01:
+        print(f"[轻量级自适应聚类] 小部件占比: {small_part_ratio:.2f}, "
+              f"使用半径: {effective_radius:.3f}, 邻居数: {effective_max_neighbors}")
+    
+    return sorted_cc_labels, sorted_indices
 
 # @torch.jit.script
-def cluster_proposals(
+def cluster_proposals_original(
     pt_xyz: torch.Tensor,
     batch_indices: torch.Tensor,
     batch_offsets: torch.Tensor,
@@ -138,6 +228,29 @@ def cluster_proposals(
 
     sorted_cc_labels, sorted_indices = torch.sort(cc_labels)
     return sorted_cc_labels, sorted_indices
+
+# @torch.jit.script
+def cluster_proposals(
+    pt_xyz: torch.Tensor,
+    batch_indices: torch.Tensor,
+    batch_offsets: torch.Tensor,
+    sem_preds: torch.Tensor,
+    ball_query_radius: float,
+    max_num_points_per_query: int,
+    use_adaptive: bool = True,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """聚类提案函数 - 可选择自适应策略"""
+    if use_adaptive:
+        return cluster_proposals_adaptive(
+            pt_xyz, batch_indices, batch_offsets, sem_preds,
+            ball_query_radius, max_num_points_per_query
+        )
+    else:
+        return cluster_proposals_original(
+            pt_xyz, batch_indices, batch_offsets, sem_preds,
+            ball_query_radius, max_num_points_per_query
+        )
+
 
 
 # @torch.jit.script
