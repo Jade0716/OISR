@@ -1,0 +1,2757 @@
+Namespace(exp_name='100flowstats0.02flowxyzoffset', model_path=None, test=False)
+No pretrained model provided, training from scratch...
+==epoch: 0, learning rate: 0.001000==
+Epoch 0: Used Files = 18875, Skipped None Items = 53, Avg Loss = 1.0898
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3723
+Validation val/AP@50_line_fixed_handle: 0.00%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 6.71%
+Validation val/AP@50_hinge_door: 63.11%
+Validation val/AP@50_slider_drawer: 19.11%
+Validation val/AP@50_slider_lid: 0.00%
+Validation val/AP@50_hinge_lid: 72.89%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 90.17
+mean_pixel_accu: 77.06
+mean_AP@50: 17.98
+Save the model from epoch 0
+==epoch: 1, learning rate: 0.001000==
+Epoch 1: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.0272
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1228
+Validation val/AP@50_line_fixed_handle: 0.00%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 10.04%
+Validation val/AP@50_hinge_door: 64.35%
+Validation val/AP@50_slider_drawer: 34.40%
+Validation val/AP@50_slider_lid: 27.37%
+Validation val/AP@50_hinge_lid: 68.18%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 90.60
+mean_pixel_accu: 77.80
+mean_AP@50: 22.71
+Save the model from epoch 1
+==epoch: 2, learning rate: 0.001000==
+Epoch 2: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.3097
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0499
+Validation val/AP@50_line_fixed_handle: 10.59%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 31.62%
+Validation val/AP@50_hinge_door: 77.32%
+Validation val/AP@50_slider_drawer: 54.55%
+Validation val/AP@50_slider_lid: 53.30%
+Validation val/AP@50_hinge_lid: 53.48%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.36
+mean_pixel_accu: 81.79
+mean_AP@50: 31.21
+Save the model from epoch 2
+==epoch: 3, learning rate: 0.001000==
+Epoch 3: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.4547
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1142
+Validation val/AP@50_line_fixed_handle: 17.40%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 35.33%
+Validation val/AP@50_hinge_door: 82.47%
+Validation val/AP@50_slider_drawer: 59.45%
+Validation val/AP@50_slider_lid: 56.19%
+Validation val/AP@50_hinge_lid: 76.13%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.87
+mean_pixel_accu: 85.45
+mean_AP@50: 36.33
+Save the model from epoch 3
+==epoch: 4, learning rate: 0.001000==
+Epoch 4: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.5189
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1118
+Validation val/AP@50_line_fixed_handle: 15.94%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 39.31%
+Validation val/AP@50_hinge_door: 81.72%
+Validation val/AP@50_slider_drawer: 59.99%
+Validation val/AP@50_slider_lid: 40.99%
+Validation val/AP@50_hinge_lid: 66.95%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.82
+mean_pixel_accu: 82.77
+mean_AP@50: 33.88
+==epoch: 5, learning rate: 0.001000==
+Epoch 5: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.5663
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0585
+Validation val/AP@50_line_fixed_handle: 17.26%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 44.18%
+Validation val/AP@50_hinge_door: 85.66%
+Validation val/AP@50_slider_drawer: 58.98%
+Validation val/AP@50_slider_lid: 14.30%
+Validation val/AP@50_hinge_lid: 77.13%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 91.27
+mean_pixel_accu: 79.11
+mean_AP@50: 33.06
+==epoch: 6, learning rate: 0.001000==
+Epoch 6: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.5703
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0532
+Validation val/AP@50_line_fixed_handle: 14.16%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 40.96%
+Validation val/AP@50_hinge_door: 82.04%
+Validation val/AP@50_slider_drawer: 63.46%
+Validation val/AP@50_slider_lid: 33.06%
+Validation val/AP@50_hinge_lid: 67.66%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.75
+mean_pixel_accu: 82.68
+mean_AP@50: 33.48
+==epoch: 7, learning rate: 0.001000==
+Epoch 7: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.5709
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1187
+Validation val/AP@50_line_fixed_handle: 14.93%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 41.10%
+Validation val/AP@50_hinge_door: 80.48%
+Validation val/AP@50_slider_drawer: 59.46%
+Validation val/AP@50_slider_lid: 33.42%
+Validation val/AP@50_hinge_lid: 63.14%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.84
+mean_pixel_accu: 82.72
+mean_AP@50: 32.50
+==epoch: 8, learning rate: 0.001000==
+Epoch 8: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.5834
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0336
+Validation val/AP@50_line_fixed_handle: 14.33%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 43.90%
+Validation val/AP@50_hinge_door: 81.39%
+Validation val/AP@50_slider_drawer: 64.36%
+Validation val/AP@50_slider_lid: 40.33%
+Validation val/AP@50_hinge_lid: 61.33%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.85
+mean_pixel_accu: 82.85
+mean_AP@50: 33.96
+==epoch: 9, learning rate: 0.001000==
+Epoch 9: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6022
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1274
+Validation val/AP@50_line_fixed_handle: 15.51%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 46.71%
+Validation val/AP@50_hinge_door: 83.52%
+Validation val/AP@50_slider_drawer: 69.26%
+Validation val/AP@50_slider_lid: 25.41%
+Validation val/AP@50_hinge_lid: 71.76%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.20%
+------results of test_inter------
+mean_all_accu: 93.28
+mean_pixel_accu: 83.84
+mean_AP@50: 34.71
+==epoch: 10, learning rate: 0.001000==
+Epoch 10: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6130
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1475
+Validation val/AP@50_line_fixed_handle: 19.67%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 45.51%
+Validation val/AP@50_hinge_door: 86.47%
+Validation val/AP@50_slider_drawer: 70.42%
+Validation val/AP@50_slider_lid: 12.82%
+Validation val/AP@50_hinge_lid: 57.62%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.01%
+------results of test_inter------
+mean_all_accu: 92.46
+mean_pixel_accu: 81.80
+mean_AP@50: 32.50
+==epoch: 11, learning rate: 0.001000==
+Epoch 11: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6273
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1524
+Validation val/AP@50_line_fixed_handle: 19.76%
+Validation val/AP@50_round_fixed_handle: 0.04%
+Validation val/AP@50_slider_button: 47.38%
+Validation val/AP@50_hinge_door: 83.15%
+Validation val/AP@50_slider_drawer: 72.52%
+Validation val/AP@50_slider_lid: 28.80%
+Validation val/AP@50_hinge_lid: 67.32%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.54
+mean_pixel_accu: 84.46
+mean_AP@50: 35.44
+==epoch: 12, learning rate: 0.001000==
+Epoch 12: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6506
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1783
+Validation val/AP@50_line_fixed_handle: 20.73%
+Validation val/AP@50_round_fixed_handle: 0.18%
+Validation val/AP@50_slider_button: 46.04%
+Validation val/AP@50_hinge_door: 86.17%
+Validation val/AP@50_slider_drawer: 73.11%
+Validation val/AP@50_slider_lid: 33.78%
+Validation val/AP@50_hinge_lid: 69.89%
+Validation val/AP@50_hinge_knob: 0.02%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.64
+mean_pixel_accu: 84.67
+mean_AP@50: 36.66
+Save the model from epoch 12
+==epoch: 13, learning rate: 0.001000==
+Epoch 13: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6530
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1083
+Validation val/AP@50_line_fixed_handle: 20.67%
+Validation val/AP@50_round_fixed_handle: 0.00%
+Validation val/AP@50_slider_button: 48.04%
+Validation val/AP@50_hinge_door: 81.94%
+Validation val/AP@50_slider_drawer: 69.98%
+Validation val/AP@50_slider_lid: 43.57%
+Validation val/AP@50_hinge_lid: 71.47%
+Validation val/AP@50_hinge_knob: 0.01%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.42
+mean_pixel_accu: 84.15
+mean_AP@50: 37.30
+Save the model from epoch 13
+==epoch: 14, learning rate: 0.001000==
+Epoch 14: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6539
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0855
+Validation val/AP@50_line_fixed_handle: 20.19%
+Validation val/AP@50_round_fixed_handle: 0.36%
+Validation val/AP@50_slider_button: 49.83%
+Validation val/AP@50_hinge_door: 82.66%
+Validation val/AP@50_slider_drawer: 68.87%
+Validation val/AP@50_slider_lid: 21.65%
+Validation val/AP@50_hinge_lid: 68.71%
+Validation val/AP@50_hinge_knob: 0.00%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.55
+mean_pixel_accu: 82.05
+mean_AP@50: 34.70
+==epoch: 15, learning rate: 0.001000==
+Epoch 15: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6712
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0294
+Validation val/AP@50_line_fixed_handle: 21.42%
+Validation val/AP@50_round_fixed_handle: 0.01%
+Validation val/AP@50_slider_button: 47.77%
+Validation val/AP@50_hinge_door: 75.87%
+Validation val/AP@50_slider_drawer: 69.74%
+Validation val/AP@50_slider_lid: 32.48%
+Validation val/AP@50_hinge_lid: 63.23%
+Validation val/AP@50_hinge_knob: 0.17%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.01
+mean_pixel_accu: 83.13
+mean_AP@50: 34.52
+==epoch: 16, learning rate: 0.001000==
+Epoch 16: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6765
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.1234
+Validation val/AP@50_line_fixed_handle: 21.76%
+Validation val/AP@50_round_fixed_handle: 0.29%
+Validation val/AP@50_slider_button: 47.45%
+Validation val/AP@50_hinge_door: 81.80%
+Validation val/AP@50_slider_drawer: 67.28%
+Validation val/AP@50_slider_lid: 42.15%
+Validation val/AP@50_hinge_lid: 75.31%
+Validation val/AP@50_hinge_knob: 0.05%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.43
+mean_pixel_accu: 84.28
+mean_AP@50: 37.34
+Save the model from epoch 16
+==epoch: 17, learning rate: 0.001000==
+Epoch 17: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6797
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0463
+Validation val/AP@50_line_fixed_handle: 23.85%
+Validation val/AP@50_round_fixed_handle: 0.03%
+Validation val/AP@50_slider_button: 49.24%
+Validation val/AP@50_hinge_door: 85.83%
+Validation val/AP@50_slider_drawer: 71.67%
+Validation val/AP@50_slider_lid: 6.69%
+Validation val/AP@50_hinge_lid: 60.53%
+Validation val/AP@50_hinge_knob: 0.46%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.81
+mean_pixel_accu: 82.64
+mean_AP@50: 33.14
+==epoch: 18, learning rate: 0.001000==
+Epoch 18: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.6987
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0896
+Validation val/AP@50_line_fixed_handle: 24.27%
+Validation val/AP@50_round_fixed_handle: 0.16%
+Validation val/AP@50_slider_button: 49.55%
+Validation val/AP@50_hinge_door: 86.09%
+Validation val/AP@50_slider_drawer: 76.60%
+Validation val/AP@50_slider_lid: 11.03%
+Validation val/AP@50_hinge_lid: 69.66%
+Validation val/AP@50_hinge_knob: 0.98%
+Validation val/AP@50_revolute_handle: 0.01%
+------results of test_inter------
+mean_all_accu: 93.31
+mean_pixel_accu: 83.84
+mean_AP@50: 35.37
+==epoch: 19, learning rate: 0.001000==
+Epoch 19: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7088
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0156
+Validation val/AP@50_line_fixed_handle: 24.30%
+Validation val/AP@50_round_fixed_handle: 0.35%
+Validation val/AP@50_slider_button: 50.72%
+Validation val/AP@50_hinge_door: 80.97%
+Validation val/AP@50_slider_drawer: 71.75%
+Validation val/AP@50_slider_lid: 11.81%
+Validation val/AP@50_hinge_lid: 55.48%
+Validation val/AP@50_hinge_knob: 0.99%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.44
+mean_pixel_accu: 81.73
+mean_AP@50: 32.93
+==epoch: 20, learning rate: 0.001000==
+Epoch 20: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7128
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0814
+Validation val/AP@50_line_fixed_handle: 27.04%
+Validation val/AP@50_round_fixed_handle: 0.45%
+Validation val/AP@50_slider_button: 50.24%
+Validation val/AP@50_hinge_door: 83.89%
+Validation val/AP@50_slider_drawer: 72.99%
+Validation val/AP@50_slider_lid: 18.68%
+Validation val/AP@50_hinge_lid: 69.83%
+Validation val/AP@50_hinge_knob: 0.29%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 93.25
+mean_pixel_accu: 83.70
+mean_AP@50: 35.94
+==epoch: 21, learning rate: 0.001000==
+Epoch 21: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7156
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0468
+Validation val/AP@50_line_fixed_handle: 28.79%
+Validation val/AP@50_round_fixed_handle: 0.76%
+Validation val/AP@50_slider_button: 51.13%
+Validation val/AP@50_hinge_door: 84.98%
+Validation val/AP@50_slider_drawer: 74.06%
+Validation val/AP@50_slider_lid: 19.14%
+Validation val/AP@50_hinge_lid: 69.85%
+Validation val/AP@50_hinge_knob: 1.30%
+Validation val/AP@50_revolute_handle: 0.35%
+------results of test_inter------
+mean_all_accu: 93.46
+mean_pixel_accu: 84.21
+mean_AP@50: 36.71
+==epoch: 22, learning rate: 0.001000==
+Epoch 22: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7157
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0284
+Validation val/AP@50_line_fixed_handle: 27.74%
+Validation val/AP@50_round_fixed_handle: 0.06%
+Validation val/AP@50_slider_button: 50.29%
+Validation val/AP@50_hinge_door: 82.79%
+Validation val/AP@50_slider_drawer: 71.66%
+Validation val/AP@50_slider_lid: 27.21%
+Validation val/AP@50_hinge_lid: 60.38%
+Validation val/AP@50_hinge_knob: 4.50%
+Validation val/AP@50_revolute_handle: 0.31%
+------results of test_inter------
+mean_all_accu: 92.76
+mean_pixel_accu: 82.52
+mean_AP@50: 36.10
+==epoch: 23, learning rate: 0.001000==
+Epoch 23: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7023
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0716
+Validation val/AP@50_line_fixed_handle: 29.40%
+Validation val/AP@50_round_fixed_handle: 0.21%
+Validation val/AP@50_slider_button: 50.90%
+Validation val/AP@50_hinge_door: 86.23%
+Validation val/AP@50_slider_drawer: 75.32%
+Validation val/AP@50_slider_lid: 19.84%
+Validation val/AP@50_hinge_lid: 66.81%
+Validation val/AP@50_hinge_knob: 8.23%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.94
+mean_pixel_accu: 82.94
+mean_AP@50: 37.44
+Save the model from epoch 23
+==epoch: 24, learning rate: 0.001000==
+Epoch 24: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7319
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0458
+Validation val/AP@50_line_fixed_handle: 31.40%
+Validation val/AP@50_round_fixed_handle: 0.27%
+Validation val/AP@50_slider_button: 51.90%
+Validation val/AP@50_hinge_door: 83.41%
+Validation val/AP@50_slider_drawer: 68.02%
+Validation val/AP@50_slider_lid: 5.01%
+Validation val/AP@50_hinge_lid: 71.14%
+Validation val/AP@50_hinge_knob: 9.95%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.88
+mean_pixel_accu: 82.81
+mean_AP@50: 35.68
+==epoch: 25, learning rate: 0.001000==
+Epoch 25: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7315
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0332
+Validation val/AP@50_line_fixed_handle: 29.58%
+Validation val/AP@50_round_fixed_handle: 0.01%
+Validation val/AP@50_slider_button: 51.59%
+Validation val/AP@50_hinge_door: 83.39%
+Validation val/AP@50_slider_drawer: 73.20%
+Validation val/AP@50_slider_lid: 15.56%
+Validation val/AP@50_hinge_lid: 62.97%
+Validation val/AP@50_hinge_knob: 11.69%
+Validation val/AP@50_revolute_handle: 0.42%
+------results of test_inter------
+mean_all_accu: 92.88
+mean_pixel_accu: 82.80
+mean_AP@50: 36.49
+==epoch: 26, learning rate: 0.001000==
+Epoch 26: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7369
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0478
+Validation val/AP@50_line_fixed_handle: 32.54%
+Validation val/AP@50_round_fixed_handle: 0.25%
+Validation val/AP@50_slider_button: 51.60%
+Validation val/AP@50_hinge_door: 84.34%
+Validation val/AP@50_slider_drawer: 72.67%
+Validation val/AP@50_slider_lid: 15.32%
+Validation val/AP@50_hinge_lid: 73.75%
+Validation val/AP@50_hinge_knob: 17.24%
+Validation val/AP@50_revolute_handle: 0.03%
+------results of test_inter------
+mean_all_accu: 93.53
+mean_pixel_accu: 84.37
+mean_AP@50: 38.64
+Save the model from epoch 26
+==epoch: 27, learning rate: 0.001000==
+Epoch 27: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7407
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = -0.0332
+Validation val/AP@50_line_fixed_handle: 30.86%
+Validation val/AP@50_round_fixed_handle: 1.09%
+Validation val/AP@50_slider_button: 50.56%
+Validation val/AP@50_hinge_door: 83.81%
+Validation val/AP@50_slider_drawer: 71.80%
+Validation val/AP@50_slider_lid: 24.79%
+Validation val/AP@50_hinge_lid: 67.90%
+Validation val/AP@50_hinge_knob: 11.90%
+Validation val/AP@50_revolute_handle: 0.23%
+------results of test_inter------
+mean_all_accu: 93.34
+mean_pixel_accu: 83.89
+mean_AP@50: 38.10
+==epoch: 28, learning rate: 0.001000==
+Epoch 28: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7485
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0493
+Validation val/AP@50_line_fixed_handle: 31.75%
+Validation val/AP@50_round_fixed_handle: 0.26%
+Validation val/AP@50_slider_button: 50.64%
+Validation val/AP@50_hinge_door: 85.24%
+Validation val/AP@50_slider_drawer: 73.76%
+Validation val/AP@50_slider_lid: 9.57%
+Validation val/AP@50_hinge_lid: 65.37%
+Validation val/AP@50_hinge_knob: 25.31%
+Validation val/AP@50_revolute_handle: 0.06%
+------results of test_inter------
+mean_all_accu: 92.57
+mean_pixel_accu: 82.02
+mean_AP@50: 37.99
+==epoch: 29, learning rate: 0.001000==
+Epoch 29: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7533
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0173
+Validation val/AP@50_line_fixed_handle: 31.76%
+Validation val/AP@50_round_fixed_handle: 0.01%
+Validation val/AP@50_slider_button: 51.72%
+Validation val/AP@50_hinge_door: 86.87%
+Validation val/AP@50_slider_drawer: 72.16%
+Validation val/AP@50_slider_lid: 3.00%
+Validation val/AP@50_hinge_lid: 72.38%
+Validation val/AP@50_hinge_knob: 20.45%
+Validation val/AP@50_revolute_handle: 0.03%
+------results of test_inter------
+mean_all_accu: 93.47
+mean_pixel_accu: 84.21
+mean_AP@50: 37.60
+==epoch: 30, learning rate: 0.001000==
+Epoch 30: Used Files = 18876, Skipped None Items = 52, Avg Loss = -0.7570
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0301
+Validation val/AP@50_line_fixed_handle: 30.93%
+Validation val/AP@50_round_fixed_handle: 0.26%
+Validation val/AP@50_slider_button: 51.00%
+Validation val/AP@50_hinge_door: 84.70%
+Validation val/AP@50_slider_drawer: 73.39%
+Validation val/AP@50_slider_lid: 13.71%
+Validation val/AP@50_hinge_lid: 62.17%
+Validation val/AP@50_hinge_knob: 20.92%
+Validation val/AP@50_revolute_handle: 0.03%
+------results of test_inter------
+mean_all_accu: 92.76
+mean_pixel_accu: 82.49
+mean_AP@50: 37.46
+==epoch: 31, learning rate: 0.001000==
+Epoch 31: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7571
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0434
+Validation val/AP@50_line_fixed_handle: 33.71%
+Validation val/AP@50_round_fixed_handle: 1.14%
+Validation val/AP@50_slider_button: 50.76%
+Validation val/AP@50_hinge_door: 84.41%
+Validation val/AP@50_slider_drawer: 70.61%
+Validation val/AP@50_slider_lid: 10.29%
+Validation val/AP@50_hinge_lid: 58.21%
+Validation val/AP@50_hinge_knob: 25.99%
+Validation val/AP@50_revolute_handle: 0.47%
+------results of test_inter------
+mean_all_accu: 92.55
+mean_pixel_accu: 81.94
+mean_AP@50: 37.29
+==epoch: 32, learning rate: 0.001000==
+Epoch 32: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7436
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0670
+Validation val/AP@50_line_fixed_handle: 34.27%
+Validation val/AP@50_round_fixed_handle: 2.23%
+Validation val/AP@50_slider_button: 52.12%
+Validation val/AP@50_hinge_door: 83.16%
+Validation val/AP@50_slider_drawer: 68.64%
+Validation val/AP@50_slider_lid: 12.82%
+Validation val/AP@50_hinge_lid: 63.08%
+Validation val/AP@50_hinge_knob: 24.57%
+Validation val/AP@50_revolute_handle: 0.31%
+------results of test_inter------
+mean_all_accu: 92.75
+mean_pixel_accu: 82.46
+mean_AP@50: 37.91
+==epoch: 33, learning rate: 0.001000==
+Epoch 33: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7603
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0852
+Validation val/AP@50_line_fixed_handle: 33.09%
+Validation val/AP@50_round_fixed_handle: 3.45%
+Validation val/AP@50_slider_button: 50.14%
+Validation val/AP@50_hinge_door: 77.99%
+Validation val/AP@50_slider_drawer: 72.74%
+Validation val/AP@50_slider_lid: 25.77%
+Validation val/AP@50_hinge_lid: 66.35%
+Validation val/AP@50_hinge_knob: 24.96%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.50
+mean_pixel_accu: 81.88
+mean_AP@50: 39.39
+Save the model from epoch 33
+==epoch: 34, learning rate: 0.001000==
+Epoch 34: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7606
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0695
+Validation val/AP@50_line_fixed_handle: 34.57%
+Validation val/AP@50_round_fixed_handle: 1.64%
+Validation val/AP@50_slider_button: 50.37%
+Validation val/AP@50_hinge_door: 83.85%
+Validation val/AP@50_slider_drawer: 71.10%
+Validation val/AP@50_slider_lid: 11.28%
+Validation val/AP@50_hinge_lid: 61.87%
+Validation val/AP@50_hinge_knob: 28.62%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.70
+mean_pixel_accu: 82.33
+mean_AP@50: 38.14
+==epoch: 35, learning rate: 0.001000==
+Epoch 35: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7699
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0664
+Validation val/AP@50_line_fixed_handle: 36.42%
+Validation val/AP@50_round_fixed_handle: 6.08%
+Validation val/AP@50_slider_button: 51.88%
+Validation val/AP@50_hinge_door: 84.44%
+Validation val/AP@50_slider_drawer: 70.36%
+Validation val/AP@50_slider_lid: 9.51%
+Validation val/AP@50_hinge_lid: 63.36%
+Validation val/AP@50_hinge_knob: 26.94%
+Validation val/AP@50_revolute_handle: 1.49%
+------results of test_inter------
+mean_all_accu: 92.45
+mean_pixel_accu: 81.71
+mean_AP@50: 38.94
+==epoch: 36, learning rate: 0.001000==
+Epoch 36: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7720
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1571
+Validation val/AP@50_line_fixed_handle: 35.50%
+Validation val/AP@50_round_fixed_handle: 5.92%
+Validation val/AP@50_slider_button: 52.28%
+Validation val/AP@50_hinge_door: 84.14%
+Validation val/AP@50_slider_drawer: 68.15%
+Validation val/AP@50_slider_lid: 5.47%
+Validation val/AP@50_hinge_lid: 58.30%
+Validation val/AP@50_hinge_knob: 31.22%
+Validation val/AP@50_revolute_handle: 0.63%
+------results of test_inter------
+mean_all_accu: 92.15
+mean_pixel_accu: 81.02
+mean_AP@50: 37.96
+==epoch: 37, learning rate: 0.001000==
+Epoch 37: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7734
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0454
+Validation val/AP@50_line_fixed_handle: 34.37%
+Validation val/AP@50_round_fixed_handle: 3.59%
+Validation val/AP@50_slider_button: 53.04%
+Validation val/AP@50_hinge_door: 84.72%
+Validation val/AP@50_slider_drawer: 67.31%
+Validation val/AP@50_slider_lid: 31.69%
+Validation val/AP@50_hinge_lid: 68.51%
+Validation val/AP@50_hinge_knob: 35.99%
+Validation val/AP@50_revolute_handle: 1.55%
+------results of test_inter------
+mean_all_accu: 93.33
+mean_pixel_accu: 83.87
+mean_AP@50: 42.31
+Save the model from epoch 37
+==epoch: 38, learning rate: 0.001000==
+Epoch 38: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7764
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1107
+Validation val/AP@50_line_fixed_handle: 35.20%
+Validation val/AP@50_round_fixed_handle: 7.25%
+Validation val/AP@50_slider_button: 53.00%
+Validation val/AP@50_hinge_door: 85.48%
+Validation val/AP@50_slider_drawer: 67.93%
+Validation val/AP@50_slider_lid: 8.37%
+Validation val/AP@50_hinge_lid: 61.97%
+Validation val/AP@50_hinge_knob: 31.73%
+Validation val/AP@50_revolute_handle: 0.10%
+------results of test_inter------
+mean_all_accu: 92.60
+mean_pixel_accu: 82.13
+mean_AP@50: 39.00
+==epoch: 39, learning rate: 0.001000==
+Epoch 39: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7787
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0947
+Validation val/AP@50_line_fixed_handle: 35.88%
+Validation val/AP@50_round_fixed_handle: 6.54%
+Validation val/AP@50_slider_button: 52.57%
+Validation val/AP@50_hinge_door: 86.44%
+Validation val/AP@50_slider_drawer: 70.29%
+Validation val/AP@50_slider_lid: 10.10%
+Validation val/AP@50_hinge_lid: 58.29%
+Validation val/AP@50_hinge_knob: 30.38%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.51
+mean_pixel_accu: 81.87
+mean_AP@50: 38.94
+==epoch: 40, learning rate: 0.001000==
+Epoch 40: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7780
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0845
+Validation val/AP@50_line_fixed_handle: 36.66%
+Validation val/AP@50_round_fixed_handle: 6.10%
+Validation val/AP@50_slider_button: 51.98%
+Validation val/AP@50_hinge_door: 84.61%
+Validation val/AP@50_slider_drawer: 69.66%
+Validation val/AP@50_slider_lid: 10.20%
+Validation val/AP@50_hinge_lid: 61.32%
+Validation val/AP@50_hinge_knob: 36.24%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.48
+mean_pixel_accu: 81.78
+mean_AP@50: 39.64
+==epoch: 41, learning rate: 0.001000==
+Epoch 41: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7815
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0967
+Validation val/AP@50_line_fixed_handle: 36.75%
+Validation val/AP@50_round_fixed_handle: 13.69%
+Validation val/AP@50_slider_button: 51.74%
+Validation val/AP@50_hinge_door: 86.58%
+Validation val/AP@50_slider_drawer: 71.50%
+Validation val/AP@50_slider_lid: 6.27%
+Validation val/AP@50_hinge_lid: 66.40%
+Validation val/AP@50_hinge_knob: 33.43%
+Validation val/AP@50_revolute_handle: 0.37%
+------results of test_inter------
+mean_all_accu: 92.61
+mean_pixel_accu: 82.11
+mean_AP@50: 40.75
+==epoch: 42, learning rate: 0.001000==
+Epoch 42: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7812
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1092
+Validation val/AP@50_line_fixed_handle: 38.25%
+Validation val/AP@50_round_fixed_handle: 15.06%
+Validation val/AP@50_slider_button: 53.29%
+Validation val/AP@50_hinge_door: 87.36%
+Validation val/AP@50_slider_drawer: 68.04%
+Validation val/AP@50_slider_lid: 5.64%
+Validation val/AP@50_hinge_lid: 66.42%
+Validation val/AP@50_hinge_knob: 33.88%
+Validation val/AP@50_revolute_handle: 0.48%
+------results of test_inter------
+mean_all_accu: 92.66
+mean_pixel_accu: 82.22
+mean_AP@50: 40.93
+==epoch: 43, learning rate: 0.001000==
+Epoch 43: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7851
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1191
+Validation val/AP@50_line_fixed_handle: 37.78%
+Validation val/AP@50_round_fixed_handle: 12.75%
+Validation val/AP@50_slider_button: 52.95%
+Validation val/AP@50_hinge_door: 84.41%
+Validation val/AP@50_slider_drawer: 67.71%
+Validation val/AP@50_slider_lid: 8.91%
+Validation val/AP@50_hinge_lid: 61.27%
+Validation val/AP@50_hinge_knob: 32.79%
+Validation val/AP@50_revolute_handle: 0.25%
+------results of test_inter------
+mean_all_accu: 92.46
+mean_pixel_accu: 81.74
+mean_AP@50: 39.87
+==epoch: 44, learning rate: 0.001000==
+Epoch 44: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7869
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0998
+Validation val/AP@50_line_fixed_handle: 37.37%
+Validation val/AP@50_round_fixed_handle: 14.26%
+Validation val/AP@50_slider_button: 52.55%
+Validation val/AP@50_hinge_door: 84.67%
+Validation val/AP@50_slider_drawer: 68.25%
+Validation val/AP@50_slider_lid: 9.79%
+Validation val/AP@50_hinge_lid: 67.12%
+Validation val/AP@50_hinge_knob: 36.23%
+Validation val/AP@50_revolute_handle: 4.97%
+------results of test_inter------
+mean_all_accu: 92.99
+mean_pixel_accu: 83.05
+mean_AP@50: 41.69
+==epoch: 45, learning rate: 0.001000==
+Epoch 45: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7896
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1206
+Validation val/AP@50_line_fixed_handle: 38.12%
+Validation val/AP@50_round_fixed_handle: 15.69%
+Validation val/AP@50_slider_button: 53.41%
+Validation val/AP@50_hinge_door: 84.98%
+Validation val/AP@50_slider_drawer: 60.06%
+Validation val/AP@50_slider_lid: 7.96%
+Validation val/AP@50_hinge_lid: 59.37%
+Validation val/AP@50_hinge_knob: 42.02%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.21
+mean_pixel_accu: 81.13
+mean_AP@50: 40.18
+==epoch: 46, learning rate: 0.001000==
+Epoch 46: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7884
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1089
+Validation val/AP@50_line_fixed_handle: 39.74%
+Validation val/AP@50_round_fixed_handle: 23.26%
+Validation val/AP@50_slider_button: 52.81%
+Validation val/AP@50_hinge_door: 85.96%
+Validation val/AP@50_slider_drawer: 71.01%
+Validation val/AP@50_slider_lid: 10.87%
+Validation val/AP@50_hinge_lid: 61.73%
+Validation val/AP@50_hinge_knob: 39.39%
+Validation val/AP@50_revolute_handle: 2.28%
+------results of test_inter------
+mean_all_accu: 92.74
+mean_pixel_accu: 82.41
+mean_AP@50: 43.01
+Save the model from epoch 46
+==epoch: 47, learning rate: 0.001000==
+Epoch 47: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7759
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1405
+Validation val/AP@50_line_fixed_handle: 36.99%
+Validation val/AP@50_round_fixed_handle: 16.76%
+Validation val/AP@50_slider_button: 52.78%
+Validation val/AP@50_hinge_door: 84.24%
+Validation val/AP@50_slider_drawer: 71.98%
+Validation val/AP@50_slider_lid: 4.33%
+Validation val/AP@50_hinge_lid: 70.35%
+Validation val/AP@50_hinge_knob: 40.03%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.97
+mean_pixel_accu: 83.05
+mean_AP@50: 41.94
+==epoch: 48, learning rate: 0.001000==
+Epoch 48: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7889
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1520
+Validation val/AP@50_line_fixed_handle: 39.92%
+Validation val/AP@50_round_fixed_handle: 18.42%
+Validation val/AP@50_slider_button: 52.84%
+Validation val/AP@50_hinge_door: 83.40%
+Validation val/AP@50_slider_drawer: 70.34%
+Validation val/AP@50_slider_lid: 4.52%
+Validation val/AP@50_hinge_lid: 60.78%
+Validation val/AP@50_hinge_knob: 39.98%
+Validation val/AP@50_revolute_handle: 0.00%
+------results of test_inter------
+mean_all_accu: 92.24
+mean_pixel_accu: 81.22
+mean_AP@50: 41.13
+==epoch: 49, learning rate: 0.001000==
+Epoch 49: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7929
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1689
+Validation val/AP@50_line_fixed_handle: 37.59%
+Validation val/AP@50_round_fixed_handle: 21.70%
+Validation val/AP@50_slider_button: 52.29%
+Validation val/AP@50_hinge_door: 83.89%
+Validation val/AP@50_slider_drawer: 66.52%
+Validation val/AP@50_slider_lid: 6.08%
+Validation val/AP@50_hinge_lid: 58.72%
+Validation val/AP@50_hinge_knob: 39.38%
+Validation val/AP@50_revolute_handle: 0.78%
+------results of test_inter------
+mean_all_accu: 92.27
+mean_pixel_accu: 81.25
+mean_AP@50: 40.77
+==epoch: 50, learning rate: 0.001000==
+Epoch 50: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7929
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1199
+Validation val/AP@50_line_fixed_handle: 34.08%
+Validation val/AP@50_round_fixed_handle: 20.60%
+Validation val/AP@50_slider_button: 53.20%
+Validation val/AP@50_hinge_door: 84.49%
+Validation val/AP@50_slider_drawer: 66.07%
+Validation val/AP@50_slider_lid: 6.39%
+Validation val/AP@50_hinge_lid: 62.81%
+Validation val/AP@50_hinge_knob: 32.57%
+Validation val/AP@50_revolute_handle: 0.40%
+------results of test_inter------
+mean_all_accu: 92.61
+mean_pixel_accu: 82.11
+mean_AP@50: 40.07
+==epoch: 51, learning rate: 0.001000==
+Epoch 51: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7985
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1488
+Validation val/AP@50_line_fixed_handle: 41.21%
+Validation val/AP@50_round_fixed_handle: 15.51%
+Validation val/AP@50_slider_button: 53.16%
+Validation val/AP@50_hinge_door: 85.00%
+Validation val/AP@50_slider_drawer: 67.85%
+Validation val/AP@50_slider_lid: 7.96%
+Validation val/AP@50_hinge_lid: 64.03%
+Validation val/AP@50_hinge_knob: 40.96%
+Validation val/AP@50_revolute_handle: 3.33%
+------results of test_inter------
+mean_all_accu: 92.54
+mean_pixel_accu: 81.95
+mean_AP@50: 42.11
+==epoch: 52, learning rate: 0.001000==
+Epoch 52: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8005
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1618
+Validation val/AP@50_line_fixed_handle: 38.96%
+Validation val/AP@50_round_fixed_handle: 12.24%
+Validation val/AP@50_slider_button: 52.95%
+Validation val/AP@50_hinge_door: 84.83%
+Validation val/AP@50_slider_drawer: 70.79%
+Validation val/AP@50_slider_lid: 6.14%
+Validation val/AP@50_hinge_lid: 62.23%
+Validation val/AP@50_hinge_knob: 39.47%
+Validation val/AP@50_revolute_handle: 1.80%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.57
+mean_AP@50: 41.05
+==epoch: 53, learning rate: 0.001000==
+Epoch 53: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8021
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1509
+Validation val/AP@50_line_fixed_handle: 41.42%
+Validation val/AP@50_round_fixed_handle: 30.49%
+Validation val/AP@50_slider_button: 53.20%
+Validation val/AP@50_hinge_door: 85.47%
+Validation val/AP@50_slider_drawer: 67.38%
+Validation val/AP@50_slider_lid: 9.95%
+Validation val/AP@50_hinge_lid: 65.31%
+Validation val/AP@50_hinge_knob: 41.22%
+Validation val/AP@50_revolute_handle: 0.10%
+------results of test_inter------
+mean_all_accu: 92.72
+mean_pixel_accu: 82.39
+mean_AP@50: 43.84
+Save the model from epoch 53
+==epoch: 54, learning rate: 0.001000==
+Epoch 54: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8036
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.0941
+Validation val/AP@50_line_fixed_handle: 38.80%
+Validation val/AP@50_round_fixed_handle: 24.41%
+Validation val/AP@50_slider_button: 51.54%
+Validation val/AP@50_hinge_door: 85.98%
+Validation val/AP@50_slider_drawer: 69.25%
+Validation val/AP@50_slider_lid: 18.58%
+Validation val/AP@50_hinge_lid: 68.18%
+Validation val/AP@50_hinge_knob: 42.62%
+Validation val/AP@50_revolute_handle: 1.77%
+------results of test_inter------
+mean_all_accu: 93.17
+mean_pixel_accu: 83.47
+mean_AP@50: 44.57
+Save the model from epoch 54
+==epoch: 55, learning rate: 0.001000==
+Epoch 55: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8046
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1394
+Validation val/AP@50_line_fixed_handle: 40.53%
+Validation val/AP@50_round_fixed_handle: 22.46%
+Validation val/AP@50_slider_button: 52.28%
+Validation val/AP@50_hinge_door: 86.72%
+Validation val/AP@50_slider_drawer: 67.22%
+Validation val/AP@50_slider_lid: 14.24%
+Validation val/AP@50_hinge_lid: 66.79%
+Validation val/AP@50_hinge_knob: 39.64%
+Validation val/AP@50_revolute_handle: 0.04%
+------results of test_inter------
+mean_all_accu: 93.28
+mean_pixel_accu: 83.74
+mean_AP@50: 43.32
+==epoch: 56, learning rate: 0.001000==
+Epoch 56: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8055
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2000
+Validation val/AP@50_line_fixed_handle: 42.99%
+Validation val/AP@50_round_fixed_handle: 24.45%
+Validation val/AP@50_slider_button: 52.21%
+Validation val/AP@50_hinge_door: 86.05%
+Validation val/AP@50_slider_drawer: 72.16%
+Validation val/AP@50_slider_lid: 9.00%
+Validation val/AP@50_hinge_lid: 59.62%
+Validation val/AP@50_hinge_knob: 41.96%
+Validation val/AP@50_revolute_handle: 2.27%
+------results of test_inter------
+mean_all_accu: 92.24
+mean_pixel_accu: 81.21
+mean_AP@50: 43.41
+==epoch: 57, learning rate: 0.001000==
+Epoch 57: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.7919
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1059
+Validation val/AP@50_line_fixed_handle: 40.77%
+Validation val/AP@50_round_fixed_handle: 31.44%
+Validation val/AP@50_slider_button: 52.98%
+Validation val/AP@50_hinge_door: 85.00%
+Validation val/AP@50_slider_drawer: 68.68%
+Validation val/AP@50_slider_lid: 7.76%
+Validation val/AP@50_hinge_lid: 58.52%
+Validation val/AP@50_hinge_knob: 39.98%
+Validation val/AP@50_revolute_handle: 3.43%
+------results of test_inter------
+mean_all_accu: 92.43
+mean_pixel_accu: 81.67
+mean_AP@50: 43.17
+==epoch: 58, learning rate: 0.001000==
+Epoch 58: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8063
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1596
+Validation val/AP@50_line_fixed_handle: 41.47%
+Validation val/AP@50_round_fixed_handle: 25.30%
+Validation val/AP@50_slider_button: 52.20%
+Validation val/AP@50_hinge_door: 84.91%
+Validation val/AP@50_slider_drawer: 70.71%
+Validation val/AP@50_slider_lid: 11.03%
+Validation val/AP@50_hinge_lid: 60.08%
+Validation val/AP@50_hinge_knob: 41.24%
+Validation val/AP@50_revolute_handle: 0.35%
+------results of test_inter------
+mean_all_accu: 92.40
+mean_pixel_accu: 81.59
+mean_AP@50: 43.03
+==epoch: 59, learning rate: 0.001000==
+Epoch 59: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8028
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1233
+Validation val/AP@50_line_fixed_handle: 37.04%
+Validation val/AP@50_round_fixed_handle: 24.00%
+Validation val/AP@50_slider_button: 51.49%
+Validation val/AP@50_hinge_door: 80.51%
+Validation val/AP@50_slider_drawer: 71.49%
+Validation val/AP@50_slider_lid: 38.90%
+Validation val/AP@50_hinge_lid: 68.10%
+Validation val/AP@50_hinge_knob: 39.06%
+Validation val/AP@50_revolute_handle: 1.82%
+------results of test_inter------
+mean_all_accu: 93.79
+mean_pixel_accu: 84.99
+mean_AP@50: 45.82
+Save the model from epoch 59
+==epoch: 60, learning rate: 0.001000==
+Epoch 60: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8008
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1293
+Validation val/AP@50_line_fixed_handle: 39.88%
+Validation val/AP@50_round_fixed_handle: 28.44%
+Validation val/AP@50_slider_button: 54.01%
+Validation val/AP@50_hinge_door: 84.26%
+Validation val/AP@50_slider_drawer: 70.79%
+Validation val/AP@50_slider_lid: 5.84%
+Validation val/AP@50_hinge_lid: 64.67%
+Validation val/AP@50_hinge_knob: 41.91%
+Validation val/AP@50_revolute_handle: 0.75%
+------results of test_inter------
+mean_all_accu: 92.59
+mean_pixel_accu: 82.06
+mean_AP@50: 43.39
+==epoch: 61, learning rate: 0.001000==
+Epoch 61: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8084
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2478
+Validation val/AP@50_line_fixed_handle: 41.38%
+Validation val/AP@50_round_fixed_handle: 31.38%
+Validation val/AP@50_slider_button: 52.18%
+Validation val/AP@50_hinge_door: 83.96%
+Validation val/AP@50_slider_drawer: 67.69%
+Validation val/AP@50_slider_lid: 11.51%
+Validation val/AP@50_hinge_lid: 60.93%
+Validation val/AP@50_hinge_knob: 37.36%
+Validation val/AP@50_revolute_handle: 0.70%
+------results of test_inter------
+mean_all_accu: 92.33
+mean_pixel_accu: 81.41
+mean_AP@50: 43.01
+==epoch: 62, learning rate: 0.001000==
+Epoch 62: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8117
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1433
+Validation val/AP@50_line_fixed_handle: 42.70%
+Validation val/AP@50_round_fixed_handle: 36.45%
+Validation val/AP@50_slider_button: 52.71%
+Validation val/AP@50_hinge_door: 85.86%
+Validation val/AP@50_slider_drawer: 68.59%
+Validation val/AP@50_slider_lid: 18.86%
+Validation val/AP@50_hinge_lid: 62.22%
+Validation val/AP@50_hinge_knob: 47.12%
+Validation val/AP@50_revolute_handle: 2.52%
+------results of test_inter------
+mean_all_accu: 92.86
+mean_pixel_accu: 82.70
+mean_AP@50: 46.34
+Save the model from epoch 62
+==epoch: 63, learning rate: 0.001000==
+Epoch 63: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8128
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1636
+Validation val/AP@50_line_fixed_handle: 40.98%
+Validation val/AP@50_round_fixed_handle: 24.09%
+Validation val/AP@50_slider_button: 51.43%
+Validation val/AP@50_hinge_door: 84.87%
+Validation val/AP@50_slider_drawer: 67.28%
+Validation val/AP@50_slider_lid: 13.60%
+Validation val/AP@50_hinge_lid: 61.95%
+Validation val/AP@50_hinge_knob: 41.63%
+Validation val/AP@50_revolute_handle: 0.91%
+------results of test_inter------
+mean_all_accu: 92.56
+mean_pixel_accu: 81.96
+mean_AP@50: 42.97
+==epoch: 64, learning rate: 0.001000==
+Epoch 64: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8107
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2271
+Validation val/AP@50_line_fixed_handle: 40.26%
+Validation val/AP@50_round_fixed_handle: 23.37%
+Validation val/AP@50_slider_button: 52.36%
+Validation val/AP@50_hinge_door: 84.54%
+Validation val/AP@50_slider_drawer: 70.51%
+Validation val/AP@50_slider_lid: 2.87%
+Validation val/AP@50_hinge_lid: 59.87%
+Validation val/AP@50_hinge_knob: 37.78%
+Validation val/AP@50_revolute_handle: 4.08%
+------results of test_inter------
+mean_all_accu: 92.14
+mean_pixel_accu: 80.94
+mean_AP@50: 41.74
+==epoch: 65, learning rate: 0.001000==
+Epoch 65: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8127
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2443
+Validation val/AP@50_line_fixed_handle: 40.18%
+Validation val/AP@50_round_fixed_handle: 31.21%
+Validation val/AP@50_slider_button: 52.48%
+Validation val/AP@50_hinge_door: 84.43%
+Validation val/AP@50_slider_drawer: 66.38%
+Validation val/AP@50_slider_lid: 10.05%
+Validation val/AP@50_hinge_lid: 58.70%
+Validation val/AP@50_hinge_knob: 40.66%
+Validation val/AP@50_revolute_handle: 0.53%
+------results of test_inter------
+mean_all_accu: 92.26
+mean_pixel_accu: 81.24
+mean_AP@50: 42.73
+==epoch: 66, learning rate: 0.001000==
+Epoch 66: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8157
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2194
+Validation val/AP@50_line_fixed_handle: 41.08%
+Validation val/AP@50_round_fixed_handle: 27.97%
+Validation val/AP@50_slider_button: 51.77%
+Validation val/AP@50_hinge_door: 86.05%
+Validation val/AP@50_slider_drawer: 64.84%
+Validation val/AP@50_slider_lid: 8.50%
+Validation val/AP@50_hinge_lid: 63.93%
+Validation val/AP@50_hinge_knob: 39.41%
+Validation val/AP@50_revolute_handle: 3.28%
+------results of test_inter------
+mean_all_accu: 92.53
+mean_pixel_accu: 81.88
+mean_AP@50: 42.98
+==epoch: 67, learning rate: 0.001000==
+Epoch 67: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8107
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2391
+Validation val/AP@50_line_fixed_handle: 39.23%
+Validation val/AP@50_round_fixed_handle: 32.43%
+Validation val/AP@50_slider_button: 51.90%
+Validation val/AP@50_hinge_door: 86.23%
+Validation val/AP@50_slider_drawer: 61.25%
+Validation val/AP@50_slider_lid: 3.69%
+Validation val/AP@50_hinge_lid: 58.76%
+Validation val/AP@50_hinge_knob: 33.68%
+Validation val/AP@50_revolute_handle: 2.91%
+------results of test_inter------
+mean_all_accu: 91.89
+mean_pixel_accu: 80.33
+mean_AP@50: 41.12
+==epoch: 68, learning rate: 0.001000==
+Epoch 68: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8147
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2162
+Validation val/AP@50_line_fixed_handle: 41.49%
+Validation val/AP@50_round_fixed_handle: 29.85%
+Validation val/AP@50_slider_button: 53.09%
+Validation val/AP@50_hinge_door: 84.85%
+Validation val/AP@50_slider_drawer: 64.46%
+Validation val/AP@50_slider_lid: 3.49%
+Validation val/AP@50_hinge_lid: 64.67%
+Validation val/AP@50_hinge_knob: 42.46%
+Validation val/AP@50_revolute_handle: 1.83%
+------results of test_inter------
+mean_all_accu: 92.44
+mean_pixel_accu: 81.69
+mean_AP@50: 42.91
+==epoch: 69, learning rate: 0.001000==
+Epoch 69: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8187
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2553
+Validation val/AP@50_line_fixed_handle: 41.94%
+Validation val/AP@50_round_fixed_handle: 34.73%
+Validation val/AP@50_slider_button: 53.26%
+Validation val/AP@50_hinge_door: 84.87%
+Validation val/AP@50_slider_drawer: 68.05%
+Validation val/AP@50_slider_lid: 4.50%
+Validation val/AP@50_hinge_lid: 62.98%
+Validation val/AP@50_hinge_knob: 44.37%
+Validation val/AP@50_revolute_handle: 2.98%
+------results of test_inter------
+mean_all_accu: 92.32
+mean_pixel_accu: 81.39
+mean_AP@50: 44.19
+==epoch: 70, learning rate: 0.001000==
+Epoch 70: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8203
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2496
+Validation val/AP@50_line_fixed_handle: 42.87%
+Validation val/AP@50_round_fixed_handle: 33.93%
+Validation val/AP@50_slider_button: 53.11%
+Validation val/AP@50_hinge_door: 85.41%
+Validation val/AP@50_slider_drawer: 63.50%
+Validation val/AP@50_slider_lid: 4.91%
+Validation val/AP@50_hinge_lid: 60.00%
+Validation val/AP@50_hinge_knob: 43.51%
+Validation val/AP@50_revolute_handle: 4.04%
+------results of test_inter------
+mean_all_accu: 92.23
+mean_pixel_accu: 81.17
+mean_AP@50: 43.47
+==epoch: 71, learning rate: 0.001000==
+Epoch 71: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8191
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2281
+Validation val/AP@50_line_fixed_handle: 42.69%
+Validation val/AP@50_round_fixed_handle: 32.88%
+Validation val/AP@50_slider_button: 53.23%
+Validation val/AP@50_hinge_door: 86.20%
+Validation val/AP@50_slider_drawer: 67.86%
+Validation val/AP@50_slider_lid: 5.07%
+Validation val/AP@50_hinge_lid: 62.71%
+Validation val/AP@50_hinge_knob: 40.91%
+Validation val/AP@50_revolute_handle: 1.95%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.60
+mean_AP@50: 43.72
+==epoch: 72, learning rate: 0.001000==
+Epoch 72: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8190
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1892
+Validation val/AP@50_line_fixed_handle: 42.72%
+Validation val/AP@50_round_fixed_handle: 28.41%
+Validation val/AP@50_slider_button: 53.06%
+Validation val/AP@50_hinge_door: 84.23%
+Validation val/AP@50_slider_drawer: 67.49%
+Validation val/AP@50_slider_lid: 4.63%
+Validation val/AP@50_hinge_lid: 67.82%
+Validation val/AP@50_hinge_knob: 39.70%
+Validation val/AP@50_revolute_handle: 2.11%
+------results of test_inter------
+mean_all_accu: 92.64
+mean_pixel_accu: 82.18
+mean_AP@50: 43.35
+==epoch: 73, learning rate: 0.001000==
+Epoch 73: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8198
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1339
+Validation val/AP@50_line_fixed_handle: 42.66%
+Validation val/AP@50_round_fixed_handle: 34.49%
+Validation val/AP@50_slider_button: 52.45%
+Validation val/AP@50_hinge_door: 87.46%
+Validation val/AP@50_slider_drawer: 71.12%
+Validation val/AP@50_slider_lid: 18.69%
+Validation val/AP@50_hinge_lid: 63.05%
+Validation val/AP@50_hinge_knob: 37.64%
+Validation val/AP@50_revolute_handle: 6.03%
+------results of test_inter------
+mean_all_accu: 92.84
+mean_pixel_accu: 82.66
+mean_AP@50: 45.95
+==epoch: 74, learning rate: 0.001000==
+Epoch 74: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8114
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1843
+Validation val/AP@50_line_fixed_handle: 42.96%
+Validation val/AP@50_round_fixed_handle: 38.44%
+Validation val/AP@50_slider_button: 53.35%
+Validation val/AP@50_hinge_door: 87.37%
+Validation val/AP@50_slider_drawer: 67.30%
+Validation val/AP@50_slider_lid: 6.28%
+Validation val/AP@50_hinge_lid: 62.75%
+Validation val/AP@50_hinge_knob: 43.73%
+Validation val/AP@50_revolute_handle: 1.43%
+------results of test_inter------
+mean_all_accu: 92.43
+mean_pixel_accu: 81.67
+mean_AP@50: 44.85
+==epoch: 75, learning rate: 0.001000==
+Epoch 75: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8223
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2171
+Validation val/AP@50_line_fixed_handle: 40.41%
+Validation val/AP@50_round_fixed_handle: 33.35%
+Validation val/AP@50_slider_button: 52.16%
+Validation val/AP@50_hinge_door: 85.15%
+Validation val/AP@50_slider_drawer: 70.06%
+Validation val/AP@50_slider_lid: 1.50%
+Validation val/AP@50_hinge_lid: 67.35%
+Validation val/AP@50_hinge_knob: 40.07%
+Validation val/AP@50_revolute_handle: 2.62%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.66
+mean_AP@50: 43.63
+==epoch: 76, learning rate: 0.001000==
+Epoch 76: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8244
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2014
+Validation val/AP@50_line_fixed_handle: 42.42%
+Validation val/AP@50_round_fixed_handle: 37.24%
+Validation val/AP@50_slider_button: 53.70%
+Validation val/AP@50_hinge_door: 85.11%
+Validation val/AP@50_slider_drawer: 70.57%
+Validation val/AP@50_slider_lid: 4.88%
+Validation val/AP@50_hinge_lid: 67.56%
+Validation val/AP@50_hinge_knob: 46.47%
+Validation val/AP@50_revolute_handle: 0.76%
+------results of test_inter------
+mean_all_accu: 92.64
+mean_pixel_accu: 82.18
+mean_AP@50: 45.41
+==epoch: 77, learning rate: 0.001000==
+Epoch 77: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8252
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1694
+Validation val/AP@50_line_fixed_handle: 43.70%
+Validation val/AP@50_round_fixed_handle: 39.05%
+Validation val/AP@50_slider_button: 53.74%
+Validation val/AP@50_hinge_door: 84.07%
+Validation val/AP@50_slider_drawer: 64.81%
+Validation val/AP@50_slider_lid: 7.07%
+Validation val/AP@50_hinge_lid: 69.42%
+Validation val/AP@50_hinge_knob: 42.01%
+Validation val/AP@50_revolute_handle: 1.74%
+------results of test_inter------
+mean_all_accu: 92.71
+mean_pixel_accu: 82.34
+mean_AP@50: 45.07
+==epoch: 78, learning rate: 0.001000==
+Epoch 78: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8252
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2876
+Validation val/AP@50_line_fixed_handle: 42.06%
+Validation val/AP@50_round_fixed_handle: 32.44%
+Validation val/AP@50_slider_button: 53.22%
+Validation val/AP@50_hinge_door: 84.76%
+Validation val/AP@50_slider_drawer: 70.89%
+Validation val/AP@50_slider_lid: 5.37%
+Validation val/AP@50_hinge_lid: 62.12%
+Validation val/AP@50_hinge_knob: 45.72%
+Validation val/AP@50_revolute_handle: 0.02%
+------results of test_inter------
+mean_all_accu: 92.21
+mean_pixel_accu: 81.14
+mean_AP@50: 44.07
+==epoch: 79, learning rate: 0.001000==
+Epoch 79: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8174
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2920
+Validation val/AP@50_line_fixed_handle: 43.11%
+Validation val/AP@50_round_fixed_handle: 34.13%
+Validation val/AP@50_slider_button: 53.66%
+Validation val/AP@50_hinge_door: 83.99%
+Validation val/AP@50_slider_drawer: 68.43%
+Validation val/AP@50_slider_lid: 3.96%
+Validation val/AP@50_hinge_lid: 62.24%
+Validation val/AP@50_hinge_knob: 42.71%
+Validation val/AP@50_revolute_handle: 1.79%
+------results of test_inter------
+mean_all_accu: 92.19
+mean_pixel_accu: 81.08
+mean_AP@50: 43.78
+==epoch: 80, learning rate: 0.001000==
+Epoch 80: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8250
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2252
+Validation val/AP@50_line_fixed_handle: 42.78%
+Validation val/AP@50_round_fixed_handle: 41.73%
+Validation val/AP@50_slider_button: 53.32%
+Validation val/AP@50_hinge_door: 84.04%
+Validation val/AP@50_slider_drawer: 68.06%
+Validation val/AP@50_slider_lid: 4.91%
+Validation val/AP@50_hinge_lid: 65.67%
+Validation val/AP@50_hinge_knob: 46.62%
+Validation val/AP@50_revolute_handle: 5.72%
+------results of test_inter------
+mean_all_accu: 92.53
+mean_pixel_accu: 81.91
+mean_AP@50: 45.87
+==epoch: 81, learning rate: 0.001000==
+Epoch 81: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8264
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2313
+Validation val/AP@50_line_fixed_handle: 45.44%
+Validation val/AP@50_round_fixed_handle: 38.42%
+Validation val/AP@50_slider_button: 53.34%
+Validation val/AP@50_hinge_door: 83.46%
+Validation val/AP@50_slider_drawer: 70.18%
+Validation val/AP@50_slider_lid: 4.82%
+Validation val/AP@50_hinge_lid: 60.22%
+Validation val/AP@50_hinge_knob: 46.03%
+Validation val/AP@50_revolute_handle: 2.88%
+------results of test_inter------
+mean_all_accu: 92.29
+mean_pixel_accu: 81.31
+mean_AP@50: 44.98
+==epoch: 82, learning rate: 0.001000==
+Epoch 82: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8249
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2307
+Validation val/AP@50_line_fixed_handle: 43.12%
+Validation val/AP@50_round_fixed_handle: 35.24%
+Validation val/AP@50_slider_button: 53.61%
+Validation val/AP@50_hinge_door: 84.39%
+Validation val/AP@50_slider_drawer: 70.45%
+Validation val/AP@50_slider_lid: 4.38%
+Validation val/AP@50_hinge_lid: 66.90%
+Validation val/AP@50_hinge_knob: 41.10%
+Validation val/AP@50_revolute_handle: 0.43%
+------results of test_inter------
+mean_all_accu: 92.63
+mean_pixel_accu: 82.15
+mean_AP@50: 44.40
+==epoch: 83, learning rate: 0.001000==
+Epoch 83: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8229
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.1680
+Validation val/AP@50_line_fixed_handle: 46.14%
+Validation val/AP@50_round_fixed_handle: 42.56%
+Validation val/AP@50_slider_button: 53.10%
+Validation val/AP@50_hinge_door: 85.32%
+Validation val/AP@50_slider_drawer: 68.78%
+Validation val/AP@50_slider_lid: 10.99%
+Validation val/AP@50_hinge_lid: 64.99%
+Validation val/AP@50_hinge_knob: 42.75%
+Validation val/AP@50_revolute_handle: 1.86%
+------results of test_inter------
+mean_all_accu: 92.98
+mean_pixel_accu: 82.99
+mean_AP@50: 46.27
+==epoch: 84, learning rate: 0.001000==
+Epoch 84: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8281
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2337
+Validation val/AP@50_line_fixed_handle: 41.77%
+Validation val/AP@50_round_fixed_handle: 37.12%
+Validation val/AP@50_slider_button: 53.13%
+Validation val/AP@50_hinge_door: 82.82%
+Validation val/AP@50_slider_drawer: 66.26%
+Validation val/AP@50_slider_lid: 7.93%
+Validation val/AP@50_hinge_lid: 65.05%
+Validation val/AP@50_hinge_knob: 41.57%
+Validation val/AP@50_revolute_handle: 2.31%
+------results of test_inter------
+mean_all_accu: 92.79
+mean_pixel_accu: 82.51
+mean_AP@50: 44.22
+==epoch: 85, learning rate: 0.001000==
+Epoch 85: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8226
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2273
+Validation val/AP@50_line_fixed_handle: 43.44%
+Validation val/AP@50_round_fixed_handle: 39.82%
+Validation val/AP@50_slider_button: 53.92%
+Validation val/AP@50_hinge_door: 86.66%
+Validation val/AP@50_slider_drawer: 68.86%
+Validation val/AP@50_slider_lid: 5.69%
+Validation val/AP@50_hinge_lid: 60.30%
+Validation val/AP@50_hinge_knob: 46.84%
+Validation val/AP@50_revolute_handle: 1.92%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.59
+mean_AP@50: 45.27
+==epoch: 86, learning rate: 0.001000==
+Epoch 86: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8302
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2149
+Validation val/AP@50_line_fixed_handle: 45.32%
+Validation val/AP@50_round_fixed_handle: 41.72%
+Validation val/AP@50_slider_button: 53.54%
+Validation val/AP@50_hinge_door: 85.57%
+Validation val/AP@50_slider_drawer: 69.65%
+Validation val/AP@50_slider_lid: 6.72%
+Validation val/AP@50_hinge_lid: 64.12%
+Validation val/AP@50_hinge_knob: 43.61%
+Validation val/AP@50_revolute_handle: 2.63%
+------results of test_inter------
+mean_all_accu: 92.61
+mean_pixel_accu: 82.10
+mean_AP@50: 45.88
+==epoch: 87, learning rate: 0.001000==
+Epoch 87: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8310
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2439
+Validation val/AP@50_line_fixed_handle: 44.50%
+Validation val/AP@50_round_fixed_handle: 37.97%
+Validation val/AP@50_slider_button: 52.77%
+Validation val/AP@50_hinge_door: 86.81%
+Validation val/AP@50_slider_drawer: 67.59%
+Validation val/AP@50_slider_lid: 5.24%
+Validation val/AP@50_hinge_lid: 66.76%
+Validation val/AP@50_hinge_knob: 39.56%
+Validation val/AP@50_revolute_handle: 4.35%
+------results of test_inter------
+mean_all_accu: 92.57
+mean_pixel_accu: 81.98
+mean_AP@50: 45.06
+==epoch: 88, learning rate: 0.001000==
+Epoch 88: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8300
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2494
+Validation val/AP@50_line_fixed_handle: 43.70%
+Validation val/AP@50_round_fixed_handle: 39.81%
+Validation val/AP@50_slider_button: 53.53%
+Validation val/AP@50_hinge_door: 85.41%
+Validation val/AP@50_slider_drawer: 65.79%
+Validation val/AP@50_slider_lid: 3.69%
+Validation val/AP@50_hinge_lid: 62.21%
+Validation val/AP@50_hinge_knob: 44.35%
+Validation val/AP@50_revolute_handle: 1.24%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.57
+mean_AP@50: 44.41
+==epoch: 89, learning rate: 0.001000==
+Epoch 89: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8319
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2550
+Validation val/AP@50_line_fixed_handle: 45.11%
+Validation val/AP@50_round_fixed_handle: 39.51%
+Validation val/AP@50_slider_button: 53.49%
+Validation val/AP@50_hinge_door: 85.33%
+Validation val/AP@50_slider_drawer: 67.28%
+Validation val/AP@50_slider_lid: 6.56%
+Validation val/AP@50_hinge_lid: 59.43%
+Validation val/AP@50_hinge_knob: 45.63%
+Validation val/AP@50_revolute_handle: 1.35%
+------results of test_inter------
+mean_all_accu: 92.28
+mean_pixel_accu: 81.30
+mean_AP@50: 44.85
+==epoch: 90, learning rate: 0.001000==
+Epoch 90: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8324
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2789
+Validation val/AP@50_line_fixed_handle: 44.67%
+Validation val/AP@50_round_fixed_handle: 38.89%
+Validation val/AP@50_slider_button: 53.39%
+Validation val/AP@50_hinge_door: 84.90%
+Validation val/AP@50_slider_drawer: 67.47%
+Validation val/AP@50_slider_lid: 1.77%
+Validation val/AP@50_hinge_lid: 66.70%
+Validation val/AP@50_hinge_knob: 43.61%
+Validation val/AP@50_revolute_handle: 2.24%
+------results of test_inter------
+mean_all_accu: 92.65
+mean_pixel_accu: 82.20
+mean_AP@50: 44.85
+==epoch: 91, learning rate: 0.001000==
+Epoch 91: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8326
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3004
+Validation val/AP@50_line_fixed_handle: 47.14%
+Validation val/AP@50_round_fixed_handle: 48.49%
+Validation val/AP@50_slider_button: 53.78%
+Validation val/AP@50_hinge_door: 85.00%
+Validation val/AP@50_slider_drawer: 71.57%
+Validation val/AP@50_slider_lid: 1.97%
+Validation val/AP@50_hinge_lid: 63.58%
+Validation val/AP@50_hinge_knob: 43.55%
+Validation val/AP@50_revolute_handle: 5.58%
+------results of test_inter------
+mean_all_accu: 92.30
+mean_pixel_accu: 81.33
+mean_AP@50: 46.74
+Save the model from epoch 91
+==epoch: 92, learning rate: 0.001000==
+Epoch 92: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8355
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2616
+Validation val/AP@50_line_fixed_handle: 45.14%
+Validation val/AP@50_round_fixed_handle: 45.91%
+Validation val/AP@50_slider_button: 53.53%
+Validation val/AP@50_hinge_door: 85.30%
+Validation val/AP@50_slider_drawer: 70.48%
+Validation val/AP@50_slider_lid: 2.51%
+Validation val/AP@50_hinge_lid: 63.72%
+Validation val/AP@50_hinge_knob: 45.35%
+Validation val/AP@50_revolute_handle: 3.05%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.58
+mean_AP@50: 46.11
+==epoch: 93, learning rate: 0.001000==
+Epoch 93: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8335
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2815
+Validation val/AP@50_line_fixed_handle: 43.72%
+Validation val/AP@50_round_fixed_handle: 36.77%
+Validation val/AP@50_slider_button: 53.73%
+Validation val/AP@50_hinge_door: 84.26%
+Validation val/AP@50_slider_drawer: 69.36%
+Validation val/AP@50_slider_lid: 6.36%
+Validation val/AP@50_hinge_lid: 61.07%
+Validation val/AP@50_hinge_knob: 39.75%
+Validation val/AP@50_revolute_handle: 3.42%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.59
+mean_AP@50: 44.27
+==epoch: 94, learning rate: 0.001000==
+Epoch 94: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8299
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2860
+Validation val/AP@50_line_fixed_handle: 45.85%
+Validation val/AP@50_round_fixed_handle: 43.95%
+Validation val/AP@50_slider_button: 53.18%
+Validation val/AP@50_hinge_door: 84.32%
+Validation val/AP@50_slider_drawer: 72.51%
+Validation val/AP@50_slider_lid: 1.80%
+Validation val/AP@50_hinge_lid: 64.77%
+Validation val/AP@50_hinge_knob: 49.45%
+Validation val/AP@50_revolute_handle: 0.84%
+------results of test_inter------
+mean_all_accu: 92.42
+mean_pixel_accu: 81.63
+mean_AP@50: 46.30
+==epoch: 95, learning rate: 0.001000==
+Epoch 95: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8339
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2738
+Validation val/AP@50_line_fixed_handle: 46.06%
+Validation val/AP@50_round_fixed_handle: 45.24%
+Validation val/AP@50_slider_button: 53.99%
+Validation val/AP@50_hinge_door: 86.01%
+Validation val/AP@50_slider_drawer: 75.29%
+Validation val/AP@50_slider_lid: 1.83%
+Validation val/AP@50_hinge_lid: 64.75%
+Validation val/AP@50_hinge_knob: 48.88%
+Validation val/AP@50_revolute_handle: 5.01%
+------results of test_inter------
+mean_all_accu: 92.48
+mean_pixel_accu: 81.76
+mean_AP@50: 47.45
+Save the model from epoch 95
+==epoch: 96, learning rate: 0.001000==
+Epoch 96: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8353
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2570
+Validation val/AP@50_line_fixed_handle: 45.98%
+Validation val/AP@50_round_fixed_handle: 38.20%
+Validation val/AP@50_slider_button: 53.71%
+Validation val/AP@50_hinge_door: 84.46%
+Validation val/AP@50_slider_drawer: 71.18%
+Validation val/AP@50_slider_lid: 2.64%
+Validation val/AP@50_hinge_lid: 65.57%
+Validation val/AP@50_hinge_knob: 43.67%
+Validation val/AP@50_revolute_handle: 5.51%
+------results of test_inter------
+mean_all_accu: 92.67
+mean_pixel_accu: 82.23
+mean_AP@50: 45.66
+==epoch: 97, learning rate: 0.001000==
+Epoch 97: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8374
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2709
+Validation val/AP@50_line_fixed_handle: 45.13%
+Validation val/AP@50_round_fixed_handle: 42.49%
+Validation val/AP@50_slider_button: 53.54%
+Validation val/AP@50_hinge_door: 84.40%
+Validation val/AP@50_slider_drawer: 70.98%
+Validation val/AP@50_slider_lid: 5.77%
+Validation val/AP@50_hinge_lid: 67.81%
+Validation val/AP@50_hinge_knob: 42.53%
+Validation val/AP@50_revolute_handle: 3.66%
+------results of test_inter------
+mean_all_accu: 92.62
+mean_pixel_accu: 82.12
+mean_AP@50: 46.26
+==epoch: 98, learning rate: 0.001000==
+Epoch 98: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8337
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3503
+Validation val/AP@50_line_fixed_handle: 44.74%
+Validation val/AP@50_round_fixed_handle: 41.63%
+Validation val/AP@50_slider_button: 53.94%
+Validation val/AP@50_hinge_door: 85.69%
+Validation val/AP@50_slider_drawer: 69.55%
+Validation val/AP@50_slider_lid: 2.46%
+Validation val/AP@50_hinge_lid: 58.46%
+Validation val/AP@50_hinge_knob: 43.97%
+Validation val/AP@50_revolute_handle: 0.72%
+------results of test_inter------
+mean_all_accu: 92.16
+mean_pixel_accu: 80.99
+mean_AP@50: 44.57
+==epoch: 99, learning rate: 0.001000==
+Epoch 99: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8338
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2360
+Validation val/AP@50_line_fixed_handle: 46.44%
+Validation val/AP@50_round_fixed_handle: 43.61%
+Validation val/AP@50_slider_button: 53.72%
+Validation val/AP@50_hinge_door: 85.34%
+Validation val/AP@50_slider_drawer: 70.06%
+Validation val/AP@50_slider_lid: 6.49%
+Validation val/AP@50_hinge_lid: 62.61%
+Validation val/AP@50_hinge_knob: 48.22%
+Validation val/AP@50_revolute_handle: 3.14%
+------results of test_inter------
+mean_all_accu: 92.53
+mean_pixel_accu: 81.90
+mean_AP@50: 46.63
+==epoch: 100, learning rate: 0.001000==
+Epoch 100: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8378
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2683
+Validation val/AP@50_line_fixed_handle: 46.67%
+Validation val/AP@50_round_fixed_handle: 44.58%
+Validation val/AP@50_slider_button: 54.33%
+Validation val/AP@50_hinge_door: 84.72%
+Validation val/AP@50_slider_drawer: 69.05%
+Validation val/AP@50_slider_lid: 3.82%
+Validation val/AP@50_hinge_lid: 64.68%
+Validation val/AP@50_hinge_knob: 45.78%
+Validation val/AP@50_revolute_handle: 6.75%
+------results of test_inter------
+mean_all_accu: 92.33
+mean_pixel_accu: 81.43
+mean_AP@50: 46.71
+==epoch: 101, learning rate: 0.001000==
+Epoch 101: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8339
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2938
+Validation val/AP@50_line_fixed_handle: 44.98%
+Validation val/AP@50_round_fixed_handle: 39.72%
+Validation val/AP@50_slider_button: 53.88%
+Validation val/AP@50_hinge_door: 84.73%
+Validation val/AP@50_slider_drawer: 69.91%
+Validation val/AP@50_slider_lid: 11.81%
+Validation val/AP@50_hinge_lid: 63.92%
+Validation val/AP@50_hinge_knob: 43.24%
+Validation val/AP@50_revolute_handle: 4.03%
+------results of test_inter------
+mean_all_accu: 92.51
+mean_pixel_accu: 81.87
+mean_AP@50: 46.25
+==epoch: 102, learning rate: 0.001000==
+Epoch 102: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8327
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3119
+Validation val/AP@50_line_fixed_handle: 45.89%
+Validation val/AP@50_round_fixed_handle: 44.69%
+Validation val/AP@50_slider_button: 52.60%
+Validation val/AP@50_hinge_door: 85.54%
+Validation val/AP@50_slider_drawer: 70.07%
+Validation val/AP@50_slider_lid: 1.09%
+Validation val/AP@50_hinge_lid: 61.71%
+Validation val/AP@50_hinge_knob: 47.09%
+Validation val/AP@50_revolute_handle: 5.17%
+------results of test_inter------
+mean_all_accu: 92.13
+mean_pixel_accu: 80.91
+mean_AP@50: 45.98
+==epoch: 103, learning rate: 0.001000==
+Epoch 103: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8362
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2589
+Validation val/AP@50_line_fixed_handle: 44.31%
+Validation val/AP@50_round_fixed_handle: 42.18%
+Validation val/AP@50_slider_button: 53.71%
+Validation val/AP@50_hinge_door: 84.29%
+Validation val/AP@50_slider_drawer: 67.77%
+Validation val/AP@50_slider_lid: 5.00%
+Validation val/AP@50_hinge_lid: 68.59%
+Validation val/AP@50_hinge_knob: 43.66%
+Validation val/AP@50_revolute_handle: 3.53%
+------results of test_inter------
+mean_all_accu: 92.55
+mean_pixel_accu: 81.95
+mean_AP@50: 45.89
+==epoch: 104, learning rate: 0.001000==
+Epoch 104: Used Files = 18876, Skipped None Items = 52, Avg Loss = -0.8318
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2789
+Validation val/AP@50_line_fixed_handle: 45.66%
+Validation val/AP@50_round_fixed_handle: 48.44%
+Validation val/AP@50_slider_button: 53.12%
+Validation val/AP@50_hinge_door: 84.95%
+Validation val/AP@50_slider_drawer: 70.60%
+Validation val/AP@50_slider_lid: 0.93%
+Validation val/AP@50_hinge_lid: 67.52%
+Validation val/AP@50_hinge_knob: 49.47%
+Validation val/AP@50_revolute_handle: 3.92%
+------results of test_inter------
+mean_all_accu: 92.38
+mean_pixel_accu: 81.55
+mean_AP@50: 47.18
+==epoch: 105, learning rate: 0.001000==
+Epoch 105: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8286
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2851
+Validation val/AP@50_line_fixed_handle: 43.71%
+Validation val/AP@50_round_fixed_handle: 39.35%
+Validation val/AP@50_slider_button: 53.08%
+Validation val/AP@50_hinge_door: 84.09%
+Validation val/AP@50_slider_drawer: 63.17%
+Validation val/AP@50_slider_lid: 6.66%
+Validation val/AP@50_hinge_lid: 66.44%
+Validation val/AP@50_hinge_knob: 44.79%
+Validation val/AP@50_revolute_handle: 2.84%
+------results of test_inter------
+mean_all_accu: 92.51
+mean_pixel_accu: 81.84
+mean_AP@50: 44.90
+==epoch: 106, learning rate: 0.001000==
+Epoch 106: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8337
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2298
+Validation val/AP@50_line_fixed_handle: 45.55%
+Validation val/AP@50_round_fixed_handle: 40.87%
+Validation val/AP@50_slider_button: 53.71%
+Validation val/AP@50_hinge_door: 85.21%
+Validation val/AP@50_slider_drawer: 67.70%
+Validation val/AP@50_slider_lid: 5.79%
+Validation val/AP@50_hinge_lid: 66.94%
+Validation val/AP@50_hinge_knob: 44.81%
+Validation val/AP@50_revolute_handle: 4.73%
+------results of test_inter------
+mean_all_accu: 92.63
+mean_pixel_accu: 82.15
+mean_AP@50: 46.15
+==epoch: 107, learning rate: 0.001000==
+Epoch 107: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8369
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2204
+Validation val/AP@50_line_fixed_handle: 45.57%
+Validation val/AP@50_round_fixed_handle: 39.85%
+Validation val/AP@50_slider_button: 54.41%
+Validation val/AP@50_hinge_door: 86.79%
+Validation val/AP@50_slider_drawer: 70.22%
+Validation val/AP@50_slider_lid: 4.33%
+Validation val/AP@50_hinge_lid: 62.28%
+Validation val/AP@50_hinge_knob: 41.48%
+Validation val/AP@50_revolute_handle: 1.90%
+------results of test_inter------
+mean_all_accu: 92.52
+mean_pixel_accu: 81.87
+mean_AP@50: 45.20
+==epoch: 108, learning rate: 0.001000==
+Epoch 108: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8286
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3449
+Validation val/AP@50_line_fixed_handle: 45.67%
+Validation val/AP@50_round_fixed_handle: 39.13%
+Validation val/AP@50_slider_button: 54.00%
+Validation val/AP@50_hinge_door: 84.76%
+Validation val/AP@50_slider_drawer: 69.69%
+Validation val/AP@50_slider_lid: 7.79%
+Validation val/AP@50_hinge_lid: 62.10%
+Validation val/AP@50_hinge_knob: 44.85%
+Validation val/AP@50_revolute_handle: 5.81%
+------results of test_inter------
+mean_all_accu: 92.18
+mean_pixel_accu: 81.07
+mean_AP@50: 45.98
+==epoch: 109, learning rate: 0.001000==
+Epoch 109: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8327
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2637
+Validation val/AP@50_line_fixed_handle: 45.04%
+Validation val/AP@50_round_fixed_handle: 32.73%
+Validation val/AP@50_slider_button: 53.98%
+Validation val/AP@50_hinge_door: 84.23%
+Validation val/AP@50_slider_drawer: 69.06%
+Validation val/AP@50_slider_lid: 6.51%
+Validation val/AP@50_hinge_lid: 64.11%
+Validation val/AP@50_hinge_knob: 42.71%
+Validation val/AP@50_revolute_handle: 5.03%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.62
+mean_AP@50: 44.82
+==epoch: 110, learning rate: 0.001000==
+Epoch 110: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8389
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2345
+Validation val/AP@50_line_fixed_handle: 46.75%
+Validation val/AP@50_round_fixed_handle: 42.40%
+Validation val/AP@50_slider_button: 53.69%
+Validation val/AP@50_hinge_door: 85.02%
+Validation val/AP@50_slider_drawer: 71.92%
+Validation val/AP@50_slider_lid: 8.47%
+Validation val/AP@50_hinge_lid: 64.56%
+Validation val/AP@50_hinge_knob: 43.54%
+Validation val/AP@50_revolute_handle: 3.76%
+------results of test_inter------
+mean_all_accu: 92.72
+mean_pixel_accu: 82.37
+mean_AP@50: 46.68
+==epoch: 111, learning rate: 0.001000==
+Epoch 111: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8324
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2444
+Validation val/AP@50_line_fixed_handle: 47.01%
+Validation val/AP@50_round_fixed_handle: 44.42%
+Validation val/AP@50_slider_button: 53.46%
+Validation val/AP@50_hinge_door: 84.83%
+Validation val/AP@50_slider_drawer: 72.33%
+Validation val/AP@50_slider_lid: 2.37%
+Validation val/AP@50_hinge_lid: 66.17%
+Validation val/AP@50_hinge_knob: 43.15%
+Validation val/AP@50_revolute_handle: 4.83%
+------results of test_inter------
+mean_all_accu: 92.33
+mean_pixel_accu: 81.45
+mean_AP@50: 46.51
+==epoch: 112, learning rate: 0.001000==
+Epoch 112: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8306
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2736
+Validation val/AP@50_line_fixed_handle: 43.49%
+Validation val/AP@50_round_fixed_handle: 44.22%
+Validation val/AP@50_slider_button: 53.03%
+Validation val/AP@50_hinge_door: 83.09%
+Validation val/AP@50_slider_drawer: 73.76%
+Validation val/AP@50_slider_lid: 3.56%
+Validation val/AP@50_hinge_lid: 65.53%
+Validation val/AP@50_hinge_knob: 47.99%
+Validation val/AP@50_revolute_handle: 8.45%
+------results of test_inter------
+mean_all_accu: 92.38
+mean_pixel_accu: 81.55
+mean_AP@50: 47.01
+==epoch: 113, learning rate: 0.001000==
+Epoch 113: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8387
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3207
+Validation val/AP@50_line_fixed_handle: 42.87%
+Validation val/AP@50_round_fixed_handle: 41.79%
+Validation val/AP@50_slider_button: 53.78%
+Validation val/AP@50_hinge_door: 85.24%
+Validation val/AP@50_slider_drawer: 71.09%
+Validation val/AP@50_slider_lid: 1.12%
+Validation val/AP@50_hinge_lid: 64.52%
+Validation val/AP@50_hinge_knob: 43.08%
+Validation val/AP@50_revolute_handle: 11.18%
+------results of test_inter------
+mean_all_accu: 92.36
+mean_pixel_accu: 81.49
+mean_AP@50: 46.07
+==epoch: 114, learning rate: 0.001000==
+Epoch 114: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8393
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2747
+Validation val/AP@50_line_fixed_handle: 45.87%
+Validation val/AP@50_round_fixed_handle: 41.80%
+Validation val/AP@50_slider_button: 54.63%
+Validation val/AP@50_hinge_door: 84.77%
+Validation val/AP@50_slider_drawer: 70.74%
+Validation val/AP@50_slider_lid: 0.88%
+Validation val/AP@50_hinge_lid: 71.57%
+Validation val/AP@50_hinge_knob: 48.26%
+Validation val/AP@50_revolute_handle: 2.55%
+------results of test_inter------
+mean_all_accu: 92.63
+mean_pixel_accu: 82.14
+mean_AP@50: 46.79
+==epoch: 115, learning rate: 0.001000==
+Epoch 115: Used Files = 18876, Skipped None Items = 52, Avg Loss = -0.8422
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2948
+Validation val/AP@50_line_fixed_handle: 46.16%
+Validation val/AP@50_round_fixed_handle: 42.22%
+Validation val/AP@50_slider_button: 54.15%
+Validation val/AP@50_hinge_door: 84.76%
+Validation val/AP@50_slider_drawer: 72.06%
+Validation val/AP@50_slider_lid: 1.41%
+Validation val/AP@50_hinge_lid: 61.38%
+Validation val/AP@50_hinge_knob: 47.95%
+Validation val/AP@50_revolute_handle: 4.86%
+------results of test_inter------
+mean_all_accu: 92.38
+mean_pixel_accu: 81.55
+mean_AP@50: 46.10
+==epoch: 116, learning rate: 0.001000==
+Epoch 116: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8346
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2539
+Validation val/AP@50_line_fixed_handle: 44.55%
+Validation val/AP@50_round_fixed_handle: 41.55%
+Validation val/AP@50_slider_button: 54.09%
+Validation val/AP@50_hinge_door: 85.24%
+Validation val/AP@50_slider_drawer: 73.90%
+Validation val/AP@50_slider_lid: 5.69%
+Validation val/AP@50_hinge_lid: 64.89%
+Validation val/AP@50_hinge_knob: 49.47%
+Validation val/AP@50_revolute_handle: 4.26%
+------results of test_inter------
+mean_all_accu: 92.59
+mean_pixel_accu: 82.06
+mean_AP@50: 47.07
+==epoch: 117, learning rate: 0.001000==
+Epoch 117: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8403
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2649
+Validation val/AP@50_line_fixed_handle: 44.95%
+Validation val/AP@50_round_fixed_handle: 41.06%
+Validation val/AP@50_slider_button: 53.49%
+Validation val/AP@50_hinge_door: 85.43%
+Validation val/AP@50_slider_drawer: 70.81%
+Validation val/AP@50_slider_lid: 5.54%
+Validation val/AP@50_hinge_lid: 64.39%
+Validation val/AP@50_hinge_knob: 47.06%
+Validation val/AP@50_revolute_handle: 5.83%
+------results of test_inter------
+mean_all_accu: 92.53
+mean_pixel_accu: 81.91
+mean_AP@50: 46.51
+==epoch: 118, learning rate: 0.001000==
+Epoch 118: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8339
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2896
+Validation val/AP@50_line_fixed_handle: 45.67%
+Validation val/AP@50_round_fixed_handle: 35.99%
+Validation val/AP@50_slider_button: 53.89%
+Validation val/AP@50_hinge_door: 84.58%
+Validation val/AP@50_slider_drawer: 73.19%
+Validation val/AP@50_slider_lid: 4.08%
+Validation val/AP@50_hinge_lid: 66.38%
+Validation val/AP@50_hinge_knob: 40.70%
+Validation val/AP@50_revolute_handle: 9.84%
+------results of test_inter------
+mean_all_accu: 92.35
+mean_pixel_accu: 81.47
+mean_AP@50: 46.04
+==epoch: 119, learning rate: 0.001000==
+Epoch 119: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8352
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3434
+Validation val/AP@50_line_fixed_handle: 45.74%
+Validation val/AP@50_round_fixed_handle: 43.43%
+Validation val/AP@50_slider_button: 53.85%
+Validation val/AP@50_hinge_door: 84.09%
+Validation val/AP@50_slider_drawer: 72.16%
+Validation val/AP@50_slider_lid: 3.62%
+Validation val/AP@50_hinge_lid: 61.87%
+Validation val/AP@50_hinge_knob: 45.95%
+Validation val/AP@50_revolute_handle: 2.48%
+------results of test_inter------
+mean_all_accu: 92.01
+mean_pixel_accu: 80.64
+mean_AP@50: 45.91
+==epoch: 120, learning rate: 0.001000==
+Epoch 120: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8412
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3128
+Validation val/AP@50_line_fixed_handle: 46.87%
+Validation val/AP@50_round_fixed_handle: 35.84%
+Validation val/AP@50_slider_button: 54.53%
+Validation val/AP@50_hinge_door: 85.91%
+Validation val/AP@50_slider_drawer: 73.89%
+Validation val/AP@50_slider_lid: 1.83%
+Validation val/AP@50_hinge_lid: 63.84%
+Validation val/AP@50_hinge_knob: 47.86%
+Validation val/AP@50_revolute_handle: 5.83%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.63
+mean_AP@50: 46.27
+==epoch: 121, learning rate: 0.001000==
+Epoch 121: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8370
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2953
+Validation val/AP@50_line_fixed_handle: 44.33%
+Validation val/AP@50_round_fixed_handle: 37.33%
+Validation val/AP@50_slider_button: 53.12%
+Validation val/AP@50_hinge_door: 83.31%
+Validation val/AP@50_slider_drawer: 71.80%
+Validation val/AP@50_slider_lid: 2.42%
+Validation val/AP@50_hinge_lid: 61.57%
+Validation val/AP@50_hinge_knob: 40.06%
+Validation val/AP@50_revolute_handle: 5.72%
+------results of test_inter------
+mean_all_accu: 92.25
+mean_pixel_accu: 81.24
+mean_AP@50: 44.41
+==epoch: 122, learning rate: 0.001000==
+Epoch 122: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8373
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2154
+Validation val/AP@50_line_fixed_handle: 46.66%
+Validation val/AP@50_round_fixed_handle: 42.80%
+Validation val/AP@50_slider_button: 53.96%
+Validation val/AP@50_hinge_door: 86.45%
+Validation val/AP@50_slider_drawer: 73.51%
+Validation val/AP@50_slider_lid: 1.98%
+Validation val/AP@50_hinge_lid: 68.85%
+Validation val/AP@50_hinge_knob: 44.66%
+Validation val/AP@50_revolute_handle: 4.22%
+------results of test_inter------
+mean_all_accu: 92.74
+mean_pixel_accu: 82.42
+mean_AP@50: 47.01
+==epoch: 123, learning rate: 0.001000==
+Epoch 123: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8423
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2620
+Validation val/AP@50_line_fixed_handle: 45.84%
+Validation val/AP@50_round_fixed_handle: 42.52%
+Validation val/AP@50_slider_button: 54.09%
+Validation val/AP@50_hinge_door: 85.04%
+Validation val/AP@50_slider_drawer: 69.54%
+Validation val/AP@50_slider_lid: 4.59%
+Validation val/AP@50_hinge_lid: 65.27%
+Validation val/AP@50_hinge_knob: 43.92%
+Validation val/AP@50_revolute_handle: 1.71%
+------results of test_inter------
+mean_all_accu: 92.52
+mean_pixel_accu: 81.89
+mean_AP@50: 45.84
+==epoch: 124, learning rate: 0.001000==
+Epoch 124: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8414
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2640
+Validation val/AP@50_line_fixed_handle: 45.73%
+Validation val/AP@50_round_fixed_handle: 44.01%
+Validation val/AP@50_slider_button: 54.23%
+Validation val/AP@50_hinge_door: 86.05%
+Validation val/AP@50_slider_drawer: 73.60%
+Validation val/AP@50_slider_lid: 7.53%
+Validation val/AP@50_hinge_lid: 67.38%
+Validation val/AP@50_hinge_knob: 45.84%
+Validation val/AP@50_revolute_handle: 1.61%
+------results of test_inter------
+mean_all_accu: 92.74
+mean_pixel_accu: 82.42
+mean_AP@50: 47.33
+==epoch: 125, learning rate: 0.001000==
+Epoch 125: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8432
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2576
+Validation val/AP@50_line_fixed_handle: 46.72%
+Validation val/AP@50_round_fixed_handle: 41.97%
+Validation val/AP@50_slider_button: 53.95%
+Validation val/AP@50_hinge_door: 85.47%
+Validation val/AP@50_slider_drawer: 70.34%
+Validation val/AP@50_slider_lid: 11.76%
+Validation val/AP@50_hinge_lid: 60.63%
+Validation val/AP@50_hinge_knob: 46.79%
+Validation val/AP@50_revolute_handle: 5.16%
+------results of test_inter------
+mean_all_accu: 92.42
+mean_pixel_accu: 81.67
+mean_AP@50: 46.98
+==epoch: 126, learning rate: 0.001000==
+Epoch 126: Used Files = 18876, Skipped None Items = 52, Avg Loss = -0.8391
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3007
+Validation val/AP@50_line_fixed_handle: 45.80%
+Validation val/AP@50_round_fixed_handle: 38.60%
+Validation val/AP@50_slider_button: 53.50%
+Validation val/AP@50_hinge_door: 84.85%
+Validation val/AP@50_slider_drawer: 69.92%
+Validation val/AP@50_slider_lid: 1.39%
+Validation val/AP@50_hinge_lid: 65.79%
+Validation val/AP@50_hinge_knob: 46.68%
+Validation val/AP@50_revolute_handle: 2.72%
+------results of test_inter------
+mean_all_accu: 92.51
+mean_pixel_accu: 81.85
+mean_AP@50: 45.47
+==epoch: 127, learning rate: 0.001000==
+Epoch 127: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8383
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3152
+Validation val/AP@50_line_fixed_handle: 45.36%
+Validation val/AP@50_round_fixed_handle: 38.52%
+Validation val/AP@50_slider_button: 53.23%
+Validation val/AP@50_hinge_door: 84.73%
+Validation val/AP@50_slider_drawer: 70.60%
+Validation val/AP@50_slider_lid: 4.86%
+Validation val/AP@50_hinge_lid: 67.90%
+Validation val/AP@50_hinge_knob: 44.97%
+Validation val/AP@50_revolute_handle: 3.52%
+------results of test_inter------
+mean_all_accu: 92.70
+mean_pixel_accu: 82.33
+mean_AP@50: 45.97
+==epoch: 128, learning rate: 0.001000==
+Epoch 128: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8341
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3209
+Validation val/AP@50_line_fixed_handle: 45.33%
+Validation val/AP@50_round_fixed_handle: 38.47%
+Validation val/AP@50_slider_button: 53.81%
+Validation val/AP@50_hinge_door: 85.09%
+Validation val/AP@50_slider_drawer: 68.73%
+Validation val/AP@50_slider_lid: 2.46%
+Validation val/AP@50_hinge_lid: 64.60%
+Validation val/AP@50_hinge_knob: 44.29%
+Validation val/AP@50_revolute_handle: 1.26%
+------results of test_inter------
+mean_all_accu: 92.29
+mean_pixel_accu: 81.30
+mean_AP@50: 44.89
+==epoch: 129, learning rate: 0.001000==
+Epoch 129: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8414
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2775
+Validation val/AP@50_line_fixed_handle: 46.09%
+Validation val/AP@50_round_fixed_handle: 43.43%
+Validation val/AP@50_slider_button: 54.34%
+Validation val/AP@50_hinge_door: 85.74%
+Validation val/AP@50_slider_drawer: 66.92%
+Validation val/AP@50_slider_lid: 3.38%
+Validation val/AP@50_hinge_lid: 66.39%
+Validation val/AP@50_hinge_knob: 44.00%
+Validation val/AP@50_revolute_handle: 3.58%
+------results of test_inter------
+mean_all_accu: 92.50
+mean_pixel_accu: 81.81
+mean_AP@50: 45.98
+==epoch: 130, learning rate: 0.001000==
+Epoch 130: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8448
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3055
+Validation val/AP@50_line_fixed_handle: 46.25%
+Validation val/AP@50_round_fixed_handle: 38.69%
+Validation val/AP@50_slider_button: 53.85%
+Validation val/AP@50_hinge_door: 84.60%
+Validation val/AP@50_slider_drawer: 65.11%
+Validation val/AP@50_slider_lid: 2.91%
+Validation val/AP@50_hinge_lid: 65.42%
+Validation val/AP@50_hinge_knob: 42.40%
+Validation val/AP@50_revolute_handle: 5.35%
+------results of test_inter------
+mean_all_accu: 92.32
+mean_pixel_accu: 81.40
+mean_AP@50: 44.95
+==epoch: 131, learning rate: 0.001000==
+Epoch 131: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8421
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2644
+Validation val/AP@50_line_fixed_handle: 47.20%
+Validation val/AP@50_round_fixed_handle: 42.80%
+Validation val/AP@50_slider_button: 53.38%
+Validation val/AP@50_hinge_door: 81.59%
+Validation val/AP@50_slider_drawer: 69.23%
+Validation val/AP@50_slider_lid: 8.83%
+Validation val/AP@50_hinge_lid: 68.54%
+Validation val/AP@50_hinge_knob: 44.27%
+Validation val/AP@50_revolute_handle: 5.75%
+------results of test_inter------
+mean_all_accu: 92.59
+mean_pixel_accu: 82.08
+mean_AP@50: 46.84
+==epoch: 132, learning rate: 0.001000==
+Epoch 132: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8379
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3084
+Validation val/AP@50_line_fixed_handle: 44.05%
+Validation val/AP@50_round_fixed_handle: 40.85%
+Validation val/AP@50_slider_button: 52.85%
+Validation val/AP@50_hinge_door: 85.32%
+Validation val/AP@50_slider_drawer: 67.77%
+Validation val/AP@50_slider_lid: 2.02%
+Validation val/AP@50_hinge_lid: 66.26%
+Validation val/AP@50_hinge_knob: 41.90%
+Validation val/AP@50_revolute_handle: 5.67%
+------results of test_inter------
+mean_all_accu: 92.46
+mean_pixel_accu: 81.73
+mean_AP@50: 45.19
+==epoch: 133, learning rate: 0.001000==
+Epoch 133: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8377
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2815
+Validation val/AP@50_line_fixed_handle: 47.03%
+Validation val/AP@50_round_fixed_handle: 46.84%
+Validation val/AP@50_slider_button: 53.62%
+Validation val/AP@50_hinge_door: 81.15%
+Validation val/AP@50_slider_drawer: 68.09%
+Validation val/AP@50_slider_lid: 2.57%
+Validation val/AP@50_hinge_lid: 69.99%
+Validation val/AP@50_hinge_knob: 44.89%
+Validation val/AP@50_revolute_handle: 4.69%
+------results of test_inter------
+mean_all_accu: 92.58
+mean_pixel_accu: 82.01
+mean_AP@50: 46.54
+==epoch: 134, learning rate: 0.001000==
+Epoch 134: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8383
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2845
+Validation val/AP@50_line_fixed_handle: 47.11%
+Validation val/AP@50_round_fixed_handle: 47.35%
+Validation val/AP@50_slider_button: 54.66%
+Validation val/AP@50_hinge_door: 85.90%
+Validation val/AP@50_slider_drawer: 70.74%
+Validation val/AP@50_slider_lid: 2.23%
+Validation val/AP@50_hinge_lid: 67.99%
+Validation val/AP@50_hinge_knob: 45.70%
+Validation val/AP@50_revolute_handle: 4.73%
+------results of test_inter------
+mean_all_accu: 92.49
+mean_pixel_accu: 81.81
+mean_AP@50: 47.38
+==epoch: 135, learning rate: 0.001000==
+Epoch 135: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8456
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2714
+Validation val/AP@50_line_fixed_handle: 45.10%
+Validation val/AP@50_round_fixed_handle: 38.92%
+Validation val/AP@50_slider_button: 53.84%
+Validation val/AP@50_hinge_door: 86.73%
+Validation val/AP@50_slider_drawer: 70.94%
+Validation val/AP@50_slider_lid: 3.38%
+Validation val/AP@50_hinge_lid: 65.29%
+Validation val/AP@50_hinge_knob: 44.68%
+Validation val/AP@50_revolute_handle: 6.31%
+------results of test_inter------
+mean_all_accu: 92.51
+mean_pixel_accu: 81.84
+mean_AP@50: 46.13
+==epoch: 136, learning rate: 0.001000==
+Epoch 136: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8434
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3027
+Validation val/AP@50_line_fixed_handle: 46.17%
+Validation val/AP@50_round_fixed_handle: 41.82%
+Validation val/AP@50_slider_button: 54.29%
+Validation val/AP@50_hinge_door: 85.27%
+Validation val/AP@50_slider_drawer: 66.98%
+Validation val/AP@50_slider_lid: 2.35%
+Validation val/AP@50_hinge_lid: 68.89%
+Validation val/AP@50_hinge_knob: 43.06%
+Validation val/AP@50_revolute_handle: 4.93%
+------results of test_inter------
+mean_all_accu: 92.54
+mean_pixel_accu: 81.91
+mean_AP@50: 45.97
+==epoch: 137, learning rate: 0.001000==
+Epoch 137: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8369
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3158
+Validation val/AP@50_line_fixed_handle: 46.93%
+Validation val/AP@50_round_fixed_handle: 36.71%
+Validation val/AP@50_slider_button: 54.27%
+Validation val/AP@50_hinge_door: 85.57%
+Validation val/AP@50_slider_drawer: 71.60%
+Validation val/AP@50_slider_lid: 0.85%
+Validation val/AP@50_hinge_lid: 68.29%
+Validation val/AP@50_hinge_knob: 43.86%
+Validation val/AP@50_revolute_handle: 3.55%
+------results of test_inter------
+mean_all_accu: 92.47
+mean_pixel_accu: 81.76
+mean_AP@50: 45.74
+==epoch: 138, learning rate: 0.001000==
+Epoch 138: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8445
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3093
+Validation val/AP@50_line_fixed_handle: 45.50%
+Validation val/AP@50_round_fixed_handle: 37.79%
+Validation val/AP@50_slider_button: 54.20%
+Validation val/AP@50_hinge_door: 85.77%
+Validation val/AP@50_slider_drawer: 68.02%
+Validation val/AP@50_slider_lid: 3.52%
+Validation val/AP@50_hinge_lid: 61.78%
+Validation val/AP@50_hinge_knob: 48.26%
+Validation val/AP@50_revolute_handle: 5.16%
+------results of test_inter------
+mean_all_accu: 92.34
+mean_pixel_accu: 81.43
+mean_AP@50: 45.55
+==epoch: 139, learning rate: 0.001000==
+Epoch 139: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8463
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3217
+Validation val/AP@50_line_fixed_handle: 46.14%
+Validation val/AP@50_round_fixed_handle: 36.79%
+Validation val/AP@50_slider_button: 54.51%
+Validation val/AP@50_hinge_door: 85.64%
+Validation val/AP@50_slider_drawer: 71.09%
+Validation val/AP@50_slider_lid: 1.90%
+Validation val/AP@50_hinge_lid: 65.24%
+Validation val/AP@50_hinge_knob: 42.60%
+Validation val/AP@50_revolute_handle: 6.81%
+------results of test_inter------
+mean_all_accu: 92.21
+mean_pixel_accu: 81.12
+mean_AP@50: 45.64
+==epoch: 140, learning rate: 0.001000==
+Epoch 140: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8468
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3233
+Validation val/AP@50_line_fixed_handle: 43.12%
+Validation val/AP@50_round_fixed_handle: 33.08%
+Validation val/AP@50_slider_button: 54.68%
+Validation val/AP@50_hinge_door: 85.26%
+Validation val/AP@50_slider_drawer: 63.16%
+Validation val/AP@50_slider_lid: 0.52%
+Validation val/AP@50_hinge_lid: 67.41%
+Validation val/AP@50_hinge_knob: 44.63%
+Validation val/AP@50_revolute_handle: 2.69%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.53
+mean_AP@50: 43.84
+==epoch: 141, learning rate: 0.001000==
+Epoch 141: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8460
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3086
+Validation val/AP@50_line_fixed_handle: 47.66%
+Validation val/AP@50_round_fixed_handle: 40.17%
+Validation val/AP@50_slider_button: 54.60%
+Validation val/AP@50_hinge_door: 85.70%
+Validation val/AP@50_slider_drawer: 68.57%
+Validation val/AP@50_slider_lid: 1.95%
+Validation val/AP@50_hinge_lid: 64.89%
+Validation val/AP@50_hinge_knob: 47.79%
+Validation val/AP@50_revolute_handle: 4.29%
+------results of test_inter------
+mean_all_accu: 92.39
+mean_pixel_accu: 81.57
+mean_AP@50: 46.18
+==epoch: 142, learning rate: 0.001000==
+Epoch 142: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8441
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3080
+Validation val/AP@50_line_fixed_handle: 46.46%
+Validation val/AP@50_round_fixed_handle: 42.00%
+Validation val/AP@50_slider_button: 54.56%
+Validation val/AP@50_hinge_door: 84.60%
+Validation val/AP@50_slider_drawer: 68.94%
+Validation val/AP@50_slider_lid: 0.56%
+Validation val/AP@50_hinge_lid: 69.40%
+Validation val/AP@50_hinge_knob: 47.64%
+Validation val/AP@50_revolute_handle: 7.75%
+------results of test_inter------
+mean_all_accu: 92.63
+mean_pixel_accu: 82.15
+mean_AP@50: 46.88
+==epoch: 143, learning rate: 0.001000==
+Epoch 143: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8428
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3299
+Validation val/AP@50_line_fixed_handle: 45.94%
+Validation val/AP@50_round_fixed_handle: 34.56%
+Validation val/AP@50_slider_button: 53.59%
+Validation val/AP@50_hinge_door: 85.78%
+Validation val/AP@50_slider_drawer: 69.93%
+Validation val/AP@50_slider_lid: 1.66%
+Validation val/AP@50_hinge_lid: 67.39%
+Validation val/AP@50_hinge_knob: 44.46%
+Validation val/AP@50_revolute_handle: 5.19%
+------results of test_inter------
+mean_all_accu: 92.41
+mean_pixel_accu: 81.60
+mean_AP@50: 45.39
+==epoch: 144, learning rate: 0.001000==
+Epoch 144: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8466
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3793
+Validation val/AP@50_line_fixed_handle: 45.77%
+Validation val/AP@50_round_fixed_handle: 39.56%
+Validation val/AP@50_slider_button: 53.78%
+Validation val/AP@50_hinge_door: 84.37%
+Validation val/AP@50_slider_drawer: 68.94%
+Validation val/AP@50_slider_lid: 1.83%
+Validation val/AP@50_hinge_lid: 62.59%
+Validation val/AP@50_hinge_knob: 42.94%
+Validation val/AP@50_revolute_handle: 2.54%
+------results of test_inter------
+mean_all_accu: 92.00
+mean_pixel_accu: 80.59
+mean_AP@50: 44.70
+==epoch: 145, learning rate: 0.001000==
+Epoch 145: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8377
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2918
+Validation val/AP@50_line_fixed_handle: 44.31%
+Validation val/AP@50_round_fixed_handle: 38.23%
+Validation val/AP@50_slider_button: 53.49%
+Validation val/AP@50_hinge_door: 85.34%
+Validation val/AP@50_slider_drawer: 72.06%
+Validation val/AP@50_slider_lid: 5.24%
+Validation val/AP@50_hinge_lid: 68.84%
+Validation val/AP@50_hinge_knob: 47.43%
+Validation val/AP@50_revolute_handle: 6.68%
+------results of test_inter------
+mean_all_accu: 92.86
+mean_pixel_accu: 82.70
+mean_AP@50: 46.85
+==epoch: 146, learning rate: 0.001000==
+Epoch 146: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8427
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3290
+Validation val/AP@50_line_fixed_handle: 46.31%
+Validation val/AP@50_round_fixed_handle: 43.55%
+Validation val/AP@50_slider_button: 54.30%
+Validation val/AP@50_hinge_door: 84.10%
+Validation val/AP@50_slider_drawer: 68.53%
+Validation val/AP@50_slider_lid: 3.53%
+Validation val/AP@50_hinge_lid: 60.28%
+Validation val/AP@50_hinge_knob: 44.92%
+Validation val/AP@50_revolute_handle: 3.12%
+------results of test_inter------
+mean_all_accu: 92.47
+mean_pixel_accu: 81.74
+mean_AP@50: 45.41
+==epoch: 147, learning rate: 0.001000==
+Epoch 147: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8479
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3096
+Validation val/AP@50_line_fixed_handle: 45.16%
+Validation val/AP@50_round_fixed_handle: 35.90%
+Validation val/AP@50_slider_button: 54.43%
+Validation val/AP@50_hinge_door: 85.80%
+Validation val/AP@50_slider_drawer: 69.39%
+Validation val/AP@50_slider_lid: 3.10%
+Validation val/AP@50_hinge_lid: 70.62%
+Validation val/AP@50_hinge_knob: 44.34%
+Validation val/AP@50_revolute_handle: 5.48%
+------results of test_inter------
+mean_all_accu: 92.70
+mean_pixel_accu: 82.32
+mean_AP@50: 46.02
+==epoch: 148, learning rate: 0.001000==
+Epoch 148: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8450
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3144
+Validation val/AP@50_line_fixed_handle: 46.25%
+Validation val/AP@50_round_fixed_handle: 40.41%
+Validation val/AP@50_slider_button: 54.09%
+Validation val/AP@50_hinge_door: 85.68%
+Validation val/AP@50_slider_drawer: 68.04%
+Validation val/AP@50_slider_lid: 3.47%
+Validation val/AP@50_hinge_lid: 66.77%
+Validation val/AP@50_hinge_knob: 45.50%
+Validation val/AP@50_revolute_handle: 4.78%
+------results of test_inter------
+mean_all_accu: 92.48
+mean_pixel_accu: 81.78
+mean_AP@50: 46.11
+==epoch: 149, learning rate: 0.001000==
+Epoch 149: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8412
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3565
+Validation val/AP@50_line_fixed_handle: 45.88%
+Validation val/AP@50_round_fixed_handle: 40.47%
+Validation val/AP@50_slider_button: 54.08%
+Validation val/AP@50_hinge_door: 84.26%
+Validation val/AP@50_slider_drawer: 69.21%
+Validation val/AP@50_slider_lid: 1.58%
+Validation val/AP@50_hinge_lid: 64.93%
+Validation val/AP@50_hinge_knob: 46.55%
+Validation val/AP@50_revolute_handle: 6.92%
+------results of test_inter------
+mean_all_accu: 92.17
+mean_pixel_accu: 81.03
+mean_AP@50: 45.99
+==epoch: 150, learning rate: 0.001000==
+Epoch 150: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8487
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2899
+Validation val/AP@50_line_fixed_handle: 46.21%
+Validation val/AP@50_round_fixed_handle: 39.74%
+Validation val/AP@50_slider_button: 53.88%
+Validation val/AP@50_hinge_door: 85.64%
+Validation val/AP@50_slider_drawer: 69.94%
+Validation val/AP@50_slider_lid: 2.93%
+Validation val/AP@50_hinge_lid: 68.78%
+Validation val/AP@50_hinge_knob: 41.53%
+Validation val/AP@50_revolute_handle: 6.21%
+------results of test_inter------
+mean_all_accu: 92.67
+mean_pixel_accu: 82.26
+mean_AP@50: 46.09
+==epoch: 151, learning rate: 0.001000==
+Epoch 151: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8403
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2616
+Validation val/AP@50_line_fixed_handle: 44.96%
+Validation val/AP@50_round_fixed_handle: 39.95%
+Validation val/AP@50_slider_button: 53.39%
+Validation val/AP@50_hinge_door: 83.34%
+Validation val/AP@50_slider_drawer: 69.07%
+Validation val/AP@50_slider_lid: 8.06%
+Validation val/AP@50_hinge_lid: 65.00%
+Validation val/AP@50_hinge_knob: 48.45%
+Validation val/AP@50_revolute_handle: 2.01%
+------results of test_inter------
+mean_all_accu: 92.55
+mean_pixel_accu: 81.97
+mean_AP@50: 46.03
+==epoch: 152, learning rate: 0.001000==
+Epoch 152: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8438
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3051
+Validation val/AP@50_line_fixed_handle: 45.60%
+Validation val/AP@50_round_fixed_handle: 29.40%
+Validation val/AP@50_slider_button: 53.80%
+Validation val/AP@50_hinge_door: 82.87%
+Validation val/AP@50_slider_drawer: 70.63%
+Validation val/AP@50_slider_lid: 2.52%
+Validation val/AP@50_hinge_lid: 67.09%
+Validation val/AP@50_hinge_knob: 40.52%
+Validation val/AP@50_revolute_handle: 5.45%
+------results of test_inter------
+mean_all_accu: 92.54
+mean_pixel_accu: 81.90
+mean_AP@50: 44.21
+==epoch: 153, learning rate: 0.001000==
+Epoch 153: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8428
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3455
+Validation val/AP@50_line_fixed_handle: 44.48%
+Validation val/AP@50_round_fixed_handle: 42.22%
+Validation val/AP@50_slider_button: 54.36%
+Validation val/AP@50_hinge_door: 83.07%
+Validation val/AP@50_slider_drawer: 69.82%
+Validation val/AP@50_slider_lid: 2.51%
+Validation val/AP@50_hinge_lid: 66.75%
+Validation val/AP@50_hinge_knob: 42.87%
+Validation val/AP@50_revolute_handle: 4.02%
+------results of test_inter------
+mean_all_accu: 92.42
+mean_pixel_accu: 81.62
+mean_AP@50: 45.57
+==epoch: 154, learning rate: 0.001000==
+Epoch 154: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8420
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2816
+Validation val/AP@50_line_fixed_handle: 43.44%
+Validation val/AP@50_round_fixed_handle: 39.63%
+Validation val/AP@50_slider_button: 53.60%
+Validation val/AP@50_hinge_door: 85.99%
+Validation val/AP@50_slider_drawer: 70.64%
+Validation val/AP@50_slider_lid: 5.62%
+Validation val/AP@50_hinge_lid: 69.90%
+Validation val/AP@50_hinge_knob: 44.17%
+Validation val/AP@50_revolute_handle: 5.00%
+------results of test_inter------
+mean_all_accu: 92.97
+mean_pixel_accu: 82.97
+mean_AP@50: 46.45
+==epoch: 155, learning rate: 0.001000==
+Epoch 155: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8444
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3074
+Validation val/AP@50_line_fixed_handle: 46.90%
+Validation val/AP@50_round_fixed_handle: 36.76%
+Validation val/AP@50_slider_button: 54.16%
+Validation val/AP@50_hinge_door: 84.33%
+Validation val/AP@50_slider_drawer: 68.43%
+Validation val/AP@50_slider_lid: 3.32%
+Validation val/AP@50_hinge_lid: 66.89%
+Validation val/AP@50_hinge_knob: 46.03%
+Validation val/AP@50_revolute_handle: 2.75%
+------results of test_inter------
+mean_all_accu: 92.50
+mean_pixel_accu: 81.84
+mean_AP@50: 45.51
+==epoch: 156, learning rate: 0.001000==
+Epoch 156: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8465
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3219
+Validation val/AP@50_line_fixed_handle: 45.97%
+Validation val/AP@50_round_fixed_handle: 33.57%
+Validation val/AP@50_slider_button: 53.47%
+Validation val/AP@50_hinge_door: 81.94%
+Validation val/AP@50_slider_drawer: 69.13%
+Validation val/AP@50_slider_lid: 3.53%
+Validation val/AP@50_hinge_lid: 67.32%
+Validation val/AP@50_hinge_knob: 44.08%
+Validation val/AP@50_revolute_handle: 5.24%
+------results of test_inter------
+mean_all_accu: 92.57
+mean_pixel_accu: 81.99
+mean_AP@50: 44.92
+==epoch: 157, learning rate: 0.001000==
+Epoch 157: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8466
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3563
+Validation val/AP@50_line_fixed_handle: 45.82%
+Validation val/AP@50_round_fixed_handle: 39.69%
+Validation val/AP@50_slider_button: 54.31%
+Validation val/AP@50_hinge_door: 83.80%
+Validation val/AP@50_slider_drawer: 72.00%
+Validation val/AP@50_slider_lid: 1.68%
+Validation val/AP@50_hinge_lid: 64.76%
+Validation val/AP@50_hinge_knob: 44.49%
+Validation val/AP@50_revolute_handle: 4.20%
+------results of test_inter------
+mean_all_accu: 92.30
+mean_pixel_accu: 81.34
+mean_AP@50: 45.64
+==epoch: 158, learning rate: 0.001000==
+Epoch 158: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8445
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3099
+Validation val/AP@50_line_fixed_handle: 46.25%
+Validation val/AP@50_round_fixed_handle: 36.65%
+Validation val/AP@50_slider_button: 53.82%
+Validation val/AP@50_hinge_door: 83.69%
+Validation val/AP@50_slider_drawer: 67.17%
+Validation val/AP@50_slider_lid: 0.82%
+Validation val/AP@50_hinge_lid: 64.84%
+Validation val/AP@50_hinge_knob: 41.68%
+Validation val/AP@50_revolute_handle: 3.73%
+------results of test_inter------
+mean_all_accu: 92.38
+mean_pixel_accu: 81.53
+mean_AP@50: 44.29
+==epoch: 159, learning rate: 0.001000==
+Epoch 159: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8451
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3005
+Validation val/AP@50_line_fixed_handle: 45.49%
+Validation val/AP@50_round_fixed_handle: 37.56%
+Validation val/AP@50_slider_button: 53.63%
+Validation val/AP@50_hinge_door: 84.55%
+Validation val/AP@50_slider_drawer: 67.92%
+Validation val/AP@50_slider_lid: 2.03%
+Validation val/AP@50_hinge_lid: 65.86%
+Validation val/AP@50_hinge_knob: 43.27%
+Validation val/AP@50_revolute_handle: 6.35%
+------results of test_inter------
+mean_all_accu: 92.45
+mean_pixel_accu: 81.72
+mean_AP@50: 45.18
+==epoch: 160, learning rate: 0.001000==
+Epoch 160: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8453
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2944
+Validation val/AP@50_line_fixed_handle: 45.21%
+Validation val/AP@50_round_fixed_handle: 34.97%
+Validation val/AP@50_slider_button: 53.81%
+Validation val/AP@50_hinge_door: 84.60%
+Validation val/AP@50_slider_drawer: 70.13%
+Validation val/AP@50_slider_lid: 3.64%
+Validation val/AP@50_hinge_lid: 65.45%
+Validation val/AP@50_hinge_knob: 41.26%
+Validation val/AP@50_revolute_handle: 5.93%
+------results of test_inter------
+mean_all_accu: 92.64
+mean_pixel_accu: 82.17
+mean_AP@50: 45.00
+==epoch: 161, learning rate: 0.001000==
+Epoch 161: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8459
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2621
+Validation val/AP@50_line_fixed_handle: 47.34%
+Validation val/AP@50_round_fixed_handle: 37.56%
+Validation val/AP@50_slider_button: 54.36%
+Validation val/AP@50_hinge_door: 83.06%
+Validation val/AP@50_slider_drawer: 67.86%
+Validation val/AP@50_slider_lid: 2.28%
+Validation val/AP@50_hinge_lid: 69.65%
+Validation val/AP@50_hinge_knob: 46.02%
+Validation val/AP@50_revolute_handle: 6.54%
+------results of test_inter------
+mean_all_accu: 92.56
+mean_pixel_accu: 82.02
+mean_AP@50: 46.07
+==epoch: 162, learning rate: 0.001000==
+Epoch 162: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8482
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3209
+Validation val/AP@50_line_fixed_handle: 45.39%
+Validation val/AP@50_round_fixed_handle: 34.42%
+Validation val/AP@50_slider_button: 54.23%
+Validation val/AP@50_hinge_door: 84.03%
+Validation val/AP@50_slider_drawer: 70.00%
+Validation val/AP@50_slider_lid: 1.34%
+Validation val/AP@50_hinge_lid: 67.21%
+Validation val/AP@50_hinge_knob: 44.48%
+Validation val/AP@50_revolute_handle: 5.00%
+------results of test_inter------
+mean_all_accu: 92.48
+mean_pixel_accu: 81.83
+mean_AP@50: 45.12
+==epoch: 163, learning rate: 0.001000==
+Epoch 163: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8454
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3159
+Validation val/AP@50_line_fixed_handle: 43.64%
+Validation val/AP@50_round_fixed_handle: 38.05%
+Validation val/AP@50_slider_button: 54.31%
+Validation val/AP@50_hinge_door: 82.67%
+Validation val/AP@50_slider_drawer: 69.09%
+Validation val/AP@50_slider_lid: 1.41%
+Validation val/AP@50_hinge_lid: 65.78%
+Validation val/AP@50_hinge_knob: 46.40%
+Validation val/AP@50_revolute_handle: 2.32%
+------results of test_inter------
+mean_all_accu: 92.22
+mean_pixel_accu: 81.17
+mean_AP@50: 44.85
+==epoch: 164, learning rate: 0.001000==
+Epoch 164: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8466
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3103
+Validation val/AP@50_line_fixed_handle: 47.85%
+Validation val/AP@50_round_fixed_handle: 35.71%
+Validation val/AP@50_slider_button: 54.34%
+Validation val/AP@50_hinge_door: 85.30%
+Validation val/AP@50_slider_drawer: 68.45%
+Validation val/AP@50_slider_lid: 1.11%
+Validation val/AP@50_hinge_lid: 68.74%
+Validation val/AP@50_hinge_knob: 45.31%
+Validation val/AP@50_revolute_handle: 5.63%
+------results of test_inter------
+mean_all_accu: 92.58
+mean_pixel_accu: 82.03
+mean_AP@50: 45.83
+==epoch: 165, learning rate: 0.001000==
+Epoch 165: Used Files = 18876, Skipped None Items = 52, Avg Loss = -0.8459
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3168
+Validation val/AP@50_line_fixed_handle: 47.20%
+Validation val/AP@50_round_fixed_handle: 36.83%
+Validation val/AP@50_slider_button: 54.45%
+Validation val/AP@50_hinge_door: 85.09%
+Validation val/AP@50_slider_drawer: 68.27%
+Validation val/AP@50_slider_lid: 0.67%
+Validation val/AP@50_hinge_lid: 68.10%
+Validation val/AP@50_hinge_knob: 45.46%
+Validation val/AP@50_revolute_handle: 1.40%
+------results of test_inter------
+mean_all_accu: 92.48
+mean_pixel_accu: 81.77
+mean_AP@50: 45.28
+==epoch: 166, learning rate: 0.001000==
+Epoch 166: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8494
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3757
+Validation val/AP@50_line_fixed_handle: 46.60%
+Validation val/AP@50_round_fixed_handle: 38.19%
+Validation val/AP@50_slider_button: 54.39%
+Validation val/AP@50_hinge_door: 85.13%
+Validation val/AP@50_slider_drawer: 67.61%
+Validation val/AP@50_slider_lid: 0.25%
+Validation val/AP@50_hinge_lid: 68.00%
+Validation val/AP@50_hinge_knob: 42.07%
+Validation val/AP@50_revolute_handle: 3.22%
+------results of test_inter------
+mean_all_accu: 92.23
+mean_pixel_accu: 81.18
+mean_AP@50: 45.05
+==epoch: 167, learning rate: 0.001000==
+Epoch 167: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8518
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3025
+Validation val/AP@50_line_fixed_handle: 46.92%
+Validation val/AP@50_round_fixed_handle: 35.93%
+Validation val/AP@50_slider_button: 54.09%
+Validation val/AP@50_hinge_door: 86.31%
+Validation val/AP@50_slider_drawer: 68.74%
+Validation val/AP@50_slider_lid: 0.96%
+Validation val/AP@50_hinge_lid: 69.49%
+Validation val/AP@50_hinge_knob: 40.86%
+Validation val/AP@50_revolute_handle: 5.13%
+------results of test_inter------
+mean_all_accu: 92.52
+mean_pixel_accu: 81.84
+mean_AP@50: 45.38
+==epoch: 168, learning rate: 0.001000==
+Epoch 168: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8510
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3439
+Validation val/AP@50_line_fixed_handle: 47.35%
+Validation val/AP@50_round_fixed_handle: 37.39%
+Validation val/AP@50_slider_button: 53.93%
+Validation val/AP@50_hinge_door: 86.39%
+Validation val/AP@50_slider_drawer: 67.84%
+Validation val/AP@50_slider_lid: 0.90%
+Validation val/AP@50_hinge_lid: 67.62%
+Validation val/AP@50_hinge_knob: 44.65%
+Validation val/AP@50_revolute_handle: 2.40%
+------results of test_inter------
+mean_all_accu: 92.36
+mean_pixel_accu: 81.49
+mean_AP@50: 45.39
+==epoch: 169, learning rate: 0.001000==
+Epoch 169: Used Files = 18875, Skipped None Items = 53, Avg Loss = -0.8524
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.3332
+Validation val/AP@50_line_fixed_handle: 47.16%
+Validation val/AP@50_round_fixed_handle: 38.64%
+Validation val/AP@50_slider_button: 54.37%
+Validation val/AP@50_hinge_door: 85.32%
+Validation val/AP@50_slider_drawer: 69.24%
+Validation val/AP@50_slider_lid: 0.71%
+Validation val/AP@50_hinge_lid: 64.73%
+Validation val/AP@50_hinge_knob: 47.27%
+Validation val/AP@50_revolute_handle: 3.25%
+------results of test_inter------
+mean_all_accu: 92.25
+mean_pixel_accu: 81.20
+mean_AP@50: 45.63
+==epoch: 170, learning rate: 0.001000==
+Epoch 170: Used Files = 18873, Skipped None Items = 55, Avg Loss = -0.8493
+Val Files = 10096, Skipped None Items = 304, Avg Val Loss = 0.2358
+Validation val/AP@50_line_fixed_handle: 48.09%
+Validation val/AP@50_round_fixed_handle: 31.19%
+Validation val/AP@50_slider_button: 54.18%
+Validation val/AP@50_hinge_door: 86.63%
+Validation val/AP@50_slider_drawer: 65.65%
+Validation val/AP@50_slider_lid: 5.14%
+Validation val/AP@50_hinge_lid: 65.22%
+Validation val/AP@50_hinge_knob: 47.72%
+Validation val/AP@50_revolute_handle: 2.48%
+------results of test_inter------
+mean_all_accu: 92.80
+mean_pixel_accu: 82.52
+mean_AP@50: 45.14
+==epoch: 171, learning rate: 0.001000==
