@@ -5,13 +5,15 @@ from tqdm import tqdm
 
 sys.path.append('./utils')
 from utils.config_utils import AKB48_ID_PATH, AKB48_CAMERA_POSITION_RANGE
-
+ALL_CATEGORIES = ["Box", "Bucket", "Drawer", "TrashCan"]
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument('--ray_tracing', type=bool, default=False, help='Specify whether to use ray tracing in rendering')
     parser.add_argument('--start_idx', type=int, default=0, help='Specify the start index of the model id to render')
     parser.add_argument('--num_render', type=int, default=32, help='Specify the number of renderings for each model id each camera range')
     parser.add_argument('--log_dir', type=str, default='./log_render.txt', help='Specify the log file')
+    parser.add_argument('--idx', type=int, default=0,help='choose id for category')
+
     
     args = parser.parse_args()
     
@@ -31,15 +33,15 @@ if __name__ == "__main__":
 
     for category, model_id in tqdm(model_id_list, desc="Rendering models", unit="model", leave=True):
         print(f'Still to render: {total_to_render-cnt}\n')
-        if category in ["Box", "Bucket", "Camera", "CoffeeMachine", "Dishwasher", "Door"]:
+        if category == ALL_CATEGORIES[args.idx]:
             for pos_idx in range(len(AKB48_CAMERA_POSITION_RANGE[category])):
                 for render_idx in range(num_render):
                     print(f'Rendering: {category} : {model_id} : {pos_idx} : {start_idx + render_idx}\n')
 
-                    render_string = f'python -u render.py --dataset akb48 --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx} --height {800} --width {800} --gpuid 0'
+                    render_string = f'CUDA_VISIBLE_DEVICES=1 python -u render.py --dataset akb48 --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx} --height {800} --width {800}'
                     if ray_tracing:
                         render_string += ' --ray_tracing True'
-                    render_string += f' 2>&1 | tee -a {log_dir}'
+                    # render_string += f' 2>&1 | tee -a {log_dir}'
 
                     os.system(render_string)
 

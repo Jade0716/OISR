@@ -24,7 +24,7 @@ from utils.read_utils import load_rgb_image, load_depth_map, load_anno_dict, loa
 from utils.sample_utils import FPS
 
 # LOG_PATH = './log_sample.txt'
-OBJECT_CATEGORIES = [['Box'],[ 'TrashCan'], ['Bucket'], ['Drawer']]
+OBJECT_CATEGORIES = ["Box", "Bucket", "Drawer", "TrashCan"]
 
 # OBJECT_CATEGORIES = ['Refrigerator']
 
@@ -107,7 +107,7 @@ def sample_and_save_with_flow(model, filename0, filename1, data_path, save_path,
     os.makedirs(gt_save_path, exist_ok=True)
 
     anno_dict0 = load_anno_dict(data_path, filename0)
-    metafile0 = load_meta(data_path, filename0)
+    metafile0 = load_meta(data_path, filename1)
     rgb_image0 = load_rgb_image(data_path, filename0)
     depth_map0 = load_depth_map(data_path, filename0)
 
@@ -225,7 +225,7 @@ def sample_and_save_with_flow(model, filename0, filename1, data_path, save_path,
 
 if __name__ == "__main__":
 
-    akb48_id_list_path = '/home/liuyuyan/GaPartNet/dataset/render_tools/meta/akb48_all_id_list.txt'
+    akb48_id_list_path = '/home/liuyuyan/OISR/OISR/dataset/render_tools/meta/akb48_all_id_list.txt'
     with open(akb48_id_list_path, 'r') as f:
         akb48_id_list = [line.strip().replace(' ', '_') for line in f.readlines()]  # 把空格换成下划线，方便匹配
     akb48_id_set = set(akb48_id_list)

@@ -26,11 +26,11 @@ from .backbone import SparseUNet
 class GAPartNet(nn.Module):
     def __init__(
             self,
-            in_channels: int = 12,
+            in_channels: int = 9,
             num_part_classes: int = 10,
             backbone_type: str = "SparseUNet",
-            backbone_cfg: Dict = {"channels": [24, 48, 64, 80, 96, 112, 128],"block_repeat": 2},
-            # backbone_cfg: Dict = {"channels": [16, 32, 48, 64, 80, 96, 112], "block_repeat": 2},
+            # backbone_cfg: Dict = {"channels": [24, 48, 64, 80, 96, 112, 128],"block_repeat": 2},
+            backbone_cfg: Dict = {"channels": [16, 32, 48, 64, 80, 96, 112], "block_repeat": 2},
             # semantic segmentation
             ignore_sem_label: int = -100,
             use_sem_focal_loss: bool = True,
@@ -51,6 +51,8 @@ class GAPartNet(nn.Module):
             # val_min_num_points_per_proposal: int = 3,
             val_nms_iou_threshold: float = 0.3,
             val_ap_iou_threshold: float = 0.5,
+            angle_thresh_deg: float = 60.0,
+            flow_diff_thresh: float = 0.05,
             # testing
             visualize_cfg: Dict = {},
             use_adaptive_clustering: bool = False,
@@ -76,6 +78,8 @@ class GAPartNet(nn.Module):
         self.max_num_points_per_query = instance_seg_cfg["max_num_points_per_query"]
         self.min_num_points_per_proposal = instance_seg_cfg["min_num_points_per_proposal"]
         self.max_num_points_per_query_shift = instance_seg_cfg["max_num_points_per_query_shift"]
+        self.angle_thresh_deg = angle_thresh_deg
+        self.flow_diff_thresh = flow_diff_thresh
         self.score_fullscale = instance_seg_cfg["score_fullscale"]
         self.score_scale = instance_seg_cfg["score_scale"]
 
@@ -97,6 +101,12 @@ class GAPartNet(nn.Module):
 
         # offset prediction
         self.offset_head = nn.Sequential(
+            nn.Linear(fea_dim, fea_dim // 2),
+            norm_fn(fea_dim // 2),
+            nn.ReLU(inplace=True),
+            nn.Linear(fea_dim // 2 , 3),
+        )
+        self.offset_flow_head = nn.Sequential(
             nn.Linear(fea_dim, fea_dim // 2),
             norm_fn(fea_dim // 2),
             nn.ReLU(inplace=True),
@@ -124,18 +134,21 @@ class GAPartNet(nn.Module):
 
 
 
-    def forward(self, data_batch):   #PointCloudBatch
+    def forward(self, data_batch, current_epoch):   #PointCloudBatch
         points = data_batch.points
         pc_ids = data_batch.pc_ids
         batch_indices = data_batch.batch_indices
         sem_labels = data_batch.sem_labels
         instance_regions = data_batch.instance_regions
+        instance_regions_flow = data_batch.instance_regions_flow
         instance_labels = data_batch.instance_labels
         instance_sem_labels = data_batch.instance_sem_labels
         num_points_per_instance = data_batch.num_points_per_instance
         gt_npcs = data_batch.gt_npcs
         pt_xyz = points[:, :3]
         flow_xyz = points[:,3:6]
+        flow = flow_xyz - pt_xyz
+        
 
         # Forward pass through backbone
         pc_feature = self.forward_backbone(pc_batch=data_batch)   #用u-net得到点云体素化特征
@@ -167,13 +180,20 @@ class GAPartNet(nn.Module):
 
         # Offset prediction
         offsets_preds = self.forward_offset(pc_feature)          #偏移预测
+        offsets_preds_flow = self.forward_offset_flow(pc_feature)
         if instance_regions is not None:
             offsets_gt = instance_regions[:, :3] - pt_xyz
             loss_offset_dist, loss_offset_dir = self.loss_offset(
                 offsets_preds, offsets_gt, sem_labels, instance_labels,   
             )
+            offsets_flow_gt = instance_regions_flow[:, :3] - flow_xyz
+            loss_offset_flow_dist, loss_offset_flow_dir = self.loss_offset(
+                offsets_preds_flow, offsets_flow_gt, sem_labels, instance_labels,
+            )
         else:
             loss_offset_dist, loss_offset_dir = 0., 0.
+            loss_offset_flow_dist, loss_offset_flow_dir = 0., 0.
+
         # if self.current_epoch >= self.start_clustering:
         # Proposal clustering and revoxelization
         voxel_tensor, pc_voxel_id, proposals = self.proposal_clustering_and_revoxelize(   #利用预测语义和偏移量，再体素化得到proposals
@@ -183,6 +203,7 @@ class GAPartNet(nn.Module):
             pt_features=pc_feature,
             sem_preds=sem_preds,
             offset_preds=offsets_preds,
+            offset_preds_flow = offsets_preds_flow,
             instance_labels=instance_labels,
         )
 
@@ -195,63 +216,132 @@ class GAPartNet(nn.Module):
 
         # Clustering and scoring
         # if self.current_epoch >= self.start_scorenet
-        if voxel_tensor is not None and proposals is not None :#and voxel_tensor.batch_size > 1:
-            score_logits = self.forward_proposal_score(
-                voxel_tensor, pc_voxel_id, proposals
-            )
-            proposal_offsets_begin = proposals.proposal_offsets[:-1].long()
-            if proposals.sem_labels is not None:
-                proposal_sem_labels = proposals.sem_labels[proposal_offsets_begin].long()
-            else:
-                proposal_sem_labels = proposals.sem_preds[proposal_offsets_begin].long()
-
-            score_logits = score_logits.gather(    #得到对sem_preds预测的实例类别的得分
-                1, proposal_sem_labels[:, None] - 1
-            ).squeeze(1)
-            proposals.score_preds = score_logits.detach().sigmoid()
-            if num_points_per_instance is not None:   
-                loss_prop_score = self.loss_proposal_score(
-                    score_logits, proposals, num_points_per_instance,   
+        if self.training:
+            if voxel_tensor is not None and proposals is not None and current_epoch >= self.start_scorenet :#and voxel_tensor.batch_size > 1:
+                score_logits = self.forward_proposal_score(
+                    voxel_tensor, pc_voxel_id, proposals
                 )
-            else:
-                # import pdb
-                # pdb.set_trace()
-                loss_prop_score = 0.0
-        else:
-            loss_prop_score = 0.0
+                proposal_offsets_begin = proposals.proposal_offsets[:-1].long()
+                if proposals.sem_labels is not None:
+                    proposal_sem_labels = proposals.sem_labels[proposal_offsets_begin].long()
+                else:
+                    proposal_sem_labels = proposals.sem_preds[proposal_offsets_begin].long()
 
-        # if self.current_epoch >= self.start_npcs
-        # NPCS prediction
-        if voxel_tensor is not None:# and voxel_tensor.batch_size > 1:
-            npcs_logits = self.forward_proposal_npcs(
-                voxel_tensor, pc_voxel_id
-            )
-            if gt_npcs is not None:
-                gt_npcs = gt_npcs[proposals.valid_mask][proposals.sorted_indices]
-                loss_prop_npcs = self.loss_proposal_npcs(npcs_logits, gt_npcs, proposals)
-            else:
-                proposals.npcs_valid_mask = torch.ones(proposals.sorted_indices.shape[0], dtype=torch.bool, device=proposals.sorted_indices.device)
-                npcs_logits = npcs_logits[proposals.npcs_valid_mask]
-                sem_preds = proposals.sem_preds[proposals.npcs_valid_mask].long()
-                proposal_indices = proposals.proposal_indices[proposals.npcs_valid_mask]
-
-                npcs_logits = rearrange(npcs_logits, "n (k c) -> n k c", c=3)
-                npcs_logits = npcs_logits.gather(
-                    1, index=repeat(sem_preds - 1, "n -> n one c", one=1, c=3)
+                score_logits = score_logits.gather(    #得到对sem_preds预测的实例类别的得分
+                    1, proposal_sem_labels[:, None] - 1
                 ).squeeze(1)
+                proposals.score_preds = score_logits.detach().sigmoid()
+                if num_points_per_instance is not None:
+                    #loss_slider_consistency = self.slider_flow_consistency_loss(flow,proposals,score_logits,
+                    #                                                            proposal_sem_labels, [4, 7, 8, 9])
+                    loss_slider_consistency = torch.tensor(0.0, device=flow.device)
+                    loss_prop_score = self.loss_proposal_score(
+                        score_logits, proposals, num_points_per_instance,
+                    )
+                else:
+                    # import pdb
+                    # pdb.set_trace()
+                    loss_prop_score = 0.0
+                    loss_slider_consistency = 0.0
+            else:
+                loss_prop_score = 0.0
+                loss_slider_consistency = 0.0
 
-                proposals.npcs_preds = npcs_logits.detach()
+
+
+            # if self.current_epoch >= self.start_npcs
+            # NPCS prediction
+            if voxel_tensor is not None and current_epoch >= self.start_npcs:# and voxel_tensor.batch_size > 1:
+                npcs_logits = self.forward_proposal_npcs(
+                    voxel_tensor, pc_voxel_id
+                )
+                if gt_npcs is not None:
+                    gt_npcs = gt_npcs[proposals.valid_mask][proposals.sorted_indices]
+                    loss_prop_npcs = self.loss_proposal_npcs(npcs_logits, gt_npcs, proposals)
+                else:
+                    proposals.npcs_valid_mask = torch.ones(proposals.sorted_indices.shape[0], dtype=torch.bool, device=proposals.sorted_indices.device)
+                    npcs_logits = npcs_logits[proposals.npcs_valid_mask]
+                    sem_preds = proposals.sem_preds[proposals.npcs_valid_mask].long()
+                    proposal_indices = proposals.proposal_indices[proposals.npcs_valid_mask]
+
+                    npcs_logits = rearrange(npcs_logits, "n (k c) -> n k c", c=3)
+                    npcs_logits = npcs_logits.gather(
+                        1, index=repeat(sem_preds - 1, "n -> n one c", one=1, c=3)
+                    ).squeeze(1)
+
+                    proposals.npcs_preds = npcs_logits.detach()
+                    loss_prop_npcs = 0.0
+            else:
                 loss_prop_npcs = 0.0
+                npcs_preds = None
         else:
-            loss_prop_npcs = 0.0
-            npcs_preds = None
+            if voxel_tensor is not None and proposals is not None  :#and voxel_tensor.batch_size > 1:
+                score_logits = self.forward_proposal_score(
+                    voxel_tensor, pc_voxel_id, proposals
+                )
+                proposal_offsets_begin = proposals.proposal_offsets[:-1].long()
+                if proposals.sem_labels is not None:
+                    proposal_sem_labels = proposals.sem_labels[proposal_offsets_begin].long()
+                else:
+                    proposal_sem_labels = proposals.sem_preds[proposal_offsets_begin].long()
+
+                score_logits = score_logits.gather(    #得到对sem_preds预测的实例类别的得分
+                    1, proposal_sem_labels[:, None] - 1
+                ).squeeze(1)
+                proposals.score_preds = score_logits.detach().sigmoid()
+                if num_points_per_instance is not None:
+                    loss_slider_consistency = self.slider_flow_consistency_loss(flow,proposals,score_logits,
+                                                                                proposal_sem_labels, [4, 7, 8])
+                    #loss_slider_consistency = torch.tensor(0.0, device=flow.device)
+                    loss_prop_score = self.loss_proposal_score(
+                        score_logits, proposals, num_points_per_instance,
+                    )
+                else:
+                    # import pdb
+                    # pdb.set_trace()
+                    loss_prop_score = 0.0
+                    loss_slider_consistency = 0.0
+            else:
+                loss_prop_score = 0.0
+                loss_slider_consistency = 0.0
+
+
+
+            # if self.current_epoch >= self.start_npcs
+            # NPCS prediction
+            if voxel_tensor is not None :# and voxel_tensor.batch_size > 1:
+                npcs_logits = self.forward_proposal_npcs(
+                    voxel_tensor, pc_voxel_id
+                )
+                if gt_npcs is not None:
+                    gt_npcs = gt_npcs[proposals.valid_mask][proposals.sorted_indices]
+                    loss_prop_npcs = self.loss_proposal_npcs(npcs_logits, gt_npcs, proposals)
+                else:
+                    proposals.npcs_valid_mask = torch.ones(proposals.sorted_indices.shape[0], dtype=torch.bool, device=proposals.sorted_indices.device)
+                    npcs_logits = npcs_logits[proposals.npcs_valid_mask]
+                    sem_preds = proposals.sem_preds[proposals.npcs_valid_mask].long()
+                    proposal_indices = proposals.proposal_indices[proposals.npcs_valid_mask]
+
+                    npcs_logits = rearrange(npcs_logits, "n (k c) -> n k c", c=3)
+                    npcs_logits = npcs_logits.gather(
+                        1, index=repeat(sem_preds - 1, "n -> n one c", one=1, c=3)
+                    ).squeeze(1)
+
+                    proposals.npcs_preds = npcs_logits.detach()
+                    loss_prop_npcs = 0.0
+            else:
+                loss_prop_npcs = 0.0
+                npcs_preds = None
+        
         # self.visualize_offsets(flow_xyz.cpu().numpy(), offsets_preds.cpu().numpy(), instance_labels.cpu().numpy())
         # self.visualize_offsets(pt_xyz.cpu().numpy(), offsets_preds.cpu().numpy(), instance_labels.cpu().numpy())
-        # print(f"loss_sem_seg: {loss_sem_seg}, loss_offset_dist: {loss_offset_dist}, loss_offset_dir: {loss_offset_dir}, loss_prop_score: {loss_prop_score}")
         dict = {
+            #'loss_slider_consistency': loss_slider_consistency,
             'loss_sem_seg': loss_sem_seg,
             'loss_offset_dist': loss_offset_dist,
             'loss_offset_dir': loss_offset_dir,
+            'loss_offset_flow_dist': loss_offset_flow_dist,
+            'loss_offset_flow_dir': loss_offset_flow_dir,
             'loss_prop_score': loss_prop_score,
             'loss_prop_npcs': loss_prop_npcs,
         }
@@ -307,6 +397,14 @@ class GAPartNet(nn.Module):
             pc_feature: torch.Tensor,
     ) -> torch.Tensor:
         offset = self.offset_head(pc_feature)
+
+        return offset
+
+    def forward_offset_flow(
+            self,
+            pc_feature: torch.Tensor,
+    ) -> torch.Tensor:
+        offset = self.offset_flow_head(pc_feature)
 
         return offset
 
@@ -513,6 +611,56 @@ class GAPartNet(nn.Module):
             )
 
         return loss_npcs
+    #compute loss for flow
+    def slider_flow_consistency_loss(self, flow, proposals, score_logits,
+                                      proposal_sem_labels, hinge_id) -> torch.Tensor:
+        device = flow.device
+        losses = []
+        scores = []
+
+        offsets = proposals.proposal_offsets
+        num_proposals = offsets.shape[0] - 1
+        sorted_indices = proposals.sorted_indices  # [M]
+        valid_mask = proposals.valid_mask
+        valid_indices = valid_mask.nonzero(as_tuple=False).squeeze(1)
+
+        for k in range(num_proposals):
+            if proposal_sem_labels[k].item() in hinge_id:
+                continue
+
+            score = torch.sigmoid(score_logits[k])
+            scores.append(score)
+
+            start = offsets[k].item()
+            end = offsets[k + 1].item()
+
+            proposal_sorted_idx = sorted_indices[start:end]
+            proposal_original_indices = valid_indices[proposal_sorted_idx]
+
+            if len(proposal_original_indices) == 0:
+                loss = torch.tensor(0.0, device=device)
+            else:
+                proposal_flow = flow[valid_indices[proposal_sorted_idx]]
+
+                # 直接按 proposal 内 flow 一致性计算
+                flow_mean = proposal_flow.mean(dim=0, keepdim=True)
+                flow_consistency = torch.norm(proposal_flow - flow_mean, dim=1)
+                loss = flow_consistency.mean()
+
+            losses.append(loss)
+
+        if len(losses) == 0:
+            print("losses's len is 0")
+            return torch.tensor(0.0, device=device)
+
+        scores = torch.stack(scores)
+        losses = torch.stack(losses)
+
+        # Softmax 归一化得分作为权重
+        weights = torch.softmax(scores, dim=0)
+        final_loss = (weights * losses).sum()
+
+        return final_loss
 
     def proposal_clustering_and_revoxelize(
             self,
@@ -522,6 +670,7 @@ class GAPartNet(nn.Module):
             pt_features: torch.Tensor,
             sem_preds: torch.Tensor,
             offset_preds: torch.Tensor,
+            offset_preds_flow : torch.Tensor,
             instance_labels: Optional[torch.Tensor],
     ):
         device = self.device
@@ -537,6 +686,9 @@ class GAPartNet(nn.Module):
         pt_features = pt_features[valid_mask]
         sem_preds = sem_preds[valid_mask].int()
         offset_preds = offset_preds[valid_mask]
+        offset_preds_flow = offset_preds_flow[valid_mask]
+        flow = flow_xyz - pt_xyz
+
         if instance_labels is not None:
             instance_labels = instance_labels[valid_mask]
 
@@ -552,14 +704,16 @@ class GAPartNet(nn.Module):
 
         # cluster proposals: dual set
         sorted_cc_labels, sorted_indices = cluster_proposals(
-            flow_xyz + offset_preds, batch_indices_compact, batch_offsets, sem_preds,
+            pt_xyz + offset_preds, flow, batch_indices_compact, batch_offsets, sem_preds,
             self.ball_query_radius, self.max_num_points_per_query,
+            self.angle_thresh_deg, self.flow_diff_thresh,
             use_adaptive=self.use_adaptive_clustering,
         )
 
         sorted_cc_labels_shift, sorted_indices_shift = cluster_proposals(
-            pt_xyz + offset_preds, batch_indices_compact, batch_offsets, sem_preds,
-            self.ball_query_radius, self.max_num_points_per_query_shift,
+            flow_xyz + offset_preds_flow, flow, batch_indices_compact, batch_offsets, sem_preds,
+            self.ball_query_radius, self.max_num_points_per_query,
+            self.angle_thresh_deg, self.flow_diff_thresh,
             use_adaptive=self.use_adaptive_clustering,
         )
 
@@ -569,7 +723,21 @@ class GAPartNet(nn.Module):
             sorted_cc_labels_shift + sorted_cc_labels.shape[0],
         ], dim=0)
         sorted_indices = torch.cat([sorted_indices, sorted_indices_shift], dim=0)
+        # compact the proposal ids
+        _, proposal_indices, num_points_per_proposal = torch.unique_consecutive(
+            sorted_cc_labels, return_inverse=True, return_counts=True
+        )
 
+        # # remove small proposals
+        # valid_proposal_mask = (
+        #         num_points_per_proposal >= self.min_num_points_per_proposal
+        # )
+
+        # 获取每个proposal的类别 (使用第一个点的语义类别代表该proposal)
+        num_proposals = num_points_per_proposal.shape[0]
+        proposal_offsets_temp = torch.zeros(num_proposals + 1, dtype=torch.int32, device=device)
+        proposal_offsets_temp[1:] = num_points_per_proposal.cumsum(0)
+        proposal_classes = sem_preds[sorted_indices[proposal_offsets_temp[:-1].long()]]
         '''        
         # 针对小类别进行额外的精细聚类
         small_classes = [1, 2, 8, 9]  # handle + knob classes  
@@ -601,21 +769,7 @@ class GAPartNet(nn.Module):
             sorted_indices = torch.cat([sorted_indices, sorted_indices_shift], dim=0)
         '''
 
-        # compact the proposal ids
-        _, proposal_indices, num_points_per_proposal = torch.unique_consecutive(
-            sorted_cc_labels, return_inverse=True, return_counts=True
-        )
 
-        # # remove small proposals
-        # valid_proposal_mask = (
-        #         num_points_per_proposal >= self.min_num_points_per_proposal
-        # )
-
-        # 获取每个proposal的类别 (使用第一个点的语义类别代表该proposal)
-        num_proposals = num_points_per_proposal.shape[0]
-        proposal_offsets_temp = torch.zeros(num_proposals + 1, dtype=torch.int32, device=device)
-        proposal_offsets_temp[1:] = num_points_per_proposal.cumsum(0)
-        proposal_classes = sem_preds[sorted_indices[proposal_offsets_temp[:-1].long()]]
 
         # remove small proposals (handle和knob类别使用更低的阈值)
         small_class_mask = (proposal_classes == 1) | (proposal_classes == 2) | (proposal_classes == 8) | (proposal_classes == 9)

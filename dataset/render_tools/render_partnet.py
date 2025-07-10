@@ -1,11 +1,14 @@
 import os
 import sys
 from argparse import ArgumentParser
+from sre_parse import CATEGORIES
+
 from tqdm import tqdm
 
 sys.path.append('./utils')
 from utils.config_utils import PARTNET_ID_PATH, PARTNET_CAMERA_POSITION_RANGE
-
+ALL_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Microwave", "Oven", "Phone"],
+                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Suitcase", "Table", "Toaster", "Toilet"], ["TrashCan", "WashingMachine", "Refrigerator"]]
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument('--ray_tracing', type=bool, default=False,
@@ -16,7 +19,7 @@ if __name__ == "__main__":
     parser.add_argument('--num_render', type=int, default=32,
                         help='Specify the number of renderings for each model id each camera range')
     parser.add_argument('--log_dir', type=str, default='/16T/liuyuyan/example_rendered/log_render.txt', help='Specify the log file')
-
+    parser.add_argument('--idx', type=int, default=0,help='choose id for category')
     args = parser.parse_args()
 
     ray_tracing = args.ray_tracing
@@ -35,18 +38,10 @@ if __name__ == "__main__":
     cnt = 0
 
     for category, model_id in tqdm(model_id_list, desc="Rendering models", unit="model", leave=True):
-        # print(f'Still to render: {total_to_render - cnt}\n')
-        if category in ["Box", "Bucket", "Camera", "CoffeeMachine", "Dishwasher", "Door"]:
-        # if category in ["Keyboard", "KitchenPot", "Laptop", "Microwave", "Oven", "Phone"]:
-        # if category in ["Printer", "Remote", "Safe", "StorageFurniture"]:
-        # if category in ["Suitcase", "Table", "Toaster", "Toilet", "TrashCan", "WashingMachine", "Refrigerator"]:
-
-        # if category in ["Box"]:
+        if category in ALL_CATEGORIES[args.idx]:
             for pos_idx in range(len(PARTNET_CAMERA_POSITION_RANGE[category])):
                 for render_idx in  range(num_render):
-                    # print(f'Rendering: {category} : {model_id} : {pos_idx} : {start_idx + render_idx}\n')
-
-                    render_string = f'CUDA_VISIBLE_DEVICES=0 python -u render.py --dataset partnet --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx}'
+                    render_string = f'CUDA_VISIBLE_DEVICES=1 python -u render.py --dataset partnet --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx}'
                     if ray_tracing:
                         render_string += ' --ray_tracing True'
                     if replace_texture:

@@ -14,7 +14,7 @@ SAVE_PATH = '/16T/liuyuyan/example_rendered'
 
 VISU_SAVE_PATH = '/16T/liuyuyan/visu'
 
-PARTNET_ID_PATH = '/home/liuyuyan/GAOR/gaor/dataset/render_tools/meta/partnet_all_id_list.txt'
+PARTNET_ID_PATH = '/home/liuyuyan/OISR/OISR/dataset/render_tools/meta/partnet_all_id_list.txt'
 AKB48_ID_PATH = './meta/akb48_all_id_list.txt'
 
 TARGET_GAPARTS = [

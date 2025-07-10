@@ -28,6 +28,8 @@ class PointCloudBatch:
     instance_labels: Optional[torch.Tensor] = None
     num_instances: Optional[List[int]] = None
     instance_regions: Optional[torch.Tensor] = None
+    instance_regions_flow: Optional[torch.Tensor] = None
+
     num_points_per_instance: Optional[torch.Tensor] = None
     instance_sem_labels: Optional[torch.Tensor] = None
     # npcs
@@ -53,6 +55,7 @@ class PointCloud:
 
     # for points in an instance: 0-3: mean_xyz; 3-6: max_xyz; 6-9: min_xyz
     instance_regions: Optional[Union[torch.Tensor, np.ndarray]] = None
+    instance_regions_flow: Optional[Union[torch.Tensor, np.ndarray]] = None
 
     # instance points number
     num_points_per_instance: Optional[Union[torch.Tensor, np.ndarray]] = None
@@ -146,6 +149,12 @@ class PointCloud:
             ], dim=0)  # type: ignore
         else:
             instance_regions = None
+        if point_clouds[0].instance_regions_flow is not None:
+            instance_regions_flow = torch.cat([
+                pc.instance_regions_flow for pc in point_clouds
+            ], dim=0)  # type: ignore
+        else:
+            instance_regions_flow = None
 
         voxel_batch_indices = torch.cat([
             torch.full((
@@ -193,6 +202,7 @@ class PointCloud:
             # instance
             num_instances=num_instances,  # type: ignore
             instance_regions=instance_regions,
+            instance_regions_flow=instance_regions_flow,
             num_points_per_instance=num_points_per_instance,
             instance_sem_labels=instance_sem_labels,
             instance_labels=instance_labels,

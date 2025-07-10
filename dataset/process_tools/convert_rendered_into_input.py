@@ -23,7 +23,8 @@ from utils.sample_utils import FPS
 # LOG_PATH = './log_sample.txt'
 # OBJECT_CATEGORIES = [['Box', 'Bucket', 'Refrigerator'], ['CoffeeMachine', 'Dishwasher'], ['KitchenPot', 'Keyboard', 'Laptop', 'Door'], ['Microwave', 'Oven', 'Phone', 'Remote',  'Printer'], ['StorageFurniture'], ['Table', 'Suitcase', 'Camera', 'Toaster', 'Toilet'], ['Safe', 'TrashCan', 'WashingMachine']]
 # OBJECT_CATEGORIES = [['CoffeeMachine', 'Table'], ['KitchenPot', 'Toilet', 'TrashCan'],['Suitcase'] ,['StorageFurniture'],['Box'], ['Refrigerator']]
-OBJECT_CATEGORIES = [['CoffeeMachine'], ['KitchenPot'],['Toilet'] ,['TrashCan']]
+OBJECT_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Microwave", "Oven", "Phone"],
+                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Suitcase", "Table", "Toaster", "Toilet"], ["TrashCan", "WashingMachine", "Refrigerator"]]
 
 # OBJECT_CATEGORIES = [
 #     'Box', 'Camera', 'CoffeeMachine', 'Dishwasher', 'KitchenPot', 'Microwave', 'Oven', 'Phone', 'Refrigerator',
@@ -113,7 +114,7 @@ def sample_and_save_with_flow(model, filename0, filename1, data_path, save_path,
     os.makedirs(gt_save_path, exist_ok=True)
 
     anno_dict0 = load_anno_dict(data_path, filename0)
-    metafile0 = load_meta(data_path, filename0)
+    metafile0 = load_meta(data_path, filename1)
     rgb_image0 = load_rgb_image(data_path, filename0)
     depth_map0 = load_depth_map(data_path, filename0)
 

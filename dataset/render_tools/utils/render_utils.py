@@ -88,52 +88,38 @@ def set_all_scene(data_path,
     qpos = np.array(qpos)
     assert qpos.shape[0] == robot.get_qpos().shape[0], 'qpos shape not match.'
     robot.set_qpos(qpos=qpos)
-    walls = []
-    wall_specs = [
-        # floor
-        ([10, 10, 0.1], [0, 0, -10]),
-        # ceiling
-        ([10, 10, 0.1], [0, 0, 10]),
-        # left wall
-        ([0.1, 10, 10], [-10, 0, 0]),
-        # right wall
-        ([0.1, 10, 10], [10, 0, 0]),
-        # back wall
-        ([10, 0.1, 10], [0, -10, 0]),
-        # front wall
-        ([10, 0.1, 10], [0, 10, 0]),
-    ]
-    for i, (half_size, pos) in enumerate(wall_specs):
-        builder = scene.create_actor_builder()
-        builder.add_box_visual(half_size=half_size, color=[1., 1., 1.])
-        wall = builder.build(name=f"wall_{i}")
-        wall.set_pose(sapien.Pose(p=pos))
-        walls.append(wall)
-    # actor_builder = scene.create_actor_builder()
-    #
-    # actor_builder.add_box_visual(half_size=[10, 10, 0.1], color=[1., 1., 1.])
-    # box = actor_builder.build(name='box')  # Add a box
-    # box.set_pose(sapien.Pose(p=[0, 0, -10]))
-    # actor_builder.add_box_visual(half_size=[0.1, 10, 10], color=[1., 1., 1.])
-    # box1 = actor_builder.build(name='box1')  # Add a box
-    # box1.set_pose(sapien.Pose(p=[-10, 0, 0]))
-    # actor_builder.add_box_visual(half_size=[10, 0.1, 10], color=[1., 1., 1.])
-    # box2 = actor_builder.build(name='box2')  # Add a box
-    # box2.set_pose(sapien.Pose(p=[0, -10, 0]))
+
+
+    # walls = []
+    # wall_specs = [
+    #     # floor
+    #     ([10, 10, 0.1], [0, 0, -10]),
+    #     # ceiling
+    #     ([10, 10, 0.1], [0, 0, 10]),
+    #     # left wall
+    #     ([0.1, 10, 10], [-10, 0, 0]),
+    #     # right wall
+    #     ([0.1, 10, 10], [10, 0, 0]),
+    #     # back wall
+    #     ([10, 0.1, 10], [0, -10, 0]),
+    #     # front wall
+    #     ([10, 0.1, 10], [0, 10, 0]),
+    # ]
+    # for i, (half_size, pos) in enumerate(wall_specs):
+    #     builder = scene.create_actor_builder()
+    #     builder.add_box_visual(half_size=half_size, color=[1., 1., 1.])
+    #     wall = builder.build(name=f"wall_{i}")
+    #     wall.set_pose(sapien.Pose(p=pos))
+    #     walls.append(wall)
+
     # * different in server and local (sapien version issue)
-    scene.set_ambient_light([1, 1, 1])
-    # scene.add_directional_light([0, 1, -1], [1, 1, 1], shadow=True)
-    # scene.add_ground(-1)
-    # scene.add_point_light([1, 2, 2], [1, 1, 1], shadow=True)
-    # scene.add_point_light([1, -2, 2], [1, 1, 1], shadow=True)
-    # scene.add_point_light([-1, 0, 1], [1, 1, 1], shadow=True)
+    scene.set_ambient_light([0.5, 0.5, 0.5])
+    scene.add_directional_light([0, 1, -1], [0.5, 0.5, 0.5], shadow=True)
+    scene.add_point_light([1, 2, 2], [1, 1, 1], shadow=True)
+    scene.add_point_light([1, -2, 2], [1, 1, 1], shadow=True)
+    scene.add_point_light([-1, 0, 1], [1, 1, 1], shadow=True)
     
-    # rscene = scene.get_renderer_scene()
-    # rscene.set_ambient_light([0.5, 0.5, 0.5])
-    # rscene.add_directional_light([0, 1, -1], [0.5, 0.5, 0.5], shadow=True)
-    # rscene.add_point_light([1, 2, 2], [1, 1, 1], shadow=True)
-    # rscene.add_point_light([1, -2, 2], [1, 1, 1], shadow=True)
-    # rscene.add_point_light([-1, 0, 1], [1, 1, 1], shadow=True)
+
 
     camera_mount_actor = scene.create_actor_builder().build_kinematic()
     camera = scene.add_mounted_camera(

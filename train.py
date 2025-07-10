@@ -1,12 +1,9 @@
 from __future__ import print_function
 
-from network.losses import focal_loss, dice_loss, pixel_accuracy, mean_iou
-from network.grouping_utils import (apply_nms, cluster_proposals, compute_ap,
-                               compute_npcs_loss, filter_invalid_proposals,
-)
+from network.losses import mean_iou
+from network.grouping_utils import (apply_nms, compute_ap, filter_invalid_proposals,)
 from structure.instances import Instances
 import copy
-from scipy.stats import spearmanr
 from pathlib import Path
 from typing import Optional, Tuple, Union, List
 from epic_ops.voxelize import voxelize
@@ -15,7 +12,7 @@ import random
 import open3d as o3d
 from glob import glob
 from tqdm import tqdm
-from structure.point_cloud import PointCloud, PointCloudBatch
+from structure.point_cloud import PointCloud
 from misc.info import OBJECT_NAME2ID, PART_ID2NAME, PART_NAME2ID, get_symmetry_matrix
 import argparse
 import os
@@ -246,6 +243,8 @@ def generate_inst_info(pc: PointCloud) -> PointCloud:          #生成实例信�
 
     num_instances = int(pc.instance_labels.max()) + 1
     instance_regions = np.zeros((num_points, 9), dtype=np.float32)
+    instance_regions_flow = np.zeros((num_points, 9), dtype=np.float32)
+
     num_points_per_instance = []
     instance_sem_labels = []
 
@@ -261,11 +260,20 @@ def generate_inst_info(pc: PointCloud) -> PointCloud:          #生成实例信�
         instance_regions[indices, 3:6] = min_i
         instance_regions[indices, 6:9] = max_i
 
+        xyz_i_flow = pc.points[indices, 3:6]
+        min_i_flow = xyz_i_flow.min(0)
+        max_i_flow = xyz_i_flow.max(0)
+        mean_i_flow = xyz_i_flow.mean(0)
+        instance_regions_flow[indices, 0:3] = mean_i_flow
+        instance_regions_flow[indices, 3:6] = min_i_flow
+        instance_regions_flow[indices, 6:9] = max_i_flow
+
         num_points_per_instance.append(indices.shape[0])
         instance_sem_labels.append(int(pc.sem_labels[indices[0]]))
 
     pc.num_instances = num_instances
     pc.instance_regions = instance_regions
+    pc.instance_regions_flow = instance_regions_flow
     pc.num_points_per_instance = np.asarray(num_points_per_instance, dtype=np.int32)
     pc.instance_sem_labels = np.asarray(instance_sem_labels, dtype=np.int32)
     return pc
@@ -307,44 +315,94 @@ def apply_voxelization(                  #点云体素化
     pc.pc_voxel_id = pc_voxel_id
 
     return pc
-def compute_instance_flow_features(pc_id, flow: np.ndarray, instance_labels: np.ndarray, sem_labels: np.ndarray) -> np.ndarray:
+# def compute_instance_flow_features(pc_id, flow: np.ndarray, instance_labels: np.ndarray, sem_labels: np.ndarray) -> np.ndarray:
+#     num_points = flow.shape[0]
+#     flow_lengths = np.linalg.norm(flow, axis=1)
+#     instance_features = np.zeros((num_points, 3), dtype=np.float32)
+#
+#     valid_mask = instance_labels >= 0
+#     valid_instance_labels = instance_labels[valid_mask]
+#     unique_instances = np.unique(valid_instance_labels)
+#
+#     target_sem_labels = [4, 5, 6, 7]  # 目标类别
+#     mean_len_list = []
+#     iqr_len_list = []
+#
+#     for instance_id in unique_instances:
+#         mask = instance_labels == instance_id
+#         instance_flow = flow[mask]
+#         instance_flow_lens = flow_lengths[mask]
+#
+#         mean_len = instance_flow_lens.mean()
+#         q1 = np.percentile(instance_flow_lens, 25)
+#         q3 = np.percentile(instance_flow_lens, 75)
+#         iqr_len = q3 - q1  # 四分位差
+#
+#         normed_flow = instance_flow / (np.linalg.norm(instance_flow, axis=1, keepdims=True) + 1e-6)
+#         mean_dir = normed_flow.mean(axis=0)
+#         mean_dir /= np.linalg.norm(mean_dir) + 1e-6
+#         mean_dir_cos_z = np.dot(mean_dir, np.array([0, 0, 1]))
+#
+#         instance_features[mask] = np.array([mean_len, iqr_len, mean_dir_cos_z], dtype=np.float32)
+#
+#         # 只打印目标语义类别
+#         inst_sem_label = sem_labels[mask][0]
+#         if inst_sem_label in target_sem_labels:
+#             print(f"pc_id:{pc_id}, instance_id:{instance_id}, sem_label:{inst_sem_label}, "
+#                   f"mean_len:{mean_len:.6f}, iqr_len:{iqr_len:.6f}, mean_dir_cos_z:{mean_dir_cos_z:.6f}")
+#             mean_len_list.append(mean_len)
+#             iqr_len_list.append(iqr_len)
+#
+#     return instance_features
 
-    num_points = flow.shape[0]
-    flow_lengths = np.linalg.norm(flow, axis=1)
-    instance_features = np.zeros((num_points, 3), dtype=np.float32)
+from scipy.spatial import cKDTree
+
+def compute_instance_flow_features(pc_id, flow: np.ndarray, instance_labels: np.ndarray, sem_labels: np.ndarray, xyz: np.ndarray) -> None:
+    """
+    统计每个实例内，球查询邻居的 flow 差异均值（使用 cKDTree）。
+    offset_xyz 在函数内自动计算。
+    """
+    # 计算 offset_xyz（全局减去中心点）
+    offset_xyz = xyz - xyz.mean(axis=0, keepdims=True)
 
     valid_mask = instance_labels >= 0
     valid_instance_labels = instance_labels[valid_mask]
     unique_instances = np.unique(valid_instance_labels)
 
+    target_sem_labels = [4, 5, 6, 7]  # 目标类别
+    ball_query_radius = 0.02
+
     for instance_id in unique_instances:
         mask = instance_labels == instance_id
+        inst_sem_label = sem_labels[mask][0]
+
+        if inst_sem_label not in target_sem_labels:
+            continue
+
+        instance_xyz = offset_xyz[mask]  # 当前实例的 3D 坐标
         instance_flow = flow[mask]
-        instance_flow_lens = flow_lengths[mask]
 
-        mean_len = instance_flow_lens.mean()
-        q1 = np.percentile(instance_flow_lens, 25)
-        q3 = np.percentile(instance_flow_lens, 75)
-        iqr_len = q3 - q1  # 四分位差
+        tree = cKDTree(instance_xyz)
+        flow_diffs = []
 
-        normed_flow = instance_flow / (np.linalg.norm(instance_flow, axis=1, keepdims=True) + 1e-6)
-        mean_dir = normed_flow.mean(axis=0)
-        mean_dir /= np.linalg.norm(mean_dir) + 1e-6
-        mean_dir_cos_z = np.dot(mean_dir, np.array([0, 0, 1]))
+        for idx in range(instance_xyz.shape[0]):
+            neighbors = tree.query_ball_point(instance_xyz[idx], ball_query_radius)
+            neighbors = [n for n in neighbors if n != idx]  # 排除自己
+            if len(neighbors) == 0:
+                continue
+            neighbor_flows = instance_flow[neighbors]
+            diff = np.linalg.norm(neighbor_flows - instance_flow[idx], axis=1).mean()
+            flow_diffs.append(diff)
 
-        instance_features[mask] = np.array([mean_len, iqr_len, mean_dir_cos_z], dtype=np.float32)
+        if len(flow_diffs) > 0:
+            mean_flow_diff = np.mean(flow_diffs)
+        else:
+            mean_flow_diff = 0.0
+
+        print(f"pc_id:{pc_id}, instance_id:{instance_id}, sem_label:{inst_sem_label}, mean_flow_diff:{mean_flow_diff:.6f}")
 
 
-        sem_ids = sem_labels[mask]
-        sem_id = np.bincount(sem_ids).argmax()
-        # if sem_id == 5 and pc_id.startswith("Table_32761"):
-        #     print(f"{instance_id} [Slider], mean_len={mean_len:.4f}, iqr_len={iqr_len:.4f}, cos_z={mean_dir_cos_z:.4f}")
-        # if sem_id == 6:
-            # print(f"{pc_id} [Slider], mean_len={mean_len:.4f}, iqr_len={iqr_len:.4f}, cos_z={mean_dir_cos_z:.4f}")
-        # if sem_id == 7:
-        #     print(f"{pc_id} [Hinge] , mean_len={mean_len:.4f}, iqr_len={iqr_len:.4f}, cos_z={mean_dir_cos_z:.4f}")
 
-    return instance_features
 
 
 def load_data(file_path: str, no_label: bool = False):
@@ -360,8 +418,8 @@ def load_data(file_path: str, no_label: bool = False):
     flow = (pc_data[1] - pc_data[0]).astype(np.float32)  # shape: (N, 3)
     instance_labels = pc_data[4].astype(np.int32)
 
-    flow_stats_per_point = compute_instance_flow_features(pc_id, flow*100, instance_labels, pc_data[3].astype(np.int64))  # shape: (N, 3)
-    points = np.concatenate([pc_data[0],pc_data[1],pc_data[2],flow_stats_per_point], axis=-1).astype(np.float32)
+    # flow_stats_per_point = compute_instance_flow_features(pc_id, flow, instance_labels, pc_data[3].astype(np.int64),pc_data[0] )  # shape: (N, 3)
+    points = np.concatenate([pc_data[0],pc_data[1],pc_data[2]], axis=-1).astype(np.float32)
 
     return PointCloud(
         pc_id=pc_id,
@@ -377,12 +435,8 @@ def load_data(file_path: str, no_label: bool = False):
 
 
 def train(args, epochs, net, train_loader, val_loader, textio):
-    val_class_instance_counter = [0] * net.num_part_classes
-    val_min_points_per_class = [3] * net.num_part_classes
     val_min_points_per_class_use = [3] * net.num_part_classes
-    # [0, 10, 10, 10, 1000, 1000, 1000, 1000, 10, 10]
     learning_rate : float = 1e-3
-    model_epoch = 0
     opt = torch.optim.Adam(filter(lambda p: p.requires_grad, net.parameters()),lr=learning_rate,)
     best_mean_ap50 = 0.0
     splits = ["val", "test_intra", "test_inter"]
@@ -392,19 +446,23 @@ def train(args, epochs, net, train_loader, val_loader, textio):
         textio.cprint('==epoch: %d, learning rate: %f==' % (epoch, opt.param_groups[0]['lr']))
 
         total_loss = 0.0
+        total_flow_loss = 0.0
         num_batches = 0
-
         for pc in tqdm(train_loader, desc=f'Training Epoch {epoch}'):
             file_count += len(pc)  # 统计有效文件数
             pc = [Point.to(net.device) for Point in pc]  # List["PointCloud"]
             data_batch = PointCloud.collate(pc)  # PointCloudBatch
-            _, _, _, stats_dict = net(data_batch)
+            _, _, _, stats_dict = net(data_batch, epoch)
 
             # 计算 loss
             loss = sum([stats_dict[key] for key in stats_dict.keys() if
                         'loss' in key and isinstance(stats_dict[key], torch.Tensor)])
+            flow_loss  = sum([stats_dict[key] for key in stats_dict.keys() if
+                        key=='loss_slider_consistency' and isinstance(stats_dict[key], torch.Tensor)])
 
             total_loss += loss.item()  # 累加 loss 值
+            if flow_loss != 0.0:
+                total_flow_loss += flow_loss.item()
             num_batches += 1  # 统计 batch 数量
 
             opt.zero_grad()
@@ -412,145 +470,147 @@ def train(args, epochs, net, train_loader, val_loader, textio):
             opt.step()
         # 计算并打印本轮平均 loss
         avg_loss = total_loss / num_batches if num_batches > 0 else 0
+        avg_flow_loss = total_flow_loss / num_batches if num_batches > 0 else 0
 
-        textio.cprint(f"Epoch {epoch}: Used Files = {file_count}, Skipped None Items = {len(train_loader.dataset) - file_count }, Avg Loss = {avg_loss:.4f}")
-        with torch.no_grad():
+        textio.cprint(f"Epoch {epoch}: Used Files = {file_count}, Skipped None Items = {len(train_loader.dataset) - file_count }, Avg Loss = {avg_loss:.4f}, Avg FlowLoss = {avg_flow_loss:.4f}")
+        if epoch>5:
+            with torch.no_grad():
+    
+                # validation
+                val_file_count = 0
+                net.eval()  # 切换到评估模式
+                num_val_batches = 0
+                val_loss = 0.0
+                val_results = [[] for _ in range(len(val_loader))]  # 用于存储每个数据加载器的结果，按 dataloader_idx 划分
+                
+    
+                # 遍历 val_loader 中的每个数据加载器
+                for loader_idx, loader in enumerate(val_loader):  # 遍历每个数据加载器
+                    for pc in tqdm(loader, desc=f'Validation Epoch {splits[loader_idx]}'):
+                        val_file_count += len(pc)
+                        pc = [Point.to(net.device) for Point in pc]  # 将每个点云转换到正确的设备
+                        data_batch = PointCloud.collate(pc)  # PointCloudBatch
+                        pc_ids, sem_seg, proposals, stats_dict = net(data_batch, epoch)  # 网络输出
+    
+                        # 计算损失
+                        loss = sum([stats_dict[key] for key in stats_dict.keys() if
+                                    'loss' in key and isinstance(stats_dict[key], torch.Tensor)])
+                        val_loss += loss.item()
+                        num_val_batches += 1  # 统计 batch 数量
+    
+                        
+                        
+    
+                        # 处理 proposals
+                        if proposals is not None and epoch>=5:
+    
+                            proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()].long()
+                            # print(f"beyond:{proposals.proposal_offsets.shape[0]}")
+                            proposals = filter_invalid_proposals(
+                                proposals,
+                                score_threshold=net.val_score_threshold,
+                                val_min_points_per_class=val_min_points_per_class_use,
+                            )
+                            # print(f"after:{proposals.proposal_offsets.shape[0]}")
+                            proposals = apply_nms(proposals, net.val_nms_iou_threshold)   #非极大值抑制（NMS），用来过滤掉重叠太多的重复 proposal
+                            proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()]
+                            # analyze_proposals_sorted_by_score(proposals)
+                            proposals_ = Instances(
+                                score_preds=proposals.score_preds,
+                                pt_sem_classes=proposals.pt_sem_classes,
+                                batch_indices=proposals.batch_indices,
+                                instance_sem_labels=proposals.instance_sem_labels,
+                                ious=proposals.ious,
+                                proposal_offsets=proposals.proposal_offsets,
+                                valid_mask=proposals.valid_mask
+                            )
+                        else:
+                            proposals_ = None
+                        # 将当前批次的结果根据 dataloader_idx 存储到 val_results
+                        val_results[loader_idx].append((pc_ids, sem_seg, proposals_))
+                        del proposals, proposals_
+                avg_val_loss = val_loss / num_val_batches if num_val_batches > 0 else 0
+    
+                textio.cprint(f"Val Files = {val_file_count}, Skipped None Items = {(sum(len(loader.dataset) for loader in val_loader)) - val_file_count}, Avg Val Loss = {avg_val_loss:.4f}")
+    
+    
+                all_accus = []
+                pixel_accus = []
+                # mious = []
+                mean_ap50 = []
+                # mAPs = []
+                for i_, val_result in enumerate(val_results):
+                    # textio.cprint(f"[Debug] Memory allocated: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
+    
+                    split = splits[i_]
+                    # pc_ids = [i for x in val_result for i in x[0]]
+                    # batch_size = val_result[0][1].batch_size
+                    # data_size = sum(x[1].batch_size for x in val_result)
+                    all_accu = sum(x[1].all_accu for x in val_result) / len(val_result)  #取自sem_seg
+                    pixel_accu = sum(x[1].pixel_accu for x in val_result) / len(val_result)  #取自sem_seg
+                    # semantic segmentation
+                    # sem_preds = torch.cat(
+                    #     [x[1].sem_preds for x in val_result], dim=0
+                    # )
+                    # sem_labels = torch.cat(
+                    #     [x[1].sem_labels for x in val_result], dim=0
+                    # )
+                    # miou = mean_iou(sem_preds, sem_labels, num_classes=net.num_part_classes)
+                    # instance segmentation
+                    proposals = [x[2] for x in val_result if x[2] != None]
+    
+                    # semantic segmentation
+                    all_accus.append(all_accu)
+                    # mious.append(miou)
+                    pixel_accus.append(pixel_accu)
+    
+    
+                    # instance segmentation
+    
+                    thes = [0.5 + 0.05 * i for i in range(10)]
+                    aps = []
+                    for the in thes: #if self.current_epoch >= self.start_scorenet:
+                        ap = compute_ap(proposals, net.num_part_classes, the)
+                        aps.append(ap)
+                        if the == 0.5:
+                            ap50 = ap
+                    # mAP = np.array(aps).mean()
+                    # mAPs.append(mAP)
+    
+                    # if self.current_epoch >= self.start_scorenet:
+                    # 记录 AP@50
+                    for class_idx in range(1, net.num_part_classes):
+                        partname = PART_ID2NAME[class_idx]
+                        textio.cprint(f"Validation {split}/AP@50_{partname}: {np.mean(ap50[class_idx - 1]) * 100:.2f}%")
+                    mean_ap50.append(np.mean(ap50))
+                    del  proposals, ap
+                    del  split, all_accu, pixel_accu
+                    thes.clear()
+                    aps.clear()
+    
+    
+    
+    
+                textio.cprint("------results of test_inter------")
+                textio.cprint(f"mean_all_accu: {(all_accus[0]) * 100.0:.2f}")
+                textio.cprint(f"mean_pixel_accu: {(pixel_accus[0]) * 100.0:.2f}")
+                # textio.cprint(f"mean_miou: {(mious[0]) * 100.0:.2f}")
+                textio.cprint(f"mean_AP@50: {(mean_ap50[0]) * 100.0:.2f}")
+                # textio.cprint(f"mean_mAP: {(mAPs[0]) * 100.0:.2f}")
+                mean_ap50 = mean_ap50[0]
+                if mean_ap50 >= best_mean_ap50:
+                    torch.save(net.state_dict(), f'checkpoints/{args.exp_name}/models/final_model.pth')
+                    textio.cprint(f"Save the model from epoch {epoch}")
+                    best_mean_ap50 = mean_ap50
+                    model_epoch = epoch
+            all_accus.clear()
 
-            # validation
-            val_file_count = 0
-            net.eval()  # 切换到评估模式
-            num_val_batches = 0
-            val_loss = 0.0
-            val_results = [[] for _ in range(len(val_loader))]  # 用于存储每个数据加载器的结果，按 dataloader_idx 划分
-            
-
-            # 遍历 val_loader 中的每个数据加载器
-            for loader_idx, loader in enumerate(val_loader):  # 遍历每个数据加载器
-                for pc in tqdm(loader, desc=f'Validation Epoch {splits[loader_idx]}'):
-                    val_file_count += len(pc)
-                    pc = [Point.to(net.device) for Point in pc]  # 将每个点云转换到正确的设备
-                    data_batch = PointCloud.collate(pc)  # PointCloudBatch
-                    pc_ids, sem_seg, proposals, stats_dict = net(data_batch)  # 网络输出
-
-                    # 计算损失
-                    loss = sum([stats_dict[key] for key in stats_dict.keys() if
-                                'loss' in key and isinstance(stats_dict[key], torch.Tensor)])
-                    val_loss += loss.item()
-                    num_val_batches += 1  # 统计 batch 数量
-
-                    
-                    
-
-                    # 处理 proposals
-                    if proposals is not None:
-
-                        proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()].long()
-                        # print(f"beyond:{proposals.proposal_offsets.shape[0]}")
-                        proposals = filter_invalid_proposals(
-                            proposals,
-                            score_threshold=net.val_score_threshold,
-                            val_min_points_per_class=val_min_points_per_class_use,
-                        )
-                        # print(f"after:{proposals.proposal_offsets.shape[0]}")
-                        proposals = apply_nms(proposals, net.val_nms_iou_threshold)   #非极大值抑制（NMS），用来过滤掉重叠太多的重复 proposal
-                        proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()]
-                        # analyze_proposals_sorted_by_score(proposals)
-                        proposals_ = Instances(
-                            score_preds=proposals.score_preds,
-                            pt_sem_classes=proposals.pt_sem_classes,
-                            batch_indices=proposals.batch_indices,
-                            instance_sem_labels=proposals.instance_sem_labels,
-                            ious=proposals.ious,
-                            proposal_offsets=proposals.proposal_offsets,
-                            valid_mask=proposals.valid_mask
-                        )
-                    else:
-                        proposals_ = None
-                    # 将当前批次的结果根据 dataloader_idx 存储到 val_results
-                    val_results[loader_idx].append((pc_ids, sem_seg, proposals_))
-                    del proposals, proposals_
-            avg_val_loss = val_loss / num_val_batches if num_val_batches > 0 else 0
-
-            textio.cprint(f"Val Files = {val_file_count}, Skipped None Items = {(sum(len(loader.dataset) for loader in val_loader)) - val_file_count}, Avg Val Loss = {avg_val_loss:.4f}")
-
-
-            all_accus = []
-            pixel_accus = []
-            # mious = []
-            mean_ap50 = []
-            # mAPs = []
-            for i_, val_result in enumerate(val_results):
-                # textio.cprint(f"[Debug] Memory allocated: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
-
-                split = splits[i_]
-                # pc_ids = [i for x in val_result for i in x[0]]
-                # batch_size = val_result[0][1].batch_size
-                # data_size = sum(x[1].batch_size for x in val_result)
-                all_accu = sum(x[1].all_accu for x in val_result) / len(val_result)  #取自sem_seg
-                pixel_accu = sum(x[1].pixel_accu for x in val_result) / len(val_result)  #取自sem_seg
-                # semantic segmentation
-                # sem_preds = torch.cat(
-                #     [x[1].sem_preds for x in val_result], dim=0
-                # )
-                # sem_labels = torch.cat(
-                #     [x[1].sem_labels for x in val_result], dim=0
-                # )
-                # miou = mean_iou(sem_preds, sem_labels, num_classes=net.num_part_classes)
-                # instance segmentation
-                proposals = [x[2] for x in val_result if x[2] != None]
-
-                # semantic segmentation
-                all_accus.append(all_accu)
-                # mious.append(miou)
-                pixel_accus.append(pixel_accu)
-
-
-                # instance segmentation
-
-                thes = [0.5 + 0.05 * i for i in range(10)]
-                aps = []
-                for the in thes: #if self.current_epoch >= self.start_scorenet:
-                    ap = compute_ap(proposals, net.num_part_classes, the)
-                    aps.append(ap)
-                    if the == 0.5:
-                        ap50 = ap
-                # mAP = np.array(aps).mean()
-                # mAPs.append(mAP)
-
-                # if self.current_epoch >= self.start_scorenet:
-                # 记录 AP@50
-                for class_idx in range(1, net.num_part_classes):
-                    partname = PART_ID2NAME[class_idx]
-                    textio.cprint(f"Validation {split}/AP@50_{partname}: {np.mean(ap50[class_idx - 1]) * 100:.2f}%")
-                mean_ap50.append(np.mean(ap50))
-                del  proposals, ap
-                del  split, all_accu, pixel_accu
-                thes.clear()
-                aps.clear()
-
-
-
-
-            textio.cprint("------results of test_inter------")
-            textio.cprint(f"mean_all_accu: {(all_accus[0]) * 100.0:.2f}")
-            textio.cprint(f"mean_pixel_accu: {(pixel_accus[0]) * 100.0:.2f}")
-            # textio.cprint(f"mean_miou: {(mious[0]) * 100.0:.2f}")
-            textio.cprint(f"mean_AP@50: {(mean_ap50[0]) * 100.0:.2f}")
-            # textio.cprint(f"mean_mAP: {(mAPs[0]) * 100.0:.2f}")
-            mean_ap50 = mean_ap50[0]
-            if mean_ap50 >= best_mean_ap50:
-                torch.save(net.state_dict(), f'checkpoints/{args.exp_name}/models/final_model.pth')
-                textio.cprint(f"Save the model from epoch {epoch}")
-                best_mean_ap50 = mean_ap50
-                model_epoch = epoch
-        all_accus.clear()
-
-        pixel_accus.clear()
-        # mious.clear()
-        del mean_ap50
-        # mAPs.clear()
-        val_results.clear()
-        torch.cuda.empty_cache()
+            pixel_accus.clear()
+            # mious.clear()
+            del mean_ap50
+            # mAPs.clear()
+            val_results.clear()
+            torch.cuda.empty_cache()
     textio.cprint(f"model from epoch {model_epoch}")
 def test(net, test_loader, test_epochs, textio):
     for epoch in tqdm(range(test_epochs)):
@@ -714,8 +774,8 @@ def main():
     root_dir: str = "/16T/liuyuyan/GAPartNetAllWithFlows"
     max_points: int = 20000
     voxel_size: Tuple[float, float, float] = (1 / 100, 1 / 100, 1 / 100)
-    train_batch_size: int = 32#32
-    val_batch_size: int = 32
+    train_batch_size: int = 16#32
+    val_batch_size: int = 16
     test_batch_size: int = 32
     num_workers: int = 16
     pos_jitter: float = 0.

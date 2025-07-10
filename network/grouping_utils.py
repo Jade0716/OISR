@@ -1,5 +1,5 @@
 from typing import List, Tuple
-
+import numpy as np
 import torch
 from epic_ops.ball_query import ball_query
 from epic_ops.ccl import connected_components_labeling
@@ -202,6 +202,9 @@ def cluster_proposals_original(
     sem_preds: torch.Tensor,
     ball_query_radius: float,
     max_num_points_per_query: int,
+    flow: torch.Tensor,
+    angle_thresh_deg: float,
+    flow_diff_thresh: float,
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     device = pt_xyz.device
     index_dtype = batch_indices.dtype
@@ -213,8 +216,12 @@ def cluster_proposals_original(
         batch_offsets,
         ball_query_radius,
         max_num_points_per_query,
+        flow_points=flow,
+        flow_queries=flow,
         point_labels=sem_preds,
         query_labels=sem_preds,
+        angle_thresh_deg=angle_thresh_deg,
+        flow_diff_thresh=flow_diff_thresh,
     )
 
     ccl_indices_begin = torch.arange(
@@ -233,11 +240,14 @@ def cluster_proposals_original(
 # @torch.jit.script
 def cluster_proposals(
     pt_xyz: torch.Tensor,
+    flow: torch.Tensor,
     batch_indices: torch.Tensor,
     batch_offsets: torch.Tensor,
     sem_preds: torch.Tensor,
     ball_query_radius: float,
     max_num_points_per_query: int,
+    angle_thresh_deg: float,
+    flow_diff_thresh: float,
     use_adaptive: bool = True,
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     """聚类提案函数 - 可选择自适应策略"""
@@ -249,7 +259,8 @@ def cluster_proposals(
     else:
         return cluster_proposals_original(
             pt_xyz, batch_indices, batch_offsets, sem_preds,
-            ball_query_radius, max_num_points_per_query
+            ball_query_radius, max_num_points_per_query,
+            flow, angle_thresh_deg, flow_diff_thresh
         )
 
 
