@@ -7,8 +7,9 @@ from tqdm import tqdm
 
 sys.path.append('./utils')
 from utils.config_utils import PARTNET_ID_PATH, PARTNET_CAMERA_POSITION_RANGE
-ALL_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Microwave", "Oven", "Phone"],
-                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Suitcase", "Table", "Toaster", "Toilet"], ["TrashCan", "WashingMachine", "Refrigerator"]]
+ALL_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Oven"],
+                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Table"], ["TrashCan"]]
+# [ "Microwave", "Oven", "Phone"]["Suitcase", "Table", "Toaster", "Toilet"]["TrashCan", "WashingMachine", "Refrigerator"]
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument('--ray_tracing', type=bool, default=False,
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         if category in ALL_CATEGORIES[args.idx]:
             for pos_idx in range(len(PARTNET_CAMERA_POSITION_RANGE[category])):
                 for render_idx in  range(num_render):
-                    render_string = f'CUDA_VISIBLE_DEVICES=1 python -u render.py --dataset partnet --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx}'
+                    render_string = f'CUDA_VISIBLE_DEVICES=0 python -u render.py --dataset partnet --model_id {model_id} --camera_idx {pos_idx} --render_idx {start_idx + render_idx}'
                     if ray_tracing:
                         render_string += ' --ray_tracing True'
                     if replace_texture:

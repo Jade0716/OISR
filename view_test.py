@@ -99,8 +99,8 @@ def visualize_flow_with_instance_selection(points, flows, instance_labels: np.nd
 
     # 转换为 numpy 数组并计算移动后的点云位置
     points_np = points[:,:3]
-    flows_np = points[:,3:6] - points[:,:3]
-    points_flowed = points[:,3:6]
+    flows_np = points[:,3:6]
+    points_flowed =  points[:,:3] + points[:,3:6]
 
     # 根据选定的实例标签过滤点
     mask = np.isin(instance_labels, selected_labels) & (instance_labels != -100)
@@ -108,13 +108,17 @@ def visualize_flow_with_instance_selection(points, flows, instance_labels: np.nd
     filtered_flows_np = flows_np[mask]
     filtered_points_flowed = filtered_points_np + filtered_flows_np
 
+    # 获取RGB颜色信息
+    rgb_colors = points[:, 6:9]  # RGB通道
+    
     # 创建原始点云 Open3D 对象
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(points_np)
-    pcd.paint_uniform_color([1, 0, 0])  # 红色
+    pcd.colors = o3d.utility.Vector3dVector(rgb_colors)  # 使用RGB颜色
+    
     pcd1 = o3d.geometry.PointCloud()
-    pcd1.points = o3d.utility.Vector3dVector(points[:,3:6])
-    pcd1.paint_uniform_color([0, 1, 0])
+    pcd1.points = o3d.utility.Vector3dVector(points_flowed)
+    pcd1.colors = o3d.utility.Vector3dVector(rgb_colors)  # 使用相同的RGB颜色
 
     # 创建线集来表示点与它们的流动方向
     lines = [[i, i+len(filtered_points_np)] for i in range(len(filtered_points_np))]
@@ -349,12 +353,12 @@ def visualize_point_cloud(points):
     pcd0 = o3d.geometry.PointCloud()
     pcd0.points = o3d.utility.Vector3dVector(points[:,:3])
     pcd0.paint_uniform_color([1, 0, 0])  # 红色
-    # pcd1 = o3d.geometry.PointCloud()
-    # pcd1.points = o3d.utility.Vector3dVector(points[:,3:6])
-    # pcd1.paint_uniform_color([0, 0, 1])  # 红色
+    pcd1 = o3d.geometry.PointCloud()
+    pcd1.points = o3d.utility.Vector3dVector(points[:,3:6])
+    pcd1.paint_uniform_color([0, 0, 1])  # 红色
 
     # 使用Open3D可视化点云
-    o3d.visualization.draw_geometries([pcd0])
+    o3d.visualization.draw_geometries([pcd0,pcd1])
 def main():
     parser = argparse.ArgumentParser(description='Point Cloud Registration')
     parser.add_argument('--exp_name', type=str, default='exp', metavar='N',
@@ -364,7 +368,7 @@ def main():
     args = parser.parse_args()
 
 
-    root_dir: str = "/16T/liuyuyan/GAPartNetAllWithFlows"
+    root_dir: str = "/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/GAPartNetAllWithFlows/"
     max_points: int = 20000
     voxel_size: Tuple[float, float, float] = (1 / 100, 1 / 100, 1 / 100)
     train_batch_size: int = 1
@@ -422,14 +426,14 @@ def main():
                                  pin_memory=True,
                                  drop_last=False
                                  )
-    for pc in train_dataloader:
+    for pc in val_dataloader:
         pc = [Point.to('cuda') for Point in pc]  # List["PointCloud"]
-        if len(pc)==1 and pc[0].pc_id.startswith("StorageFurniture_46859"):
+        if len(pc)==1 and pc[0].pc_id.startswith("Table_32746"):
 
             points = pc[0].points.cpu().numpy()
             pc_id = pc[0].pc_id
-    #         instance_sem_labels = pc[0].instance_sem_labels
-    #         instance_labels = pc[0].instance_labels.cpu().numpy()
+            # instance_sem_labels = pc[0].instance_sem_labels
+            instance_labels = pc[0].instance_labels.cpu().numpy()
     #         sem_labels = pc[0].sem_labels
     #         # 构建 Open3D 点云对象
     #         raw_xyz = points[:,:3]
@@ -458,13 +462,13 @@ def main():
     #
     #
     #         # print(instance_sem_labels)
-            visualize_point_cloud(points)
+            # visualize_point_cloud(points)
     #         # visualize_offsets(points[:,:3].cpu().numpy(),pc[0].instance_regions.cpu().numpy(),instance_labels)
-            np.savetxt(f"{pc[0].pc_id}.txt", points, fmt="%.6f")
+            # np.savetxt(f"{pc[0].pc_id}.txt", points, fmt="%.6f")
     #         # np.savetxt(f"{pc[0].pc_id}_ins.txt", instance_labels.cpu().numpy(), fmt="%.6f")
     #         # np.savetxt(f"{pc[0].pc_id}_ins_sem.txt", instance_sem_labels.cpu().numpy(), fmt="%.6f")
-    #         # flow = points[:, 3:6] - points[:, :3]
-    #         # visualize_flow_with_instance_selection(points, flow, instance_labels, [0,3], 'fuck')
+            flow = points[:, 3:6]
+            visualize_flow_with_instance_selection(points, flow, instance_labels, [0,1,2,3,4,5,6], 'fuck')
             input("continue")
     # data = np.load("/16T/wangzhi/ArtImage/laptop/train/SdfSamples/010988.npz")['sdf_data']
     # point_cloud0,_ = FPS(data[data[:, 3] == 0, :3],10000, 'cuda')

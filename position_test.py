@@ -8,6 +8,10 @@ from epic_ops.voxelize import voxelize
 from misc.pose_fitting import estimate_pose_from_npcs
 from misc.visu import visualize_gapartnet
 from network.model import GAPartNet
+from train import GAPartNetDataset, collate_fn
+from pathlib import Path
+from torch.utils.data import ConcatDataset, DataLoader
+from calculate import energy_function
 import copy
 from scipy.spatial import cKDTree
 from network.grouping_utils import (apply_nms, cluster_proposals, compute_ap, compute_npcs_loss, filter_invalid_proposals,)
@@ -15,115 +19,21 @@ from structure.point_cloud import PointCloud, PointCloudBatch
 import json
 import csv
 import os
-def compute_distance(P, p, n):
-    n = n / torch.norm(n)  # 归一化法向量
-    return torch.norm(torch.cross(P - p, n.expand_as(P)), dim=1)
 
-lambda_C = torch.nn.Parameter(torch.tensor(1.0, requires_grad=True, device='cuda'))
 
-def visualize_point_cloud(point0):
+def visualize_point_cloud(point0,rgb):
 
     pcd0 = o3d.geometry.PointCloud()
     pcd0.points = o3d.utility.Vector3dVector(point0)
-    pcd0.paint_uniform_color([0.6, 0.2, 0.2])
+    pcd0.colors = o3d.utility.Vector3dVector(rgb)
 
 
-    coord_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
-        size=1, origin=[0, 0, 0]
-    )
 
 
 
     # 使用Open3D可视化点云
-    o3d.visualization.draw_geometries([pcd0, coord_frame])
-def energy_function(params, instance_data):
-    total_loss = 0.0
-    total_EV = 0.0
-    total_EC = 0.0
-    x = params[0][2]  # 只有一个实例
-    inst = instance_data[0]
-    sem_label = inst["sem_label"]
+    o3d.visualization.draw_geometries([pcd0])
 
-    if sem_label in {"hinge_lid", "hinge_door"}:
-        p = x[:3]
-        n = x[3:]
-        n = n / torch.norm(n)
-
-        P_inst = inst["points"]
-        F_inst = inst["flow"]
-        P_number = P_inst.shape[0]
-        F_norm = torch.norm(F_inst, dim=1)
-        distances = compute_distance(P_inst, p, n)
-
-        D_ratio = distances.unsqueeze(1) / distances.unsqueeze(0)
-        F_ratio = F_norm.unsqueeze(1) / F_norm.unsqueeze(0)
-        EC = torch.sum(torch.abs(D_ratio - F_ratio))
-
-        top_k = max(1, P_number // 5)
-        threshold = torch.topk(F_norm, top_k, largest=True)[0][-1]
-        mask = F_norm >= threshold
-
-        P_inst = P_inst[mask]
-        F_inst = F_inst[mask]
-        F_norm = F_norm[mask]
-        P_number_big = P_inst.shape[0]
-
-        if P_number_big == 0:
-            print("not cal")
-            return torch.tensor(0.0), torch.tensor(0.0), torch.tensor(0.0)
-
-        W = F_norm / torch.sum(F_norm)
-        F_dot_n = torch.sum(F_inst * n, dim=1)
-        EV = torch.sum(W * torch.abs(F_dot_n / torch.clamp(F_norm, min=1e-3)))
-
-        loss = EV / P_number_big + EC / (P_number * P_number)
-        EV = EV / P_number_big
-        EC = EC / (P_number * P_number)
-
-    elif sem_label in {"slider_drawer", "slider_lid"} :
-        n = x[:3]
-        n = n / torch.norm(n)
-
-        P_inst = inst["points"]
-        F_inst = inst["flow"]
-        P_number = P_inst.shape[0]
-        F_norm = torch.norm(F_inst, dim=1)
-        top_k = max(1, P_number // 5)
-        threshold = torch.topk(F_norm, top_k, largest=True)[0][-1]
-        mask = F_norm >= threshold
-
-        P_inst = P_inst[mask]
-        F_inst = F_inst[mask]
-        F_norm = F_norm[mask]
-        P_number_big = P_inst.shape[0]
-
-        # 计算 flow 与 n 的内积
-        F_dot_n = torch.sum(F_inst * n, dim=1)
-
-        # 计算 flow 的模长
-        F_norm = torch.norm(F_inst, dim=1)
-        n_norm = torch.norm(n)
-
-        # 根据公式计算每个项的残差
-        residuals = F_dot_n - n_norm * F_norm
-
-        # 计算总和
-        loss = torch.sum(torch.abs(residuals))/P_number_big
-
-
-
-        if P_number == 0:
-            print("not cal")
-            return torch.tensor(0.0), torch.tensor(0.0), torch.tensor(0.0)
-    else:
-        print("not cal")
-
-        # 其他类型
-        loss = torch.tensor(0.0)
-        EV = torch.tensor(0.0)
-        EC = torch.tensor(0.0)
-    total_loss += loss
-    return total_loss
 
 def visualize_flow(points, flows):
     """
@@ -271,34 +181,8 @@ def get_top_scored_proposal_instances(proposals, target_classes):
 
 
 
-def apply_voxelization(                  #点云体素化
-        pc: PointCloud, *, voxel_size: Tuple[float, float, float]
-) -> PointCloud:
-    pc = copy.copy(pc)
-    num_points = pc.points.shape[0]
-    pt_xyz = pc.points[:, :3]
-    points_range_min = pt_xyz.min(0)[0] - 1e-4
-    points_range_max = pt_xyz.max(0)[0] + 1e-4
-    voxel_features, voxel_coords, _, pc_voxel_id = voxelize(  #,体素特征(xyz,颜色),体素坐标,_,每个点对应的体素索引
-        pt_xyz, pc.points,
-        batch_offsets=torch.as_tensor([0, num_points], dtype=torch.int64, device=pt_xyz.device),
-        voxel_size=torch.as_tensor(voxel_size, device=pt_xyz.device),
-        points_range_min=torch.as_tensor(points_range_min, device=pt_xyz.device),
-        points_range_max=torch.as_tensor(points_range_max, device=pt_xyz.device),
-        reduction="mean",
-    )
-    assert (pc_voxel_id >= 0).all()
 
-    voxel_coords_range = (voxel_coords.max(0)[0] + 1).clamp(min=128, max=None)
-
-    pc.voxel_features = voxel_features
-    pc.voxel_coords = voxel_coords
-    pc.voxel_coords_range = voxel_coords_range.tolist()
-    pc.pc_voxel_id = pc_voxel_id
-
-    return pc
-
-def visualize_instance_with_axis(points_all, instance_points, axis_params):
+def visualize_instance_with_axis(points_all, rgb, instance_points, axis_params):
 
 
     # 转成 numpy
@@ -312,11 +196,13 @@ def visualize_instance_with_axis(points_all, instance_points, axis_params):
     # 创建 open3d 点云对象
     pcd_all = o3d.geometry.PointCloud()
     pcd_all.points = o3d.utility.Vector3dVector(points_all)
-    pcd_all.paint_uniform_color([0, 0, 1.0])  # 蓝色
+    
+    # 设置点云颜色：rgb是(N,3)数组，每个点都有自己的颜色
+    pcd_all.colors = o3d.utility.Vector3dVector(rgb)
 
     pcd_inst = o3d.geometry.PointCloud()
     pcd_inst.points = o3d.utility.Vector3dVector(instance_points)
-    pcd_inst.paint_uniform_color([1.0, 0, 0])  # 红色
+    pcd_inst.paint_uniform_color([222/255, 235/255, 247/255])  # 浅蓝色
 
     # 创建转轴
     axis_line = None
@@ -343,22 +229,93 @@ def visualize_instance_with_axis(points_all, instance_points, axis_params):
 
     o3d.visualization.draw_geometries([pcd_all, pcd_inst, axis_line])
 
-def FindMaxDis(pointcloud):
-    max_xyz = pointcloud.max(0)
-    min_xyz = pointcloud.min(0)
-    center = (max_xyz + min_xyz) / 2
-    max_radius = ((((pointcloud - center) ** 2).sum(1)) ** 0.5).max()
-    return max_radius, center
-def WorldSpaceToBallSpace(pointcloud):
+def visualize_multiple_axes(points_all, rgb, all_axis_params, axis_colors=None, line_radius=0.02):
+    # 转成 numpy
+    if isinstance(points_all, torch.Tensor):
+        points_all = points_all.detach().cpu().numpy()
+    if isinstance(rgb, torch.Tensor):
+        rgb = rgb.detach().cpu().numpy()
 
-    max_radius, center = FindMaxDis(pointcloud)
-    pointcloud_normalized = (pointcloud - center) / max_radius
-    return pointcloud_normalized, max_radius, center
-def match_points_by_nn(points0, points1):
+    # 创建背景点云
+    pcd_all = o3d.geometry.PointCloud()
+    pcd_all.points = o3d.utility.Vector3dVector(points_all)
+    pcd_all.colors = o3d.utility.Vector3dVector(rgb)
 
-    tree = cKDTree(points1)
-    _, indices = tree.query(points0, k=1)  # 每个points0中点在points1中最近的点的索引
-    return points1[indices]
+    # 创建所有旋转轴
+    axis_cylinders = []
+    if axis_colors is None:
+        # 默认颜色：红、绿、蓝、黄、紫、青、橙、粉
+        default_colors = [
+            [0.8, 0.2, 0.2],  # 红
+            [0.2, 0.8, 0.2],  # 绿
+            [0.2, 0.2, 0.8],  # 蓝
+            [0.8, 0.8, 0.2],  # 黄
+            [0.8, 0.2, 0.8],  # 紫
+            [0.2, 0.8, 0.8],  # 青
+            [0.8, 0.5, 0.2],  # 橙
+            [0.8, 0.2, 0.5],  # 粉
+        ]
+        axis_colors = default_colors
+
+    for i, axis_params in enumerate(all_axis_params):
+        if isinstance(axis_params, torch.Tensor):
+            axis_params = axis_params.detach().cpu().numpy()
+        
+        # 创建转轴
+        if len(axis_params) == 6:
+            axis_point = axis_params[:3]
+            axis_dir = axis_params[3:]
+        elif len(axis_params) == 3:
+            axis_point = points_all.mean(axis=0)  # 默认用点云中心
+            axis_dir = axis_params
+        else:
+            continue
+
+        axis_dir = axis_dir / np.linalg.norm(axis_dir)
+        line_length = 5  # 可视化长度
+        
+        # 创建圆柱体代替线段
+        cylinder = o3d.geometry.TriangleMesh.create_cylinder(
+            radius=line_radius, 
+            height=line_length * 2,
+            resolution=10  # 圆柱体的分辨率，数值越大越平滑
+        )
+        
+        # 计算旋转矩阵，使圆柱体沿着轴方向
+        # 默认圆柱体沿着z轴，需要旋转到目标方向
+        z_axis = np.array([0, 0, 1])
+        if np.allclose(axis_dir, z_axis) or np.allclose(axis_dir, -z_axis):
+            # 如果轴方向就是z轴，不需要旋转
+            rotation_matrix = np.eye(3)
+        else:
+            # 计算从z轴到目标方向的旋转矩阵
+            rotation_axis = np.cross(z_axis, axis_dir)
+            rotation_axis = rotation_axis / np.linalg.norm(rotation_axis)
+            cos_angle = np.dot(z_axis, axis_dir)
+            angle = np.arccos(np.clip(cos_angle, -1.0, 1.0))
+            
+            # 使用罗德里格斯公式计算旋转矩阵
+            K = np.array([[0, -rotation_axis[2], rotation_axis[1]],
+                         [rotation_axis[2], 0, -rotation_axis[0]],
+                         [-rotation_axis[1], rotation_axis[0], 0]])
+            rotation_matrix = np.eye(3) + np.sin(angle) * K + (1 - np.cos(angle)) * (K @ K)
+        
+        # 应用旋转和平移
+        cylinder.rotate(rotation_matrix, center=[0, 0, 0])
+        cylinder.translate(axis_point)
+        
+        # 设置颜色
+        color_idx = i % len(axis_colors)
+        cylinder.paint_uniform_color(axis_colors[color_idx])
+        
+        axis_cylinders.append(cylinder)
+
+    # 可视化所有轴
+    geometries = [pcd_all] + axis_cylinders
+    o3d.visualization.draw_geometries(geometries)
+
+
+
 
 
 
@@ -451,267 +408,383 @@ def load_meta_and_restore_points(meta_path, points_normalized):
     return points_restored, max_radius, center
 def main():
     # CUDA settings
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     torch.backends.cudnn.deterministic = True
-    # torch.manual_seed(1234)
-    # torch.cuda.manual_seed_all(1234)
-    # np.random.seed(1234)
-
-
-    #载入分割网络
-    model_path = "/home/liuyuyan/GAOR/gaor/checkpoints/100flowstats0.02flowxyzoffsetslider/models/final_model.pth"
-    net1 = GAPartNet().cuda()
-    print(f'Loading pretrained model from {model_path}')
-    net1.load_state_dict(torch.load(model_path))
-    filename = "StorageFurniture_46859_0_24"
-
-    points = np.loadtxt(f"{filename}.txt").astype(np.float32)
-    points0 = points[:, :3]
-    meta_path = f"/16T/liuyuyan/GAPartNetAllWithFlows/train/meta/{filename}.txt"
-    points0, max_radius, center = load_meta_and_restore_points(meta_path, points0)
-    with open(f"/16T/liuyuyan/example_rendered_3dgs/metafile/{filename}_1.json", "r") as f:
-        meta = json.load(f)
-    R_c2w = np.array(meta['world2camera_rotation'], dtype=np.float32).reshape(3, 3)
-    t_c2w = np.array(meta['camera2world_translation'], dtype=np.float32).reshape(3)
-    points0 = (R_c2w @ points0.T).T+ t_c2w
-    points1 = points[:, 3:6]
-    points1, max_radius, center = load_meta_and_restore_points(meta_path, points1)
-    points1 = (R_c2w @ points1.T).T + t_c2w
-    visualize_point_cloud(points1)
-    pc = PointCloud(pc_id=filename, points=points)
-    pc = pc.to_tensor()
-    pc = apply_voxelization(pc, voxel_size = (1 / 100, 1 / 100, 1 / 100))
-    pc = [pc.to(net1.device)]  # List["PointCloud"]
-    data_batch = PointCloud.collate(pc)  # PointCloudBatch
-    net1.eval()
-    with torch.no_grad():
-        pc_ids, sem_seg, proposals, _ = net1(data_batch)
-    sample_ids = range(len(pc_ids))
-    sample_id = 0
-    batch_id = sample_id // 1
-    batch_sample_id = sample_id % 1
-    if proposals is not None:
-        proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()].long()
-        print(f"beyond:{proposals.proposal_offsets.shape[0]-1}")
-        analyze_proposals_sorted_by_score(proposals)
-        val_min_points_per_class_use = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-        proposals = filter_invalid_proposals(
-            proposals,
-            score_threshold=net1.val_score_threshold,
-            val_min_points_per_class=val_min_points_per_class_use,
-        )
-        proposals = apply_nms(proposals, net1.val_nms_iou_threshold)  # 非极大值抑制（NMS），用来过滤掉重叠太多的重复 proposal
-        print(f"after:{proposals.proposal_offsets.shape[0]-1}")
-        if proposals is not None:
-            proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()]
-            # analyze_proposals_sorted_by_score(proposals)
-            pt_xyz = proposals.pt_xyz
-            batch_indices = proposals.batch_indices
-            proposal_offsets = proposals.proposal_offsets
-            num_points_per_proposal = proposals.num_points_per_proposal
-            num_proposals = num_points_per_proposal.shape[0]
-            score_preds = proposals.score_preds
-            mask = proposals.valid_mask
-            indices = torch.arange(mask.shape[0], dtype=torch.int64, device=sem_seg.sem_preds.device)
-            proposal_indices = indices[proposals.valid_mask][proposals.sorted_indices]
-
-            ins_seg_preds = torch.ones(mask.shape[0]) * 0
-            for ins_i in range(len(proposal_offsets) - 1):
-                ins_seg_preds[proposal_indices[proposal_offsets[ins_i]:proposal_offsets[ins_i + 1]]] = ins_i + 1
-            npcs_maps = torch.ones(proposals.valid_mask.shape[0], 3, device=proposals.valid_mask.device) * 0.0
-            valid_index = torch.where(proposals.valid_mask == True)[0][
-                proposals.sorted_indices.long()[torch.where(proposals.npcs_valid_mask == True)]]
-            npcs_maps[valid_index] = proposals.npcs_preds
-
-            # bounding box
-            bboxes = []
-            for proposal_i in range(len(proposal_offsets) - 1):
-                npcs_i = npcs_maps[proposal_indices[proposal_offsets[proposal_i]:proposal_offsets[proposal_i + 1]]]
-                npcs_i = npcs_i - 0.5
-                xyz_i = pt_xyz[proposal_offsets[proposal_i]:proposal_offsets[proposal_i + 1]]
-                # import pdb; pdb.set_trace()
-                if xyz_i.shape[0] < 5:
-                    continue
-                bbox_xyz, scale, rotation, translation, out_transform, best_inlier_idx = estimate_pose_from_npcs(
-                    xyz_i.cpu().numpy(), npcs_i.cpu().numpy())
-                # import pdb; pdb.set_trace()
-                if scale[0] == None:
-                    continue
-                bboxes.append(bbox_xyz.tolist())
-
-            # get the sampled data point
-            sample_sem_pred = sem_seg.sem_preds.reshape(-1, 20000)
-            sample_ins_seg_pred = ins_seg_preds.reshape(-1, 20000)
-            sample_npcs_map = npcs_maps.reshape(-1, 20000, 3)
-
-            visualize_gapartnet(
-                SAVE_ROOT="output/GAPartNetWithFlow_result",
-                RAW_IMG_ROOT="data/image_kuafu",
-                GAPARTNET_DATA_ROOT="/16T/liuyuyan/GAPartNetAllWithFlows",
-                # save_option=["raw", "pc", "sem_pred", "sem_gt", "ins_pred", "ins_gt", "npcs_pred", "npcs_gt", "bbox_gt", "bbox_gt_pure", "bbox_pred", "bbox_pred_pure"],
-                save_option=["raw", "pc", "sem_pred", "ins_pred", "npcs_pred", "bbox_pred", "bbox_pred_pure"],
-                name=pc_ids[sample_id],
-                split="train",
-                sem_preds=sample_sem_pred.cpu().numpy().squeeze(),  # type: ignore
-                ins_preds=sample_ins_seg_pred.cpu().numpy().squeeze(),
-                npcs_preds=sample_npcs_map.cpu().numpy().squeeze(),
-                bboxes=bboxes,
-            )
-            target_classes = [ 5, 6, 7]
-            top_proposal = get_top_scored_proposal_instances(proposals, target_classes)
-            if top_proposal is not None:
-                print(f"Top proposal: {top_proposal}")
-
-
-            valid_mask = top_proposal.valid_mask  # [N]
-            sorted_indices = top_proposal.sorted_indices  # [M], 是 valid_mask 为 True 的点中的子集
-            valid_indices = valid_mask.nonzero(as_tuple=False).squeeze(1)  # [K], K <= N
-            start = top_proposal.proposal_offsets[0].item()
-            end = top_proposal.proposal_offsets[1].item()
-            proposal_sorted_idx = top_proposal.sorted_indices[start:end]  # 聚类后 proposal 的点索引（相对于 valid_indices）
-            proposal_original_indices = valid_indices[proposal_sorted_idx]
-
-            inst_sem_label = top_proposal.pt_sem_classes.item()
-            sem_label_name = PART_ID2NAME[inst_sem_label]
-
-            P_inst = torch.tensor((points0), dtype=torch.float32).cuda()[proposal_original_indices] # 点坐标
-            F_inst =  torch.tensor((points1-points0), dtype=torch.float32).cuda()[proposal_original_indices]  # 光流
-            instance_data = [{
-                "inst_idx": 0,
-                "sem_label": sem_label_name,
-                "points": P_inst,
-                "flow": F_inst
-            }]
-            params = []
-            if sem_label_name in {"hinge_lid", "hinge_door"}:
-                num_params = 6
-            elif sem_label_name in {"slider_drawer", "slider_lid"}:
-                num_params = 3
-            else:
-                num_params = 0
-
-            if num_params > 0:
-                x = torch.rand(num_params, dtype=torch.float32, device='cuda', requires_grad=True)
-                params.append((sem_label_name, 0, x))
-            optimizer = torch.optim.Adam([x for _, _, x in params], lr=0.001)
-            scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3000, gamma=0.1)
-
-            loss = np.inf
-            step = 0
-            while step < 6000:
-                optimizer.zero_grad()
-                loss = energy_function(params, instance_data)
-
-
-                loss.backward()
-                optimizer.step()
-                scheduler.step()
-                step += 1
-                if step % 1000 == 0:
-                    print(f"Step {step}  Loss: {loss.item():.6f}")
-                    print(f"当前学习率: {scheduler.get_last_lr()[0]}")
-                    # print(f"total_EV: {total_EV}, total_EC: {total_EC}")
-
-            print(f"Step {step}  Loss: {loss.item():.6f}")
-
-    _, _, x_opt = params[0]
-    visualize_instance_with_axis(points0, P_inst, x_opt)
-    mesh = o3d.io.read_triangle_mesh("/home/liuyuyan/PGSR/output/test/mesh/tsdf_fusion_post.obj")
-    mesh.compute_vertex_normals()
-    assert mesh.has_vertex_colors(), "Mesh must have vertex colors"
-
-    # 构建 KD 树用于查找顶点最近邻
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = mesh.vertices
-    pcd.colors = mesh.vertex_colors
-    pcd_tree = o3d.geometry.KDTreeFlann(pcd)
-
-    # 查找 mesh 中靠近 P_inst 的顶点索引
-    selected_vertex_indices = set()
-    for point in P_inst.cpu().numpy():
-        [_, idxs, _] = pcd_tree.search_knn_vector_3d(point, 5)
-        selected_vertex_indices.update(idxs)
-    selected_vertex_indices = set(selected_vertex_indices)
-
-    # 分割三角形面片：属于 selected 的顶点 vs 不属于的
-    triangles = np.asarray(mesh.triangles)
-    vertices = np.asarray(mesh.vertices)
-    colors = np.asarray(mesh.vertex_colors)
-
-    # 创建两个面片集合
-    part_triangles = []
-    rest_triangles = []
-
-    for i, tri in enumerate(triangles):
-        v0, v1, v2 = tri
-        # 如果3个顶点中任意一个属于选中点，划为part；否则划为rest
-        if v0 in selected_vertex_indices or v1 in selected_vertex_indices or v2 in selected_vertex_indices:
-            part_triangles.append(tri)
-        else:
-            rest_triangles.append(tri)
-
-    # 构造两个子 mesh（保留原始顶点、颜色、拓扑）
-    def build_mesh(triangles_idx_list):
-        submesh = o3d.geometry.TriangleMesh()
-        submesh.vertices = mesh.vertices
-        submesh.vertex_colors = mesh.vertex_colors
-        submesh.triangles = o3d.utility.Vector3iVector(np.array(triangles_idx_list))
-        return submesh
-
-    part_mesh = build_mesh(part_triangles)
-    rest_mesh = build_mesh(rest_triangles)
-
-
-    o3d.io.write_triangle_mesh("cabinet_door_part.obj", part_mesh, write_vertex_colors=True, write_triangle_uvs=True)
-    o3d.io.write_triangle_mesh("cabinet_body_rest.obj", rest_mesh)
-
-    part_vertices = np.asarray(part_mesh.vertices)
-    part_mesh.vertex_colors = o3d.utility.Vector3dVector(
-        np.tile(np.array([[1.0, 0.0, 0.0]]), (part_vertices.shape[0], 1))
+    torch.manual_seed(1234)
+    torch.cuda.manual_seed_all(1234)
+    np.random.seed(1234)
+    net = GAPartNet()
+    # if torch.cuda.device_count() > 1:
+    #     net = nn.DataParallel(net).cuda()
+    # else:
+    #     net = net.to(device)
+    net.load_state_dict(torch.load("/home/liuyuyan/OISR/checkpoints/flowxyzwithmotion/models/final_model.pth"), strict=True)
+    net.to(device)
+    root_dir: str = "/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/GAPartNetAllWithFlows/"
+    max_points: int = 20000
+    voxel_size: Tuple[float, float, float] = (1 / 100, 1 / 100, 1 / 100)
+    train_batch_size: int = 1
+    val_batch_size: int = 32
+    test_batch_size: int = 32
+    num_workers: int = 16
+    pos_jitter: float = 0.
+    color_jitter: float = 0.1
+    flip_prob: float = 0.
+    rotate_prob: float = 0.
+    train_few_shot: bool = False
+    val_few_shot: bool = False
+    intra_few_shot: bool = False
+    inter_few_shot: bool = False
+    few_shot_num: int = 256
+    val_min_points_per_class_use = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+    train_data_files = GAPartNetDataset(
+        Path(root_dir) / "train" / "pth",
+        shuffle=True,
+        max_points=max_points,
+        augmentation=True,
+        voxel_size=voxel_size,
+        few_shot=train_few_shot,
+        few_shot_num=few_shot_num,
+        pos_jitter=pos_jitter,
+        color_jitter=color_jitter,
+        flip_prob=flip_prob,
+        rotate_prob=rotate_prob,
     )
-
-    # 给 rest_mesh 染绿色
-    rest_vertices = np.asarray(rest_mesh.vertices)
-    rest_mesh.vertex_colors = o3d.utility.Vector3dVector(
-        np.tile(np.array([[0.0, 1.0, 0.0]]), (rest_vertices.shape[0], 1))
+    inter_data_files = GAPartNetDataset(
+        Path(root_dir) / "test_inter" / "pth",
+        shuffle=True,
+        max_points=max_points,
+        augmentation=False,
+        voxel_size=voxel_size,
+        few_shot=inter_few_shot,
+        few_shot_num=few_shot_num,
+        pos_jitter=pos_jitter,
+        color_jitter=color_jitter,
+        flip_prob=flip_prob,
+        rotate_prob=rotate_prob,
     )
+    train_dataloader = DataLoader(train_data_files,
+                                  batch_size=1,
+                                  shuffle=True,
+                                  num_workers=num_workers,
+                                  collate_fn=collate_fn,
+                                  pin_memory=True,
+                                  drop_last=True,
+                                  )
+    val_dataloader = DataLoader(inter_data_files,
+                                batch_size=1,
+                                shuffle=False,
+                                num_workers=num_workers,
+                                collate_fn=collate_fn,
+                                pin_memory=True,
+                                drop_last=False
+                                )
+    for pc in val_dataloader:
+        pc = [Point.to('cuda') for Point in pc]  # List["PointCloud"]
+        if len(pc)!=0 and pc[0].pc_id.startswith("Oven_7201"):
+            data_batch = PointCloud.collate(pc)  # PointCloudBatch
+            net.eval()
+            with torch.no_grad():
+                pc_ids, sem_seg, proposals, _ = net(data_batch,10)
+            points = pc[0].points.cpu().numpy()
+            pc_id = pc[0].pc_id
+            points1 = points[:, :3]
+            flow = points[:, 3:6]
+            points0 = points1-flow
+            rgb = points[:, 6:9]
+            meta_path = f"/15T/liuyuyan/GAPartNetAllWithFlows/test_inter/meta/{pc_id}.txt"
+            points0, max_radius, center = load_meta_and_restore_points(meta_path, points0)
+            # with open(f"/15T/liuyuyan/example_rendered_3dgs/metafile/{filename}_1.json", "r") as f:
+            #     meta = json.load(f)
+            # R_c2w = np.array(meta['world2camera_rotation'], dtype=np.float32).reshape(3, 3)
+            # t_c2w = np.array(meta['camera2world_translation'], dtype=np.float32).reshape(3)
+            # points0 = (R_c2w @ points0.T).T+ t_c2w
 
-    # 添加坐标轴
-    coord_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(size=0.1)
+            points1, max_radius, center = load_meta_and_restore_points(meta_path, points1)
+            # points1 = (R_c2w @ points1.T).T + t_c2w
+            visualize_flow(points0,flow)
+            sample_ids = range(len(pc_ids))
+            sample_id = 0
+            batch_id = sample_id // 1
+            batch_sample_id = sample_id % 1
+            if proposals is not None:
+                proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()].long()
+                print(f"beyond:{proposals.proposal_offsets.shape[0]-1}")
+                analyze_proposals_sorted_by_score(proposals)
+                val_min_points_per_class_use = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+                proposals = filter_invalid_proposals(
+                    proposals,
+                    score_threshold=net.val_score_threshold,
+                    val_min_points_per_class=val_min_points_per_class_use,
+                )
+                proposals = apply_nms(proposals, net.val_nms_iou_threshold)  # 非极大值抑制（NMS），用来过滤掉重叠太多的重复 proposal
+                print(f"after:{proposals.proposal_offsets.shape[0]-1}")
+                if proposals is not None:
+                    proposals.pt_sem_classes = proposals.sem_preds[proposals.proposal_offsets[:-1].long()]
+                    # analyze_proposals_sorted_by_score(proposals)
+                    pt_xyz = proposals.pt_xyz
+                    batch_indices = proposals.batch_indices
+                    proposal_offsets = proposals.proposal_offsets
+                    num_points_per_proposal = proposals.num_points_per_proposal
+                    num_proposals = num_points_per_proposal.shape[0]
+                    score_preds = proposals.score_preds
+                    mask = proposals.valid_mask
+                    indices = torch.arange(mask.shape[0], dtype=torch.int64, device=sem_seg.sem_preds.device)
+                    proposal_indices = indices[proposals.valid_mask][proposals.sorted_indices]
 
-    # 可视化
-    o3d.visualization.draw_geometries([part_mesh, rest_mesh, coord_frame])
+                    ins_seg_preds = torch.ones(mask.shape[0]) * 0
+                    for ins_i in range(len(proposal_offsets) - 1):
+                        ins_seg_preds[proposal_indices[proposal_offsets[ins_i]:proposal_offsets[ins_i + 1]]] = ins_i + 1
+                    npcs_maps = torch.ones(proposals.valid_mask.shape[0], 3, device=proposals.valid_mask.device) * 0.0
+                    valid_index = torch.where(proposals.valid_mask == True)[0][
+                        proposals.sorted_indices.long()[torch.where(proposals.npcs_valid_mask == True)]]
+                    npcs_maps[valid_index] = proposals.npcs_preds
 
-    # 记录优化后的旋转轴数据
-    all_axes = []
-    header = ["instance_name", "p_x", "p_y", "p_z", "n_x", "n_y", "n_z"]  # 固定表头
-    for sem_label, inst_idx, x_opt in params:
-        x_opt = x_opt.cpu().detach().numpy()
-        if len(x_opt) > 3:
-            p_opt = x_opt[:3]
-            n_opt = x_opt[3:]
-        else:
-            p_opt = np.array([])  # 如果没有 p_opt，则设置为空数组
-            n_opt = x_opt[:3]
+                    # bounding box
+                    bboxes = []
+                    for proposal_i in range(len(proposal_offsets) - 1):
+                        npcs_i = npcs_maps[proposal_indices[proposal_offsets[proposal_i]:proposal_offsets[proposal_i + 1]]]
+                        npcs_i = npcs_i - 0.5
+                        xyz_i = pt_xyz[proposal_offsets[proposal_i]:proposal_offsets[proposal_i + 1]]
+                        # import pdb; pdb.set_trace()
+                        if xyz_i.shape[0] < 5:
+                            continue
+                        bbox_xyz, scale, rotation, translation, out_transform, best_inlier_idx = estimate_pose_from_npcs(
+                            xyz_i.cpu().numpy(), npcs_i.cpu().numpy())
+                        # import pdb; pdb.set_trace()
+                        if scale[0] == None:
+                            continue
+                        bboxes.append(bbox_xyz.tolist())
 
-        instance_name = f"{sem_label}_{inst_idx}"  # 生成唯一标识
-        print(f"实例 {instance_name} 优化后的旋转轴位置 p:", p_opt)
-        if n_opt.size > 0:
-            print(f"实例 {instance_name} 优化后的旋转轴方向 n:", n_opt)
+                    # get the sampled data point
+                    sample_sem_pred = sem_seg.sem_preds.reshape(-1, 20000)
+                    sample_ins_seg_pred = ins_seg_preds.reshape(-1, 20000)
+                    sample_npcs_map = npcs_maps.reshape(-1, 20000, 3)
 
-        # 统一格式：没有的位置填充空值
-        row = [instance_name]
-        row.extend(p_opt.tolist() if p_opt.size > 0 else [None, None, None])
-        row.extend(n_opt.tolist() if n_opt.size > 0 else [None, None, None])
+                    visualize_gapartnet(
+                        SAVE_ROOT="output/GAPartNetWithFlow_result",
+                        RAW_IMG_ROOT="data/image_kuafu",
+                        GAPARTNET_DATA_ROOT="/15T/liuyuyan/GAPartNetAllWithFlows",
+                        # save_option=["raw", "pc", "sem_pred", "sem_gt", "ins_pred", "ins_gt", "npcs_pred", "npcs_gt", "bbox_gt", "bbox_gt_pure", "bbox_pred", "bbox_pred_pure"],
+                        save_option=["raw", "pc", "sem_pred", "ins_pred", "npcs_pred", "bbox_pred", "bbox_pred_pure"],
+                        name=pc_ids[sample_id],
+                        split="test_inter",
+                        sem_preds=sample_sem_pred.cpu().numpy().squeeze(),  # type: ignore
+                        ins_preds=sample_ins_seg_pred.cpu().numpy().squeeze(),
+                        npcs_preds=sample_npcs_map.cpu().numpy().squeeze(),
+                        bboxes=bboxes,
+                    )
+                    # 获取所有符合条件的proposals，按得分排序
+                    target_classes = [4, 5, 6, 7]
+                    all_qualified_proposals = []
+                    
+                    # 遍历所有proposals，找到符合条件的
+                    for i in range(proposals.proposal_offsets.shape[0] - 1):
+                        start = proposals.proposal_offsets[i].item()
+                        end = proposals.proposal_offsets[i + 1].item()
+                        pred_class = proposals.pt_sem_classes[i].item()
+                        score = proposals.score_preds[i].item()
+                        
+                        if pred_class in target_classes:
+                            all_qualified_proposals.append((score, i, pred_class))
+                    
+                    # 按得分降序排序，取前8个
+                    all_qualified_proposals.sort(reverse=True, key=lambda x: x[0])
+                    top_8_proposals = all_qualified_proposals[:8]
+                    
+                    print(f"找到 {len(all_qualified_proposals)} 个符合条件的proposals，处理前8个")
+                    
+                    # 存储所有优化后的旋转轴参数
+                    all_optimized_axes = []
+                    all_axes_info = []
+                    
+                    # 循环处理前8个实例
+                    for proposal_idx, (score, proposal_id, pred_class) in enumerate(top_8_proposals):
+                        print(f"处理第 {proposal_idx + 1} 个实例，得分: {score:.4f}, 类别: {pred_class}")
+                        
+                        # 获取当前proposal的点云数据
+                        start = proposals.proposal_offsets[proposal_id].item()
+                        end = proposals.proposal_offsets[proposal_id + 1].item()
+                        
+                        valid_mask = proposals.valid_mask
+                        sorted_indices = proposals.sorted_indices
+                        valid_indices = valid_mask.nonzero(as_tuple=False).squeeze(1)
+                        proposal_sorted_idx = sorted_indices[start:end]
+                        proposal_original_indices = valid_indices[proposal_sorted_idx]
+                        
+                        sem_label_name = PART_ID2NAME[pred_class]
+                        
+                        P_inst = torch.tensor((points0), dtype=torch.float32).cuda()[proposal_original_indices]
+                        F_inst = torch.tensor((points1-points0), dtype=torch.float32).cuda()[proposal_original_indices]
+                        
+                        instance_data = [{
+                            "inst_idx": proposal_idx,
+                            "sem_label": sem_label_name,
+                            "points": P_inst,
+                            "flow": F_inst
+                        }]
+                        
+                        # 确定参数数量
+                        if sem_label_name in {"hinge_lid", "hinge_door"}:
+                            num_params = 6
+                        elif sem_label_name in {"slider_drawer", "slider_lid"}:
+                            num_params = 3
+                        else:
+                            print(f"跳过不支持的类别: {sem_label_name}")
+                            continue
+                        
+                        # 优化参数
+                        x = torch.rand(num_params, dtype=torch.float32, device='cuda', requires_grad=True)
+                        optimizer = torch.optim.Adam([x], lr=0.001)
+                        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5000, gamma=0.1)
+                        
+                        loss = np.inf
+                        step = 0
+                        while step < 10000:
+                            optimizer.zero_grad()
+                            loss = energy_function([(sem_label_name, proposal_idx, x)], instance_data)
+                            
+                            if isinstance(loss, torch.Tensor):
+                                loss.backward()
+                                optimizer.step()
+                                scheduler.step()
+                            
+                            step += 1
+                            if step % 1000 == 0:
+                                print(f"  实例 {proposal_idx + 1} Step {step} Loss: {loss.item():.6f}")
+                        
+                        print(f"  实例 {proposal_idx + 1} 优化完成，最终Loss: {loss.item():.6f}")
+                        
+                        # 保存优化结果
+                        all_optimized_axes.append(x.detach().clone())
+                        all_axes_info.append({
+                            'proposal_idx': proposal_idx,
+                            'score': score,
+                            'sem_label': sem_label_name,
+                            'num_points': P_inst.shape[0]
+                        })
+                    
+                    # 可视化所有旋转轴
+                    if all_optimized_axes:
+                        print("可视化所有旋转轴...")
+                        visualize_multiple_axes(points0, rgb, all_optimized_axes)
+                            
+                    # mesh = o3d.io.read_triangle_mesh("/home/liuyuyan/PGSR/output/test/mesh/tsdf_fusion_post.obj")
+                    # mesh.compute_vertex_normals()
+                    # assert mesh.has_vertex_colors(), "Mesh must have vertex colors"
 
-        all_axes.append(row)
-    write_urdf("cabinet_model", p_opt, n_opt)
-    # 保存优化结果到 CSV
-    csv_filename = f"{filename}_pos.csv"
-    with open(csv_filename, mode="w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(header)
-        writer.writerows(all_axes)
+                    # # 构建 KD 树用于查找顶点最近邻
+                    # pcd = o3d.geometry.PointCloud()
+                    # pcd.points = mesh.vertices
+                    # pcd.colors = mesh.vertex_colors
+                    # pcd_tree = o3d.geometry.KDTreeFlann(pcd)
 
-    print(f"优化结果已保存到 {csv_filename}")
+                    # # 查找 mesh 中靠近 P_inst 的顶点索引
+                    # selected_vertex_indices = set()
+                    # for point in P_inst.cpu().numpy():
+                    #     [_, idxs, _] = pcd_tree.search_knn_vector_3d(point, 5)
+                    #     selected_vertex_indices.update(idxs)
+                    # selected_vertex_indices = set(selected_vertex_indices)
+
+                    # # 分割三角形面片：属于 selected 的顶点 vs 不属于的
+                    # triangles = np.asarray(mesh.triangles)
+                    # vertices = np.asarray(mesh.vertices)
+                    # colors = np.asarray(mesh.vertex_colors)
+
+                    # # 创建两个面片集合
+                    # part_triangles = []
+                    # rest_triangles = []
+
+                    # for i, tri in enumerate(triangles):
+                    #     v0, v1, v2 = tri
+                    #     # 如果3个顶点中任意一个属于选中点，划为part；否则划为rest
+                    #     if v0 in selected_vertex_indices or v1 in selected_vertex_indices or v2 in selected_vertex_indices:
+                    #         part_triangles.append(tri)
+                    #     else:
+                    #         rest_triangles.append(tri)
+
+                    # # 构造两个子 mesh（保留原始顶点、颜色、拓扑）
+                    # def build_mesh(triangles_idx_list):
+                    #     submesh = o3d.geometry.TriangleMesh()
+                    #     submesh.vertices = mesh.vertices
+                    #     submesh.vertex_colors = mesh.vertex_colors
+                    #     submesh.triangles = o3d.utility.Vector3iVector(np.array(triangles_idx_list))
+                    #     return submesh
+
+                    # part_mesh = build_mesh(part_triangles)
+                    # rest_mesh = build_mesh(rest_triangles)
+
+
+                    # o3d.io.write_triangle_mesh("cabinet_door_part.obj", part_mesh, write_vertex_colors=True, write_triangle_uvs=True)
+                    # o3d.io.write_triangle_mesh("cabinet_body_rest.obj", rest_mesh)
+
+                    # part_vertices = np.asarray(part_mesh.vertices)
+                    # part_mesh.vertex_colors = o3d.utility.Vector3dVector(
+                    #     np.tile(np.array([[1.0, 0.0, 0.0]]), (part_vertices.shape[0], 1))
+                    # )
+
+                    # # 给 rest_mesh 染绿色
+                    # rest_vertices = np.asarray(rest_mesh.vertices)
+                    # rest_mesh.vertex_colors = o3d.utility.Vector3dVector(
+                    #     np.tile(np.array([[0.0, 1.0, 0.0]]), (rest_vertices.shape[0], 1))
+                    # )
+
+                    # # 添加坐标轴
+                    # coord_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(size=0.1)
+
+                    # # 可视化
+                    # o3d.visualization.draw_geometries([part_mesh, rest_mesh, coord_frame])
+
+
+
+                    
+                    # 记录优化后的旋转轴数据
+                    all_axes = []
+                    header = ["instance_name", "p_x", "p_y", "p_z", "n_x", "n_y", "n_z", "score", "num_points"]
+                    
+                    for i, (axis_params, info) in enumerate(zip(all_optimized_axes, all_axes_info)):
+                        axis_params = axis_params.cpu().detach().numpy()
+                        
+                        if len(axis_params) > 3:
+                            p_opt = axis_params[:3]
+                            n_opt = axis_params[3:]
+                        else:
+                            p_opt = np.array([])
+                            n_opt = axis_params[:3]
+                        
+                        instance_name = f"{info['sem_label']}_{info['proposal_idx']}"
+                        print(f"实例 {instance_name} 优化后的旋转轴位置 p:", p_opt)
+                        if n_opt.size > 0:
+                            print(f"实例 {instance_name} 优化后的旋转轴方向 n:", n_opt)
+                        
+                        # 统一格式
+                        row = [instance_name]
+                        row.extend(p_opt.tolist() if p_opt.size > 0 else [None, None, None])
+                        row.extend(n_opt.tolist() if n_opt.size > 0 else [None, None, None])
+                        row.extend([info['score'], info['num_points']])
+                        
+                        all_axes.append(row)
+                    
+                    # 保存优化结果到 CSV
+                    csv_filename = f"{pc_id}_pos.csv"
+                    with open(csv_filename, mode="w", newline="") as f:
+                        writer = csv.writer(f)
+                        writer.writerow(header)
+                        writer.writerows(all_axes)
+                    
+                    print(f"优化结果已保存到 {csv_filename}")
+                    
+                    # 如果有优化结果，生成URDF文件（使用第一个实例的参数）
+                    if all_optimized_axes:
+                        first_axis = all_optimized_axes[0].cpu().detach().numpy()
+                        if len(first_axis) > 3:
+                            p_opt = first_axis[:3]
+                            n_opt = first_axis[3:]
+                        else:
+                            p_opt = np.array([])
+                            n_opt = first_axis[:3]
+                        
+                        if p_opt.size > 0 and n_opt.size > 0:
+                             write_urdf(f"{pc_id}_model", p_opt, n_opt)
 if __name__ == '__main__':
     main()

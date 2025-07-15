@@ -12,10 +12,22 @@ from utils.config_utils import PARTNET_DATASET_PATH, AKB48_DATASET_PATH, PARTNET
 from utils.read_utils import get_id_category, read_joints_from_urdf_file, save_rgb_image, save_depth_map, \
     save_anno_dict, save_meta
 from utils.render_utils import get_cam_pos, set_all_scene, render_rgb_image, render_depth_map, \
-    render_sem_ins_seg_map, add_background_color_for_image, get_camera_pos_mat, merge_joint_qpos, get_12_cam_positions
+    render_sem_ins_seg_map, get_camera_pos_mat, merge_joint_qpos, get_12_cam_positions
 from utils.pose_utils import query_part_pose_from_joint_qpos, get_NPCS_map_from_oriented_bbox
 
-
+def add_background_color_for_image(rgb_image, depth_map, background_rgb, eps=1e-6):
+    background_mask = abs(depth_map) < eps
+    rgb_image[background_mask] = background_rgb
+    
+    # 添加Alpha通道来区分背景和前景
+    # Alpha = 255: 前景 (有效区域)
+    # Alpha = 0: 背景 (无效区域)
+    alpha_channel = (~background_mask).astype(np.uint8) * 255
+    
+    # 将RGB图像转换为RGBA
+    rgba_image = np.concatenate([rgb_image, alpha_channel[..., None]], axis=-1)
+    
+    return rgba_image
 def render_one_image(dataset_name, model_id, camera_idx, height, width, use_raytracing=False,
                      replace_texture=False):
     # 1. read the id list to get the category; set path, camera range, and base link name

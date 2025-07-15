@@ -22,6 +22,7 @@ import numpy as np
 from torch.utils.data import ConcatDataset, DataLoader
 from network.model import GAPartNet
 
+torch.multiprocessing.set_sharing_strategy('file_system')
 
 def analyze_proposals_sorted_by_score(proposals, top_k=None):
     if proposals is None or not hasattr(proposals, 'proposal_offsets'):
@@ -260,7 +261,7 @@ def generate_inst_info(pc: PointCloud) -> PointCloud:          #生成实例信�
         instance_regions[indices, 3:6] = min_i
         instance_regions[indices, 6:9] = max_i
 
-        xyz_i_flow = pc.points[indices, 3:6]
+        xyz_i_flow = pc.points[indices, 3:6] + xyz_i
         min_i_flow = xyz_i_flow.min(0)
         max_i_flow = xyz_i_flow.max(0)
         mean_i_flow = xyz_i_flow.mean(0)
@@ -308,8 +309,8 @@ def apply_voxelization(                  #点云体素化
     assert (pc_voxel_id >= 0).all()
 
     voxel_coords_range = (voxel_coords.max(0)[0] + 1).clamp(min=128, max=None)
-
-    pc.voxel_features = voxel_features
+    pc.static_voxel_features = torch.cat([voxel_features[:, :3], voxel_features[:, 6:]], dim=-1)
+    pc.dynamic_voxel_features = voxel_features[:,3:6]
     pc.voxel_coords = voxel_coords
     pc.voxel_coords_range = voxel_coords_range.tolist()
     pc.pc_voxel_id = pc_voxel_id
@@ -419,7 +420,7 @@ def load_data(file_path: str, no_label: bool = False):
     instance_labels = pc_data[4].astype(np.int32)
 
     # flow_stats_per_point = compute_instance_flow_features(pc_id, flow, instance_labels, pc_data[3].astype(np.int64),pc_data[0] )  # shape: (N, 3)
-    points = np.concatenate([pc_data[0],pc_data[1],pc_data[2]], axis=-1).astype(np.float32)
+    points = np.concatenate([pc_data[1],flow,pc_data[2]], axis=-1).astype(np.float32)
 
     return PointCloud(
         pc_id=pc_id,
@@ -446,34 +447,45 @@ def train(args, epochs, net, train_loader, val_loader, textio):
         textio.cprint('==epoch: %d, learning rate: %f==' % (epoch, opt.param_groups[0]['lr']))
 
         total_loss = 0.0
-        total_flow_loss = 0.0
+        #total_flow_loss = 0.0
         num_batches = 0
+        # 在train函数的epoch循环内，初始化
+        loss_sums = {}
+        loss_counts = {}
+
         for pc in tqdm(train_loader, desc=f'Training Epoch {epoch}'):
             file_count += len(pc)  # 统计有效文件数
             pc = [Point.to(net.device) for Point in pc]  # List["PointCloud"]
             data_batch = PointCloud.collate(pc)  # PointCloudBatch
             _, _, _, stats_dict = net(data_batch, epoch)
 
-            # 计算 loss
-            loss = sum([stats_dict[key] for key in stats_dict.keys() if
-                        'loss' in key and isinstance(stats_dict[key], torch.Tensor)])
-            flow_loss  = sum([stats_dict[key] for key in stats_dict.keys() if
-                        key=='loss_slider_consistency' and isinstance(stats_dict[key], torch.Tensor)])
+            loss = 0.0
+            for key in stats_dict.keys():
+                if 'loss' in key and isinstance(stats_dict[key], torch.Tensor):
+                    if key not in loss_sums:
+                        loss_sums[key] = 0.0
+                        loss_counts[key] = 0
+                    loss_sums[key] += stats_dict[key].item()
+                    loss_counts[key] += 1
+                    loss += stats_dict[key]  # 这里累加每个loss
+            # flow_loss  = sum([stats_dict[key] for key in stats_dict.keys() if
+            #             key=='loss_slider_consistency' and isinstance(stats_dict[key], torch.Tensor)])
 
             total_loss += loss.item()  # 累加 loss 值
-            if flow_loss != 0.0:
-                total_flow_loss += flow_loss.item()
+            # if flow_loss != 0.0:
+            #     total_flow_loss += flow_loss.item()
             num_batches += 1  # 统计 batch 数量
 
             opt.zero_grad()
             loss.backward()
             opt.step()
-        # 计算并打印本轮平均 loss
-        avg_loss = total_loss / num_batches if num_batches > 0 else 0
-        avg_flow_loss = total_flow_loss / num_batches if num_batches > 0 else 0
+        # 每轮结束后，打印每个loss的均值
+        for key in loss_sums:
+            avg_key_loss = loss_sums[key] / loss_counts[key] if loss_counts[key] > 0 else 0
+            textio.cprint(f"Epoch {epoch}: {key} mean = {avg_key_loss:.6f}")
 
-        textio.cprint(f"Epoch {epoch}: Used Files = {file_count}, Skipped None Items = {len(train_loader.dataset) - file_count }, Avg Loss = {avg_loss:.4f}, Avg FlowLoss = {avg_flow_loss:.4f}")
-        if epoch>5:
+        textio.cprint(f"Epoch {epoch}: Used Files = {file_count}, Skipped None Items = {len(train_loader.dataset) - file_count }, Avg Loss = {total_loss / num_batches if num_batches > 0 else 0:.4f}")
+        if epoch>=2:
             with torch.no_grad():
     
                 # validation
@@ -569,22 +581,30 @@ def train(args, epochs, net, train_loader, val_loader, textio):
     
                     thes = [0.5 + 0.05 * i for i in range(10)]
                     aps = []
-                    for the in thes: #if self.current_epoch >= self.start_scorenet:
-                        ap = compute_ap(proposals, net.num_part_classes, the)
-                        aps.append(ap)
-                        if the == 0.5:
-                            ap50 = ap
-                    # mAP = np.array(aps).mean()
-                    # mAPs.append(mAP)
-    
-                    # if self.current_epoch >= self.start_scorenet:
-                    # 记录 AP@50
-                    for class_idx in range(1, net.num_part_classes):
-                        partname = PART_ID2NAME[class_idx]
-                        textio.cprint(f"Validation {split}/AP@50_{partname}: {np.mean(ap50[class_idx - 1]) * 100:.2f}%")
-                    mean_ap50.append(np.mean(ap50))
-                    del  proposals, ap
-                    del  split, all_accu, pixel_accu
+                    ap50 = None  # 初始化 ap50
+                    
+                    if epoch >= 5:  # 只在 epoch >= 5 时计算 AP
+                        for the in thes:
+                            ap = compute_ap(proposals, net.num_part_classes, the)
+                            aps.append(ap)
+                            if the == 0.5:
+                                ap50 = ap
+                        
+                        # 记录 AP@50
+                        if ap50 is not None:
+                            for class_idx in range(1, net.num_part_classes):
+                                partname = PART_ID2NAME[class_idx]
+                                textio.cprint(f"Validation {split}/AP@50_{partname}: {np.mean(ap50[class_idx - 1]) * 100:.2f}%")
+                            mean_ap50.append(np.mean(ap50))
+                        else:
+                            mean_ap50.append(0.0)  # 如果没有有效的 ap50，使用默认值
+                        del ap, ap50
+                    else:
+                        # epoch < 5 时，使用默认值
+                        mean_ap50.append(0.0)
+                    
+                    del proposals
+                    del split, all_accu, pixel_accu
                     thes.clear()
                     aps.clear()
     
@@ -760,7 +780,7 @@ def main():
     net = GAPartNet().cuda()
     if args.model_path:
         textio.cprint(f'Loading pretrained model from {args.model_path}')
-        net.load_state_dict(torch.load(args.model_path))
+        net.load_state_dict(torch.load(args.model_path), strict=True)
         textio.cprint('Pretrained model loaded successfully, resuming training...')
     else:
         textio.cprint('No pretrained model provided, training from scratch...')
@@ -771,11 +791,11 @@ def main():
     #     net = net.to(device)
 
     print("Let's use", torch.cuda.device_count(), net.device, "GPUs!")
-    root_dir: str = "/16T/liuyuyan/GAPartNetAllWithFlows"
+    root_dir: str = "/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/GAPartNetAllWithFlows/"
     max_points: int = 20000
     voxel_size: Tuple[float, float, float] = (1 / 100, 1 / 100, 1 / 100)
-    train_batch_size: int = 16#32
-    val_batch_size: int = 16
+    train_batch_size: int = 64#32
+    val_batch_size: int = 64
     test_batch_size: int = 32
     num_workers: int = 16
     pos_jitter: float = 0.

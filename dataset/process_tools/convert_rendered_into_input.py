@@ -23,14 +23,12 @@ from utils.sample_utils import FPS
 # LOG_PATH = './log_sample.txt'
 # OBJECT_CATEGORIES = [['Box', 'Bucket', 'Refrigerator'], ['CoffeeMachine', 'Dishwasher'], ['KitchenPot', 'Keyboard', 'Laptop', 'Door'], ['Microwave', 'Oven', 'Phone', 'Remote',  'Printer'], ['StorageFurniture'], ['Table', 'Suitcase', 'Camera', 'Toaster', 'Toilet'], ['Safe', 'TrashCan', 'WashingMachine']]
 # OBJECT_CATEGORIES = [['CoffeeMachine', 'Table'], ['KitchenPot', 'Toilet', 'TrashCan'],['Suitcase'] ,['StorageFurniture'],['Box'], ['Refrigerator']]
-OBJECT_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Microwave", "Oven", "Phone"],
-                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Suitcase", "Table", "Toaster", "Toilet"], ["TrashCan", "WashingMachine", "Refrigerator"]]
+OBJECT_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],["Oven"],
+                  ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Table"], ["TrashCan"]]
+# OBJECT_CATEGORIES = [["Box", "Bucket", "Camera"], ["CoffeeMachine", "Dishwasher", "Door"],  ["Keyboard", "KitchenPot", "Laptop"],[ "Microwave", "Oven", "Phone"],
+#                   ["Printer", "Remote", "Safe"],["StorageFurniture"], ["Suitcase", "Table", "Toaster", "Toilet"], ["TrashCan", "WashingMachine", "Refrigerator"]]
 
-# OBJECT_CATEGORIES = [
-#     'Box', 'Camera', 'CoffeeMachine', 'Dishwasher', 'KitchenPot', 'Microwave', 'Oven', 'Phone', 'Refrigerator',
-#     'Remote', 'Safe', 'StorageFurniture', 'Table', 'Toaster', 'TrashCan', 'WashingMachine', 'Keyboard', 'Laptop', 'Door', 'Printer',
-#     'Suitcase', 'Bucket', 'Toilet' ,'Drawer'
-# ]
+
 
 # OBJECT_CATEGORIES = ['Refrigerator']
 
@@ -206,7 +204,7 @@ def sample_and_save_with_flow(model, filename0, filename1, data_path, save_path,
     #         # 可视化两个点云
     #         o3d.visualization.draw_geometries([pcd, pcd1])
 
-    torch.save((pcs0_sampled_normalized.astype(np.float32),  pcs0_with_flow.astype(np.float32), pcs0_rgb[fps_idx0].astype(
+    torch.save((pcs0_sampled_normalized.astype(np.float32),pcs1_sampled_normalized.astype(np.float32),  pcs0_with_flow.astype(np.float32), pcs0_rgb[fps_idx0].astype(
         np.float32), pcs_sem_sampled_converted.astype(np.int32), pcs_ins_sampled_converted.astype(
             np.int32), pcs_npcs_sampled.astype(np.float32), pcs_idx_sampled.astype(np.int32)), pjoin(pth_save_path, filename + '.pth'))
     np.savetxt(pjoin(meta_save_path, filename + '.txt'), scale_param, delimiter=',')
@@ -232,9 +230,9 @@ if __name__ == "__main__":
 
     parser = ArgumentParser()
     parser.add_argument('--dataset', type=str, default='partnet', help='Specify the dataset to render')
-    parser.add_argument('--data_path', type=str, default='/16T/liuyuyan/example_rendered',
+    parser.add_argument('--data_path', type=str, default='/15T/liuyuyan/example_rendered',
                         help='Specify the path to the rendered data')
-    parser.add_argument('--save_path', type=str, default='/16T/liuyuyan/GAPartNetWithFlows_data',
+    parser.add_argument('--save_path', type=str, default='/15T/liuyuyan/GAPartNetWithFlows_data',
                         help='Specify the path to save the sampled data')
     parser.add_argument('--num_points', type=int, default=20000, help='Specify the number of points to sample')
     parser.add_argument('--idx', type=int, default=0)

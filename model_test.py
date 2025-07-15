@@ -26,6 +26,8 @@ from typing import Optional, Tuple, Union, List
 import matplotlib.pyplot as plt
 from misc.info import OBJECT_NAME2ID, PART_ID2NAME
 import pandas as pd
+from view_test import visualize_flow_with_instance_selection
+
 def analyze_proposals_sorted_by_score(proposals, top_k=None):
     if proposals is None or not hasattr(proposals, 'proposal_offsets'):
         print("No valid proposals.")
@@ -99,14 +101,14 @@ def main():
     torch.manual_seed(1234)
     torch.cuda.manual_seed_all(1234)
     np.random.seed(1234)
-    net = GAPartNet()
+    net = GAPartNet(visualize_cfg={"visualize_offsets": False})
     # if torch.cuda.device_count() > 1:
     #     net = nn.DataParallel(net).cuda()
     # else:
     #     net = net.to(device)
-    net.load_state_dict(torch.load("/home/liuyuyan/GaPartNet/gapartnet/checkpoints/100flowstats0.02flowxyzoffsetslider/models/final_model.pth"), strict=False)
+    net.load_state_dict(torch.load("/home/liuyuyan/OISR/checkpoints/10lossoffsetwithmotion/models/final_model.pth"), strict=True)
     net.to(device)
-    root_dir: str = "/16T/liuyuyan/GAPartNetAllWithFlows"
+    root_dir: str = "/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/GAPartNetAllWithFlows/"
     max_points: int = 20000
     voxel_size: Tuple[float, float, float] = (1 / 100, 1 / 100, 1 / 100)
     train_batch_size: int = 1
@@ -150,7 +152,7 @@ def main():
         rotate_prob=rotate_prob,
     )
     train_dataloader = DataLoader(train_data_files,
-                                  batch_size=train_batch_size,
+                                  batch_size=1,
                                   shuffle=True,
                                   num_workers=num_workers,
                                   collate_fn=collate_fn,
@@ -167,11 +169,18 @@ def main():
                                 )
     for pc in val_dataloader:
         pc = [Point.to('cuda') for Point in pc]  # List["PointCloud"]
-        if len(pc)!=0 :#and pc[0].pc_id.startswith("Table_32761"):
+        if len(pc)!=0 and pc[0].pc_id.startswith("TrashCan"):
             data_batch = PointCloud.collate(pc)  # PointCloudBatch
+            visualize_flow_with_instance_selection(
+                points=pc[0].points.cpu().numpy(),
+                flows=None,
+                instance_labels=pc[0].instance_labels.cpu().numpy(),
+                selected_labels=[0,1,2,3,4,5,6],
+                pc_id='fuck'
+            )            
             net.eval()
             with torch.no_grad():
-                pc_ids, sem_seg, proposals, _ = net(data_batch)
+                pc_ids, sem_seg, proposals, _ = net(data_batch,10)
             print(f"{pc_ids}真实实例：{data_batch.instance_sem_labels, data_batch.num_points_per_instance}")
             print(f"分割预测：{sem_seg.all_accu,sem_seg.pixel_accu,torch.unique(sem_seg.sem_labels), torch.unique(sem_seg.sem_preds)}")
             sample_ids = range(len(pc_ids))
@@ -233,7 +242,7 @@ def main():
                 visualize_gapartnet(
                     SAVE_ROOT="output/GAPartNetWithFlow_result",
                     RAW_IMG_ROOT="data/image_kuafu",
-                    GAPARTNET_DATA_ROOT="/16T/liuyuyan/GAPartNetAllWithFlows",
+                    GAPARTNET_DATA_ROOT=root_dir,
                     # save_option=["raw", "pc", "sem_pred", "sem_gt", "ins_pred", "ins_gt", "npcs_pred", "npcs_gt", "bbox_gt", "bbox_gt_pure", "bbox_pred", "bbox_pred_pure"],
                     save_option=["raw", "pc", "sem_pred", "ins_pred", "npcs_pred", "bbox_pred", "bbox_pred_pure"],
                     name=pc_ids[sample_id],

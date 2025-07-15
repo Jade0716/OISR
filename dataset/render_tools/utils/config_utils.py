@@ -6,15 +6,15 @@ import numpy as np
 
 
 # TODO: Set the path to the dataset
-PARTNET_DATASET_PATH = '/16T/liuyuyan/partnet_mobility_part'
-AKB48_DATASET_PATH = '/16T/liuyuyan/akb48_all_annotated_new'
+PARTNET_DATASET_PATH = '/15T/liuyuyan/partnet_mobility_part'
+AKB48_DATASET_PATH = '/15T/liuyuyan/akb48_all_annotated_new'
 
-GS_SAVE_PATH = '/16T/liuyuyan/example_rendered_3dgs'
-SAVE_PATH = '/16T/liuyuyan/example_rendered'
+GS_SAVE_PATH = '/15T/liuyuyan/example_rendered_3dgs'
+SAVE_PATH = '/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/example_rendered'
 
-VISU_SAVE_PATH = '/16T/liuyuyan/visu'
+VISU_SAVE_PATH = '/mnt/4dba1798-fc0d-4700-a472-04acb2f7b630/liuyuyan/visu'
 
-PARTNET_ID_PATH = '/home/liuyuyan/OISR/OISR/dataset/render_tools/meta/partnet_all_id_list.txt'
+PARTNET_ID_PATH = '/home/liuyuyan/OISR/dataset/render_tools/meta/partnet_all_id_list.txt'
 AKB48_ID_PATH = './meta/akb48_all_id_list.txt'
 
 TARGET_GAPARTS = [
@@ -88,8 +88,8 @@ PARTNET_CAMERA_POSITION_RANGE = {
         'distance_max': 4.1
     }],
     'Oven': [{
-        'theta_min': 30.0,
-        'theta_max': 80.0,
+        'theta_min': 50.0,
+        'theta_max': 90.0,
         'phi_min': 120.0,
         'phi_max': 240.0,
         'distance_min': 3.5,
@@ -104,11 +104,11 @@ PARTNET_CAMERA_POSITION_RANGE = {
         'distance_max': 4.1
     }],
     'Refrigerator': [{
-        'theta_min': 45.0,
-        'theta_max': 45.0,
-        'phi_min': 0.0,
-        'phi_max': 360.0,
-        'distance_min': 4.1,
+        'theta_min': 30.0,
+        'theta_max': 80.0,
+        'phi_min': 120.0,
+        'phi_max': 240.0,
+        'distance_min': 3.5,
         'distance_max': 4.1
     }],
     'Remote': [{
@@ -128,16 +128,16 @@ PARTNET_CAMERA_POSITION_RANGE = {
         'distance_max': 4.1
     }],
     'StorageFurniture': [{
-        'theta_min': 30.0,
-        'theta_max': 80.0,
+        'theta_min': 50.0,
+        'theta_max': 90.0,
         'phi_min': 120.0,
         'phi_max': 240.0,
         'distance_min': 4.1,
         'distance_max': 5.2
     }],
     'Table': [{
-        'theta_min': 30.0,
-        'theta_max': 80.0,
+        'theta_min': 50.0,
+        'theta_max': 90.0,
         'phi_min': 120.0,
         'phi_max': 240.0,
         'distance_min': 3.8,

@@ -32,7 +32,7 @@ class Instances:
 
     cls_preds: Optional[torch.Tensor] = None
     cls_labels: Optional[torch.Tensor] = None
-    
+    flow: Optional[torch.Tensor] = None
     name: Optional[str] = None
 
 @dataclass

@@ -29,8 +29,8 @@ for json_path in json_paths:
         merged_data["unseen_category"][category]["seen_instance"].extend(instances["seen_instance"])
         merged_data["unseen_category"][category]["unseen_instance"].extend(instances["unseen_instance"])
 # 定义数据集根目录和目标目录
-root = "/16T/liuyuyan/GAPartNetWithFlows_data/"
-tar_root = "/16T/liuyuyan/GAPartNetAllWithFlows/"
+root = "/15T/liuyuyan/GAPartNetWithFlows_data/"
+tar_root = "/15T/liuyuyan/GAPartNetAllWithFlows/"
 
 # 定义数据集类别
 splits = {

@@ -67,8 +67,8 @@ def render_two_images(dataset_name, model_id, camera_idx, render_idx, height, wi
         revolute_num = len(revolute_joints)
 
         # 预计算打散的 ratio 顺序
-        prismatic_ratios = [(i + 1) / (prismatic_num + 1) * 0.8 for i in range(prismatic_num)]
-        revolute_ratios = [(i + 1) / (revolute_num + 1) * 0.8 for i in range(revolute_num)]
+        prismatic_ratios = [(i + 1) / (prismatic_num + 1) * 0.4 for i in range(prismatic_num)]
+        revolute_ratios = [(i + 1) / (revolute_num + 1) * 0.4 for i in range(revolute_num)]
 
         prismatic_order = get_interleaved_indices(prismatic_num)
         revolute_order = get_interleaved_indices(revolute_num)

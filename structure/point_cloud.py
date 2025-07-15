@@ -17,7 +17,8 @@ class PointCloudBatch:
     device: str = None  # type: ignore
 
     # voxel
-    voxel_tensor: any = None,  # type: ignore
+    static_voxel_tensor: any = None,  # type: ignore
+    dynamic_voxel_tensor: any = None,  # type: ignore
     pc_voxel_id: any = None  # type: ignore
 
     # semantic
@@ -62,7 +63,8 @@ class PointCloud:
 
     # instance semantic label
     instance_sem_labels: Optional[torch.Tensor] = None
-    voxel_features: Optional[torch.Tensor] = None
+    static_voxel_features: Optional[torch.Tensor] = None   # 体素特征  [N, 16] 
+    dynamic_voxel_features: Optional[torch.Tensor] = None   # 体素特征  [N, 16] 
     voxel_coords: Optional[torch.Tensor] = None
     voxel_coords_range: Optional[List[int]] = None
     pc_voxel_id: Optional[torch.Tensor] = None
@@ -169,19 +171,26 @@ class PointCloud:
         voxel_coords = torch.cat([
             voxel_batch_indices[:, None], voxel_coords
         ], dim=-1)
-        voxel_features = torch.cat([
-            pc.voxel_features for pc in point_clouds
+        static_voxel_features = torch.cat([
+            pc.static_voxel_features for pc in point_clouds
+        ], dim=0)  # type: ignore
+        dynamic_voxel_features = torch.cat([
+            pc.dynamic_voxel_features for pc in point_clouds
         ], dim=0)  # type: ignore
 
         voxel_coords_range = np.max([
             pc.voxel_coords_range for pc in point_clouds
         ], axis=0)  # type: ignore
-        voxel_tensor = spconv.SparseConvTensor(
-            voxel_features, voxel_coords,
+        static_voxel_tensor = spconv.SparseConvTensor(
+            static_voxel_features, voxel_coords,
             spatial_shape=voxel_coords_range.tolist(),
             batch_size=len(point_clouds),
         )
-
+        dynamic_voxel_tensor = spconv.SparseConvTensor(
+            dynamic_voxel_features, voxel_coords,
+            spatial_shape=voxel_coords_range.tolist(),
+            batch_size=len(point_clouds),
+        )
         pc_voxel_id = []
         num_voxel_offset = 0
         for pc in point_clouds:
@@ -196,7 +205,8 @@ class PointCloud:
             batch_indices=batch_indices,
             batch_size=batch_size,
             device=device,  # type: ignore
-            voxel_tensor=voxel_tensor,
+            static_voxel_tensor=static_voxel_tensor,
+            dynamic_voxel_tensor=dynamic_voxel_tensor,
             pc_voxel_id=pc_voxel_id,
             sem_labels=sem_labels,  # type: ignore
             # instance
