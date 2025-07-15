@@ -571,89 +571,24 @@ class GAPartNet(nn.Module):
 
 
     # def loss_proposal_score(
-    #         self,
-    #         score_logits: torch.Tensor,
-    #         proposals: Instances,
-    #         num_points_per_instance: torch.Tensor,
-    # ) -> torch.Tensor:
-    #     ious = batch_instance_seg_iou(
-    #         proposals.proposal_offsets,   
-    #         proposals.instance_labels,   
-    #         proposals.batch_indices,   
-    #         num_points_per_instance,
-    #     )
-    #     proposals.ious = ious
-    #     proposals.num_points_per_instance = num_points_per_instance
+    #             self,
+    #             score_logits: torch.Tensor,
+    #             proposals: Instances,
+    #             num_points_per_instance: torch.Tensor,
+    #     ) -> torch.Tensor:
+    #         ious = batch_instance_seg_iou(
+    #             proposals.proposal_offsets,   
+    #             proposals.instance_labels,   
+    #             proposals.batch_indices,   
+    #             num_points_per_instance,
+    #         )
+    #         proposals.ious = ious
+    #         proposals.num_points_per_instance = num_points_per_instance
 
-    #     ious_max, gt_assignment = ious.max(-1)  # 每个 proposal 对应的 GT 实例索引
-    #     gt_scores = get_gt_scores(ious_max, 0.75, 0.25)  # 原始基于IoU的soft标签
+    #         ious_max = ious.max(-1)[0]
+    #         gt_scores = get_gt_scores(ious_max, 0.75, 0.25)
 
-    #     # 需要的输入
-    #     flow = getattr(proposals, 'flow', None)
-    #     sem_preds = proposals.sem_preds
-    #     instance_labels = proposals.instance_labels
-    #     sorted_indices = proposals.sorted_indices
-    #     proposal_offsets = proposals.proposal_offsets
-
-    #     if flow is None:
-    #         raise ValueError("proposals 需要包含 flow 字段（每个点的 flow）")
-
-    #     proposal_flow_scores = []
-    #     gt_flow_scores = []
-
-    #     for k in range(proposal_offsets.shape[0] - 1):
-    #         start = proposal_offsets[k].item()
-    #         end = proposal_offsets[k + 1].item()
-    #         indices = sorted_indices[start:end]  # 属于该 proposal 的点索引
-
-    #         prop_flow = flow[indices]
-    #         prop_lengths = prop_flow.norm(dim=1)
-    #         length_mean = prop_lengths.mean()
-    #         norm_lengths = prop_lengths / (length_mean + 1e-8)
-    #         length_std = norm_lengths.std()
-    #         cv = length_std  # coefficient of variation
-
-    #         pred_cls = sem_preds[indices[0]].item()
-    #         if pred_cls in [4, 7]:  # hinge
-    #             prop_score = 1.0 - torch.sigmoid(cv * 5)
-    #         elif pred_cls in [5, 6]:  # slider
-    #             prop_score = torch.sigmoid(cv * 5)
-    #         else:
-    #             prop_score = torch.tensor(1.0, device=flow.device)  # 其他类不影响分数
-    #         # print(f"prop_cls: {pred_cls} prop_score: {prop_score}")
-    #         proposal_flow_scores.append(prop_score)
-
-    #         # === 计算GT flow stats ===
-    #         gt_cls = instance_labels[indices[0]].item()
-    #         gt_instance_mask = (instance_labels == gt_assignment[k].item())
-    #         if gt_instance_mask.sum() < 3:
-    #             gt_flow_scores.append(torch.tensor(1.0, device=flow.device))  # 忽略小GT
-    #             continue
-    #         gt_flow = flow[gt_instance_mask]
-    #         gt_lengths = gt_flow.norm(dim=1)
-    #         gt_mean = gt_lengths.mean()
-    #         gt_norm = gt_lengths / (gt_mean + 1e-8)
-    #         gt_std = gt_norm.std()
-    #         gt_cv = gt_std
-    #         gt_sem_cls = sem_preds[gt_instance_mask][0].item()
-
-    #         if gt_sem_cls in [4, 7]:  # hinge
-    #             gt_score = 1.0 - torch.sigmoid(gt_cv * 5)
-    #         elif gt_sem_cls in [5, 6]:  # slider
-    #             gt_score = torch.sigmoid(gt_cv * 5)
-    #         else:
-    #             gt_score = torch.tensor(1.0, device=flow.device)
-    #         # print(f"gt_sem_cls:{gt_sem_cls} gt_score: {gt_score}")
-    #         gt_flow_scores.append(gt_score)
-
-    #     # 组合统计量差值惩罚
-    #     proposal_flow_scores = torch.stack(proposal_flow_scores)
-    #     gt_flow_scores = torch.stack(gt_flow_scores)
-    #     flow_diff = (proposal_flow_scores - gt_flow_scores).abs()
-    #     flow_penalty = flow_diff  # 值越大 -> 惩罚越强
-    #     final_scores = gt_scores * (1 - flow_penalty)
-
-    #     return F.binary_cross_entropy_with_logits(score_logits, final_scores)
+    #         return F.binary_cross_entropy_with_logits(score_logits, gt_scores)
     def loss_proposal_score(
         self,
         score_logits: torch.Tensor,
@@ -669,8 +604,8 @@ class GAPartNet(nn.Module):
         proposals.ious = ious
         proposals.num_points_per_instance = num_points_per_instance
 
-        ious_max, gt_assignment = ious.max(-1)
-        gt_scores = get_gt_scores(ious_max, 0.75, 0.25)
+        ious_max, gt_assignment = ious.max(-1)  # 每个 proposal 对应的 GT 实例索引
+        gt_scores = get_gt_scores(ious_max, 0.75, 0.25)  # 基于IoU的soft标签
 
         flow = getattr(proposals, 'flow', None)
         sem_preds = proposals.sem_preds
@@ -678,113 +613,60 @@ class GAPartNet(nn.Module):
         sorted_indices = proposals.sorted_indices
         proposal_offsets = proposals.proposal_offsets
 
-        if flow is None:
-            raise ValueError("proposals needs to contain flow field (flow for each point)")
+        device = flow.device
+        num_props = proposal_offsets.shape[0] - 1
 
-        num_proposals = proposal_offsets.shape[0] - 1
-        if num_proposals == 0:
-            return torch.tensor(0.0, device=score_logits.device)
-        all_flow_lengths = flow.norm(dim=1)
-        point_proposal_indices = torch.empty_like(sorted_indices, dtype=torch.long)
-        for i in range(num_proposals):
-            start = proposal_offsets[i].item()
-            end = proposal_offsets[i + 1].item()
-            point_proposal_indices[sorted_indices[start:end]] = i
-        sum_lengths_per_proposal = torch.zeros(num_proposals, device=flow.device)
-        sum_lengths_per_proposal.scatter_add_(0, point_proposal_indices[sorted_indices], all_flow_lengths[sorted_indices])
-        points_count_per_proposal = torch.zeros(num_proposals, device=flow.device)
-        ones = torch.ones_like(sorted_indices, dtype=flow.dtype)
-        points_count_per_proposal.scatter_add_(0, point_proposal_indices[sorted_indices], ones)
-        points_count_per_proposal[points_count_per_proposal == 0] = 1 # Set to 1 to avoid NaN in division, will be masked later
-        mean_lengths_per_proposal = sum_lengths_per_proposal / points_count_per_proposal
-        normalized_lengths_per_point = all_flow_lengths / (mean_lengths_per_proposal[point_proposal_indices] + 1e-8)
+        proposal_flow_scores = torch.ones(num_props, device=device)
+        gt_flow_scores = torch.ones(num_props, device=device)
 
-        # Sum of squared normalized lengths for variance
-        sum_sq_norm_lengths_per_proposal = torch.zeros(num_proposals, device=flow.device)
-        sum_sq_norm_lengths_per_proposal.scatter_add_(0, point_proposal_indices[sorted_indices], normalized_lengths_per_point[sorted_indices]**2)
+        # 只对 gt_scores > 0.5 的proposal计算
+        valid_idx = (gt_scores > 0.5).nonzero(as_tuple=False).squeeze(1)
+        if valid_idx.numel() == 0:
+            # 如果没有满足条件的proposal，直接返回loss
+            final_scores = gt_scores * (1 - (proposal_flow_scores - gt_flow_scores).abs())
+            return F.binary_cross_entropy_with_logits(score_logits, final_scores)
 
-        # Variance and Standard Deviation
-        variance_per_proposal = (sum_sq_norm_lengths_per_proposal / points_count_per_proposal) - (sum_lengths_per_proposal / points_count_per_proposal)**2
-        std_per_proposal = torch.sqrt(torch.relu(variance_per_proposal)) # Use relu to prevent sqrt of negative due to small numerical errors
+        for k in valid_idx.tolist():
+            start = proposal_offsets[k].item()
+            end = proposal_offsets[k + 1].item()
+            indices = sorted_indices[start:end]
 
-        # Coefficient of Variation (CV) for proposals
-        cv_per_proposal = std_per_proposal
+            prop_flow = flow[indices]
+            prop_lengths = prop_flow.norm(dim=1)
+            length_mean = prop_lengths.mean()
+            norm_lengths = prop_lengths / (length_mean + 1e-8)
+            length_std = norm_lengths.std()
+            cv = length_std
 
-        # Predict classes for each proposal (assuming homogeneous class within a proposal)
-        # We can get the class for the first point of each proposal
-        first_point_indices = proposal_offsets[:-1]
-        pred_cls_for_proposals = sem_preds[sorted_indices[first_point_indices]]
+            pred_cls = sem_preds[indices[0]].item()
+            if pred_cls in [4, 7]:  # hinge
+                prop_score = 1.0 - torch.sigmoid(cv * 5)
+            elif pred_cls in [5, 6]:  # slider
+                prop_score = torch.sigmoid(cv * 5)
+            else:
+                prop_score = torch.tensor(1.0, device=device)
+            proposal_flow_scores[k] = prop_score
 
-        # Calculate proposal scores based on predicted class and CV
-        proposal_flow_scores = torch.ones(num_proposals, device=flow.device)
-        hinge_mask = (pred_cls_for_proposals == 4) | (pred_cls_for_proposals == 7)
-        slider_mask = (pred_cls_for_proposals == 5) | (pred_cls_for_proposals == 6)
+            gt_instance_mask = (instance_labels == gt_assignment[k].item())
+            if gt_instance_mask.sum() < 3:
+                gt_flow_scores[k] = torch.tensor(1.0, device=device)
+                continue
+            gt_flow = flow[gt_instance_mask]
+            gt_lengths = gt_flow.norm(dim=1)
+            gt_mean = gt_lengths.mean()
+            gt_norm = gt_lengths / (gt_mean + 1e-8)
+            gt_std = gt_norm.std()
+            gt_cv = gt_std
+            gt_sem_cls = sem_preds[gt_instance_mask][0].item()
 
-        proposal_flow_scores[hinge_mask] = 1.0 - torch.sigmoid(cv_per_proposal[hinge_mask] * 5)
-        proposal_flow_scores[slider_mask] = torch.sigmoid(cv_per_proposal[slider_mask] * 5)
+            if gt_sem_cls in [4, 7]:  # hinge
+                gt_score = 1.0 - torch.sigmoid(gt_cv * 5)
+            elif gt_sem_cls in [5, 6]:  # slider
+                gt_score = torch.sigmoid(gt_cv * 5)
+            else:
+                gt_score = torch.tensor(1.0, device=device)
+            gt_flow_scores[k] = gt_score
 
-        # --- Parallelized GT Flow Scores ---
-        # Get the GT instance mask for each proposal's assigned GT
-        # This creates a boolean mask for all points indicating if they belong to the assigned GT instance
-        gt_instance_ids = gt_assignment[torch.arange(num_proposals, device=flow.device)]
-        gt_instance_masks_all_points = (instance_labels.unsqueeze(0) == gt_instance_ids.unsqueeze(1)) # shape: (num_proposals, num_total_points)
-
-        # Filter out small GT instances (less than 3 points) from consideration for GT flow scores
-        gt_instance_point_counts = gt_instance_masks_all_points.sum(dim=1).float()
-        valid_gt_mask = gt_instance_point_counts >= 3
-
-        # Prepare for masked calculations
-        # We only want to compute for valid GTs
-        if valid_gt_mask.sum() == 0: # If no valid GTs, set all GT flow scores to 1.0
-            gt_flow_scores = torch.ones(num_proposals, device=flow.device)
-        else:
-            # Replicate flow and instance labels for each proposal's assigned GT
-            flow_expanded = flow.unsqueeze(0).expand(num_proposals, -1, -1) # (num_proposals, num_total_points, 3)
-            gt_flow_for_valid = flow_expanded[valid_gt_mask] # Flows for points belonging to valid assigned GTs
-
-            # Calculate lengths for points within valid GT instances
-            gt_flow_lengths_for_valid = gt_flow_for_valid.norm(dim=2) # (num_valid_gt_instances, num_points_in_each_gt)
-
-            # Get the actual point counts for each valid GT
-            num_points_in_valid_gt = gt_instance_point_counts[valid_gt_mask].long()
-
-            # Calculate mean lengths for valid GTs.
-            # We can use `torch.segment_reduce` or a manual sum/count approach with indexing
-            # For simplicity and broad compatibility, let's use a sum and count with masks
-            sum_gt_lengths = (gt_flow_for_valid.norm(dim=2) * gt_instance_masks_all_points[valid_gt_mask]).sum(dim=1)
-            mean_gt_lengths = sum_gt_lengths / (gt_instance_point_counts[valid_gt_mask] + 1e-8)
-
-            # Normalize lengths for CV calculation for valid GTs
-            normalized_gt_lengths = (gt_flow_for_valid.norm(dim=2) * gt_instance_masks_all_points[valid_gt_mask]) / \
-                                    (mean_gt_lengths.unsqueeze(1) * gt_instance_masks_all_points[valid_gt_mask] + 1e-8)
-
-            # Sum of squared normalized lengths for variance for valid GTs
-            sum_sq_norm_gt_lengths = (normalized_gt_lengths**2 * gt_instance_masks_all_points[valid_gt_mask]).sum(dim=1)
-
-            # Variance and Standard Deviation for valid GTs
-            variance_gt = (sum_sq_norm_gt_lengths / (gt_instance_point_counts[valid_gt_mask] + 1e-8)) - mean_gt_lengths**2
-            std_gt = torch.sqrt(torch.relu(variance_gt))
-
-            # Coefficient of Variation (CV) for valid GTs
-            cv_gt = std_gt
-
-            # Get semantic classes for valid GTs (first point of the GT instance)
-            gt_sem_cls_for_valid = sem_preds[instance_labels == gt_assignment[valid_gt_mask].to(instance_labels.device)].unique()
-            # This needs to be done carefully. We need the sem_pred for the *assigned* GT instance.
-            # A more robust way: use `gt_assignment` to map back to original instance_labels indices.
-            gt_sem_cls_per_proposal_assigned_gt = sem_preds[instance_labels == gt_assignment.unsqueeze(1)].unique(dim=1)[0] # Assuming each GT has a consistent sem_pred
-
-            gt_flow_scores = torch.ones(num_proposals, device=flow.device)
-            # Apply to valid GTs only
-            gt_sem_cls_valid_proposals = gt_sem_cls_per_proposal_assigned_gt[valid_gt_mask]
-            
-            gt_hinge_mask = (gt_sem_cls_valid_proposals == 4) | (gt_sem_cls_valid_proposals == 7)
-            gt_slider_mask = (gt_sem_cls_valid_proposals == 5) | (gt_sem_cls_valid_proposals == 6)
-
-            gt_flow_scores[valid_gt_mask][gt_hinge_mask] = 1.0 - torch.sigmoid(cv_gt[gt_hinge_mask] * 5)
-            gt_flow_scores[valid_gt_mask][gt_slider_mask] = torch.sigmoid(cv_gt[gt_slider_mask] * 5)
-
-        # --- Combine Scores ---
         flow_diff = (proposal_flow_scores - gt_flow_scores).abs()
         flow_penalty = flow_diff
         final_scores = gt_scores * (1 - flow_penalty)
@@ -792,117 +674,74 @@ class GAPartNet(nn.Module):
         return F.binary_cross_entropy_with_logits(score_logits, final_scores)
 
 
-    def loss_proposal_score(
-        self,
-        score_logits: torch.Tensor,
-        proposals: 'Instances',
-        num_points_per_instance: torch.Tensor,
+
+    def loss_proposal_npcs(
+            self,
+            npcs_logits: torch.Tensor,
+            gt_npcs: torch.Tensor,
+            proposals: Instances,
     ) -> torch.Tensor:
-        # === IoU & GT soft score ===
-        ious = batch_instance_seg_iou(
-            proposals.proposal_offsets,
-            proposals.instance_labels,
-            proposals.batch_indices,
-            num_points_per_instance,
-        )
-        proposals.ious = ious
-        proposals.num_points_per_instance = num_points_per_instance
+        sem_preds, sem_labels = proposals.sem_preds, proposals.sem_labels
+        proposal_indices = proposals.proposal_indices
+        valid_mask = (sem_preds == sem_labels) & (gt_npcs != 0).any(dim=-1)
 
-        ious_max, gt_assignment = ious.max(-1)
-        gt_scores = get_gt_scores(ious_max, 0.75, 0.25)
 
-        flow = getattr(proposals, 'flow', None)
-        if flow is None:
-            raise ValueError("proposals needs to contain flow field")
 
-        sem_preds = proposals.sem_preds
-        instance_labels = proposals.instance_labels
-        sorted_indices = proposals.sorted_indices
-        proposal_offsets = proposals.proposal_offsets
 
-        num_props = proposal_offsets.shape[0] - 1
-        if num_props == 0:
-            return torch.tensor(0.0, device=score_logits.device)
+        npcs_logits = npcs_logits[valid_mask]
+        gt_npcs = gt_npcs[valid_mask]
+        sem_preds = sem_preds[valid_mask].long()
+        sem_labels = sem_labels[valid_mask]
+        proposal_indices = proposal_indices[valid_mask]
 
-        # === Proposal flow stats (并行) ===
-        all_flow_lengths = flow.norm(dim=1)
-        point_to_proposal = torch.zeros_like(sorted_indices, dtype=torch.long)
-        point_to_proposal[sorted_indices] = torch.bucketize(
-            torch.arange(len(sorted_indices), device=flow.device),
-            proposal_offsets[1:]
-        )
+        npcs_logits = rearrange(npcs_logits, "n (k c) -> n k c", c=3)
+        npcs_logits = npcs_logits.gather(
+            1, index=repeat(sem_preds - 1, "n -> n one c", one=1, c=3)
+        ).squeeze(1)
 
-        sum_lengths = torch.zeros(num_props, device=flow.device).scatter_add_(
-            0, point_to_proposal[sorted_indices], all_flow_lengths[sorted_indices]
-        )
-        count_lengths = torch.zeros(num_props, device=flow.device).scatter_add_(
-            0, point_to_proposal[sorted_indices], torch.ones_like(sorted_indices, dtype=flow.dtype)
-        )
-        count_lengths[count_lengths == 0] = 1
-        mean_lengths = sum_lengths / count_lengths
+        proposals.npcs_preds = npcs_logits.detach()
+        proposals.gt_npcs = gt_npcs
+        proposals.npcs_valid_mask = valid_mask
 
-        normalized_lengths = all_flow_lengths / (mean_lengths[point_to_proposal] + 1e-8)
-        norm_lengths_sq = normalized_lengths ** 2
+        loss_npcs = 0
+        # import pdb; pdb.set_trace()
+        self.symmetry_indices = self.symmetry_indices.to(sem_preds.device)
+        self.symmetry_matrix_1 = self.symmetry_matrix_1.to(sem_preds.device)
+        self.symmetry_matrix_2 = self.symmetry_matrix_2.to(sem_preds.device)
+        self.symmetry_matrix_3 = self.symmetry_matrix_3.to(sem_preds.device)
+        # import pdb; pdb.set_trace()
+        symmetry_indices = self.symmetry_indices[sem_preds]
+        # group #1
+        group_1_mask = symmetry_indices < 3
+        symmetry_indices_1 = symmetry_indices[group_1_mask]
+        if symmetry_indices_1.shape[0] > 0:
+            loss_npcs += compute_npcs_loss(
+                npcs_logits[group_1_mask], gt_npcs[group_1_mask],
+                proposal_indices[group_1_mask],
+                self.symmetry_matrix_1[symmetry_indices_1]
+            )
 
-        sum_sq = torch.zeros(num_props, device=flow.device).scatter_add_(
-            0, point_to_proposal[sorted_indices], norm_lengths_sq[sorted_indices]
-        )
-        var = (sum_sq / count_lengths) - (mean_lengths ** 2)
-        std = torch.sqrt(torch.relu(var))
-        cv_proposals = std
+        # group #2
+        group_2_mask = symmetry_indices == 3
+        symmetry_indices_2 = symmetry_indices[group_2_mask]
+        if symmetry_indices_2.shape[0] > 0:
+            loss_npcs += compute_npcs_loss(
+                npcs_logits[group_2_mask], gt_npcs[group_2_mask],
+                proposal_indices[group_2_mask],
+                self.symmetry_matrix_2[symmetry_indices_2 - 3]
+            )
 
-        first_point_indices = proposal_offsets[:-1]
-        proposal_sem_cls = sem_preds[sorted_indices[first_point_indices]]
+        # group #3
+        group_3_mask = symmetry_indices == 4
+        symmetry_indices_3 = symmetry_indices[group_3_mask]
+        if symmetry_indices_3.shape[0] > 0:
+            loss_npcs += compute_npcs_loss(
+                npcs_logits[group_3_mask], gt_npcs[group_3_mask],
+                proposal_indices[group_3_mask],
+                self.symmetry_matrix_3[symmetry_indices_3 - 4]
+            )
 
-        hinge_mask = (proposal_sem_cls == 4) | (proposal_sem_cls == 7)
-        slider_mask = (proposal_sem_cls == 5) | (proposal_sem_cls == 6)
-
-        prop_flow_scores = torch.ones(num_props, device=flow.device)
-        prop_flow_scores[hinge_mask] = 1.0 - torch.sigmoid(cv_proposals[hinge_mask] * 5)
-        prop_flow_scores[slider_mask] = torch.sigmoid(cv_proposals[slider_mask] * 5)
-
-        # === GT flow stats (并行) ===
-        point_idx = torch.arange(flow.shape[0], device=flow.device)
-        gt_mask_matrix = instance_labels.unsqueeze(0) == gt_assignment.unsqueeze(1)  # (P, N)
-        gt_point_counts = gt_mask_matrix.sum(dim=1)
-        valid_mask = gt_point_counts >= 3
-
-        # Expand flow
-        flow_expanded = flow.unsqueeze(0).expand(num_props, -1, -1)
-        flow_lengths = flow_expanded.norm(dim=2)  # (P, N)
-
-        masked_lengths = flow_lengths * gt_mask_matrix
-        mean_gt = masked_lengths.sum(dim=1) / (gt_point_counts + 1e-8)
-        norm_gt = masked_lengths / (mean_gt.unsqueeze(1) + 1e-8)
-        norm_sq_gt = norm_gt ** 2
-        var_gt = (norm_sq_gt * gt_mask_matrix).sum(dim=1) / (gt_point_counts + 1e-8) - mean_gt ** 2
-        std_gt = torch.sqrt(torch.relu(var_gt))
-        cv_gt = std_gt
-
-        # 获取每个 proposal 对应 GT 实例的第一个点
-        gt_assignment_exp = gt_assignment.unsqueeze(1)
-        match_matrix = (instance_labels.unsqueeze(0) == gt_assignment_exp)  # (P, N)
-        first_gt_indices = match_matrix.float().cumsum(dim=1).eq(1).float().argmax(dim=1)
-        gt_sem_cls = sem_preds[first_gt_indices]
-
-        gt_flow_scores = torch.ones(num_props, device=flow.device)
-        valid_cv = cv_gt[valid_mask]
-        valid_cls = gt_sem_cls[valid_mask]
-
-        hinge_mask = (valid_cls == 4) | (valid_cls == 7)
-        slider_mask = (valid_cls == 5) | (valid_cls == 6)
-
-        gt_flow_scores_valid = torch.ones_like(valid_cv)
-        gt_flow_scores_valid[hinge_mask] = 1.0 - torch.sigmoid(valid_cv[hinge_mask] * 5)
-        gt_flow_scores_valid[slider_mask] = torch.sigmoid(valid_cv[slider_mask] * 5)
-
-        gt_flow_scores[valid_mask] = gt_flow_scores_valid
-
-        # === Final score ===
-        flow_penalty = (prop_flow_scores - gt_flow_scores).abs()
-        final_scores = gt_scores * (1 - flow_penalty)
-
-        return F.binary_cross_entropy_with_logits(score_logits, final_scores)
+        return loss_npcs
     #compute loss for flow
     def slider_flow_consistency_loss(self, flow, proposals, score_logits,
                                       proposal_sem_labels, hinge_id) -> torch.Tensor:
